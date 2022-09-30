@@ -17,35 +17,38 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className='fixed w-full h-[80px] flex justify-between items-center px-4 bg-[#0a192f] text-gray-300'>
-      <div>
-        <img src={Logo} alt='Logo Image' style={{ width: '50px' }} />
-      </div>
+    <div className='fixed w-full h-[80px] flex justify-between items-center px-4 bg-gray-200 dark:bg-[#0a192f] text-gray-500 dark:text-gray-300 shadow'>
+      <div className='block'>
+          <Link to='home' className='block font-semibold text-lg' smooth={true} duration={500}>
+          Code<span className='text-green-500'>Hermit</span>
+            {/*<img src={Logo} alt='Logo Image' style={{ width: '50px' }} />*/}
+          </Link>
+        </div>
 
       {/* menu */}
       <ul className='hidden md:flex'>
         <li>
-          <Link to='home' smooth={true} duration={500}>
+          <Link to='home' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
             Home
           </Link>
         </li>
         <li>
-          <Link to='about' smooth={true} duration={500}>
+          <Link to='about' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
             About
           </Link>
         </li>
         <li>
-          <Link to='skills' smooth={true} duration={500}>
+          <Link to='skills' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
             Skills
           </Link>
         </li>
         <li>
-          <Link to='work' smooth={true} duration={500}>
+          <Link to='work' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
             Work
           </Link>
         </li>
         <li>
-          <Link to='contact' smooth={true} duration={500}>
+          <Link to='contact' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
             Contact
           </Link>
         </li>

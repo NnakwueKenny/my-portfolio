@@ -7,7 +7,7 @@ import Work from "./components/Work";
 
 function App() {
   return (
-    <div className='text-green-500'>
+    <div className=''>
       <Navbar />
       <Home />
       <About />
