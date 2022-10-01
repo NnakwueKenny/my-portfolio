@@ -16,7 +16,7 @@ const Work = () => {
           <div class="flex flex-wrap -m-4">
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="../assets/imago-quad.png" />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/assets/imago-quad.png" />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
                   <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">iMAGO qUAD</h2>
                   <p class="leading-relaxed">I built it using ReactJS and Tailwindcss in attempt to clone the features of "4 pics one word".</p>
@@ -29,7 +29,7 @@ const Work = () => {
             </div>
             <div class="lg:w-1/3 sm:w-1/2 h-full p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="../assets/task-manager.png" />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/assets/task-manager.png" />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
                   <h2 class="tracking-widest text-sm title-font font-semibold text-cyan-500 mb-1">tASK mANAGER</h2>
                   <p class="leading-relaxed">I implemented this using the MERN stack, and designed the UI with tailwindcss CSS utility-first framework.</p>
@@ -42,7 +42,7 @@ const Work = () => {
             </div>
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="../assets/sabivoters.png" />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/assets/sabivoters.png" />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
                   <h2 class="tracking-widest text-sm title-font font-semibold text-green-700 mb-1">sABI vOTERS</h2>
                   <p class="leading-relaxed">In collaboration with some other PHP developers, I designed the UI of this site using JS and TailwindCss.</p>
@@ -54,7 +54,7 @@ const Work = () => {
             </div>
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="../assets/anjima.png" />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/assets/anjima.png" />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
                   <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">Kolib</h2>
                   <p class="leading-relaxed">The android app '4 pics one word' was my source of inspiration for this project. I built it using ReactJS and Tailwindcss</p>
