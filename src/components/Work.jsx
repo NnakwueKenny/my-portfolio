@@ -17,60 +17,78 @@ const Work = () => {
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="./assets/workImg.jpeg" />
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-400 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-white mb-3">Shooting Stars</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100 text-center">
+                  <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">iMAGO qUAD</h2>
+                  <p class="leading-relaxed">The android app "4 pics one word" was my source of inspiration for this project. I built it using ReactJS and Tailwindcss</p>
+                  <div className='w-full flex justify-around py-2'>
+                    <a className='py-1 px-2 border-2 border-green-500 rounded text-green-500 hover:text-gray-50 hover:bg-green-500' href='https:github.com'>Visit Site</a>
+                    <a className='py-1 px-2 border-2 border-gray-500 rounded text-gray-500 hover:text-gray-50 hover:bg-gray-500' href='https:github.com'>Github</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="lg:w-1/3 sm:w-1/2 p-4">
-              <div class="flex relative">
+            <div class="lg:w-1/3 sm:w-1/2 h-full p-4">
+              <div class="flex relative ">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/601x361" />
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-400 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-white mb-3">The Catalyzer</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100 text-center">
+                  <h2 class="tracking-widest text-sm title-font font-semibold text-cyan-500 mb-1">tASK mANAGER</h2>
+                  <p class="leading-relaxed">I implemented this using the MERN stack, and designed the UI with tailwindcss CSS utility-first framework.</p>
+                  <div className='w-full flex justify-around py-2'>
+                    <a className='py-1 px-2 border-2 border-cyan-500 rounded text-cyan-500 hover:text-gray-50 hover:bg-cyan-500' href='https:github.com'>Visit Site</a>
+                    <a className='py-1 px-2 border-2 border-gray-500 rounded text-gray-500 hover:text-gray-50 hover:bg-gray-500' href='https:github.com'>Github</a>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/603x363" />
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-400 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-white mb-3">The 400 Blows</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100 text-center">
+                  <h2 class="tracking-widest text-sm title-font font-semibold text-green-700 mb-1">sABI vOTERS</h2>
+                  <p class="leading-relaxed">I designed the user interface of this site using vanilla javascript and Tailwindcss</p>
+                  <div className='w-full flex justify-around py-2'>
+                    <a className='py-1 px-2 border-2 border-green-700 rounded text-green-700 hover:text-gray-50 hover:bg-green-700' href='https:github.com'>Visit Site</a>
+                    <a className='py-1 px-2 border-2 border-gray-700 rounded text-gray-500 hover:text-gray-50 hover:bg-gray-500' href='https:github.com'>Github</a>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/602x362" />
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-400 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-white mb-3">Neptune</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100 text-center">
+                  <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">iMAGO qUAD</h2>
+                  <p class="leading-relaxed">The android app '4 pics one word' was my source of inspiration for this project. I built it using ReactJS and Tailwindcss</p>
+                  <div className='w-full flex justify-around py-2'>
+                    <a className='py-1 px-2 border-2 border-green-500 rounded text-green-500 hover:text-gray-50 hover:bg-green-500' href='https:github.com'>Visit Site</a>
+                    <a className='py-1 px-2 border-2 border-gray-500 rounded text-gray-500 hover:text-gray-50 hover:bg-gray-500' href='https:github.com'>Github</a>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/605x365" />
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-400 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-white mb-3">Holden Caulfield</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100 text-center">
+                  <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">iMAGO qUAD</h2>
+                  <p class="leading-relaxed">The android app '4 pics one word' was my source of inspiration for this project. I built it using ReactJS and Tailwindcss</p>
+                  <div className='w-full flex justify-around py-2'>
+                    <a className='py-1 px-2 border-2 border-green-500 rounded text-green-500 hover:text-gray-50 hover:bg-green-500' href='https:github.com'>Visit Site</a>
+                    <a className='py-1 px-2 border-2 border-gray-500 rounded text-gray-500 hover:text-gray-50 hover:bg-gray-500' href='https:github.com'>Github</a>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/606x366" />
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-400 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-white mb-3">Alper Kamu</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100 text-center">
+                  <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">iMAGO qUAD</h2>
+                  <p class="leading-relaxed">The android app '4 pics one word' was my source of inspiration for this project. I built it using ReactJS and Tailwindcss</p>
+                  <div className='w-full flex justify-around py-2'>
+                    <a className='py-1 px-2 border-2 border-green-500 rounded text-green-500 hover:text-gray-50 hover:bg-green-500' href='https:github.com'>Visit Site</a>
+                    <a className='py-1 px-2 border-2 border-gray-500 rounded text-gray-500 hover:text-gray-50 hover:bg-gray-500' href='https:github.com'>Github</a>
+                  </div>
                 </div>
               </div>
             </div>
