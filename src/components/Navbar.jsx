@@ -6,6 +6,7 @@ import {
   FaLinkedin,
   FaFacebook,
   FaLinkedinIn,
+  FaTwitter
 } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
@@ -17,7 +18,7 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className='fixed w-full h-[80px] flex justify-between items-center px-4 bg-gray-200 dark:bg-[#0a192f] text-gray-500 dark:text-gray-300 shadow'>
+    <div className='z-50 fixed w-full h-[80px] flex justify-between items-center px-4 bg-gray-200 dark:bg-[#0a192f] text-gray-500 dark:text-gray-300 shadow'>
       <div className='block'>
           <Link to='home' className='block font-semibold text-lg' smooth={true} duration={500}>
           Code<span className='text-green-500'>Hermit</span>
@@ -101,36 +102,36 @@ const Navbar = () => {
       {/* Social icons */}
       <div className='hidden lg:flex fixed flex-col top-[35%] left-0'>
         <ul>
-          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-blue-600'>
+          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-500 bg-blue-600 hover:rounded'>
             <a
               className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              href='https://www.linkedin.com/in/kenechukwu-nnakwue-a854081b5/'
             >
               Linkedin <FaLinkedin size={30} />
             </a>
           </li>
-          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#333333]'>
+          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-500 bg-[#333333] hover:rounded'>
             <a
               className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              href='https://github.com/NnakwueKenny'
             >
               Github <FaGithub size={30} />
             </a>
           </li>
-          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#6fc2b0]'>
+          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-500 bg-[#6fc2b0] hover:rounded'>
             <a
               className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              href='mailto:https://nnakwuekenny@gmail.com'
             >
               Email <HiOutlineMail size={30} />
             </a>
           </li>
-          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#565f69]'>
+          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-500 bg-blue-500 hover:rounded'>
             <a
-              className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              className='flex justify-between items-center w-full text-gray-200'
+              href='https://twitter.com/kenny_nnakwue'
             >
-              Resume <BsFillPersonLinesFill size={30} />
+              Twitter <FaTwitter size={30} />
             </a>
           </li>
         </ul>
