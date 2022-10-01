@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div className='z-50 fixed w-full h-[80px] flex justify-between items-center px-4 bg-gray-200 dark:bg-[#0a192f] text-gray-500 dark:text-gray-300 shadow'>
-      <div className='block'>
+      <div className='block md:px-8'>
           <Link to='home' className='block font-semibold text-lg' smooth={true} duration={500}>
           Code<span className='text-green-500'>Hermit</span>
             {/*<img src={Logo} alt='Logo Image' style={{ width: '50px' }} />*/}
@@ -27,17 +27,19 @@ const Navbar = () => {
         </div>
 
       {/* menu */}
-      <ul className='hidden md:flex'>
+      <ul className='hidden md:flex md:px-10'>
         <li>
           <Link to='home' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
             Home
           </Link>
         </li>
-        <li>
-          <Link to='about' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
-            About
-          </Link>
-        </li>
+        {/*
+          <li>
+            <Link to='about' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
+              About
+            </Link>
+          </li>*/
+        }
         <li>
           <Link to='skills' className='hover:text-green-500 font-semibold' smooth={true} duration={500}>
             Skills
@@ -73,12 +75,14 @@ const Navbar = () => {
             Home
           </Link>
         </li>
-        <li className='py-6 text-4xl'>
-          {' '}
-          <Link onClick={handleClick} to='about' smooth={true} duration={500}>
-            About
-          </Link>
-        </li>
+        {/*
+          <li className='py-6 text-4xl'>
+            {' '}
+            <Link onClick={handleClick} to='about' smooth={true} duration={500}>
+              About
+            </Link>
+          </li>*/
+        }
         <li className='py-6 text-4xl'>
           {' '}
           <Link onClick={handleClick} to='skills' smooth={true} duration={500}>
@@ -100,7 +104,7 @@ const Navbar = () => {
       </ul>
 
       {/* Social icons */}
-      <div className='hidden lg:flex fixed flex-col top-[35%] left-0'>
+      <div className='hidden md:flex fixed flex-col top-[35%] left-0'>
         <ul>
           <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-500 bg-blue-600 hover:rounded'>
             <a

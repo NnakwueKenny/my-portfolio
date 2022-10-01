@@ -4,17 +4,15 @@ import realEstate from '../assets/realestate.jpg';
 
 const Work = () => {
   return (
-    <div name='work' className='flex flex-col w-full bg-[#0a192f] dark:bg-bg-white flex justify-center items-center p-4 md:py-10 lg:py-12 shadow-xl'>
-      <section class="text-gray-400 max-w-6xl body-font">
+    <div name='work' className='flex flex-col w-full bg-[#0a192f] dark:bg-gray-100 flex justify-center items-center p-4 md:py-10 lg:py-12 shadow-xl'>
+      <section class="text-gray-400 max-w-5xl body-font md:px-6">
         <div className='pb-8'>
           <h2 class="inline-flex mb-4 text-4xl tracking-tight font-extrabold text-left text-gray-500 dark:text-gray-200 border-b-4 border-green-500">Projects</h2>
-          <p className='py-6 text-green-500 font-mono'>// Check out some of my recent work</p>
+          <p className='py-1 text-green-500 font-mono'>// check out some of my recent work</p>
+          <p className='py-1 text-green-500 font-mono'>// Some, I developed alone, others I worked in collaboration with others.</p>
+          <p className='py-1 text-green-500 font-mono'>// They are all open-source. so you can clone, modify them as you wish; Just give me some credits 😊😁</p>
         </div>
-        <div class="container px-5 py-24 mx-auto">
-          <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="self-center sm:text-3xl text-2xl font-medium title-font mb-4 text-white dark:text-gray-200 border-b-4 border-green-500">Projects I have worked on</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Some, I developed alone, others I worked in collaboration with others.</p>
-          </div>
+        <div class="container px-2 mx-auto">
           <div class="flex flex-wrap -m-4">
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative">
