@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { HiArrowNarrowRight } from 'react-icons/hi';
-import { FaNodeJs, FaReact, FaWatchmanMonitoring } from 'react-icons/fa';
+import { FaNodeJs, FaReact, FaWatchmanMonitoring, FaBootstrap } from 'react-icons/fa';
 
 const Home = () => {
   const backgroundImageArr = ['../assets/bg3.jpg', '../assets/bg1.jpg'];
@@ -22,7 +22,7 @@ const Home = () => {
       {/* Container */}
       
       <div className='max-w-[1000px] mx-auto px-8 pt-12 flex flex-col justify-center h-full'>
-        <p className='text-yellow-500 text-3xl italic font-mono font-extrabold'>This is for =&gt;</p>
+        <p className='text-yellow-500 text-3xl italic font-mono font-extrabold'>for =&gt;</p>
         <div
           data-aos="fade-in"
           data-aos-offset="300"
@@ -43,10 +43,9 @@ const Home = () => {
           data-aos-duration="1500"
           className='text-[#8892b0] text-xl py-3 max-w-4xl font-cursive font-mono'
         >
-          I specialize in building (and occasionally
-          designing) responsive full-stack web applications using:
+          I specialize in building responsive full-stack web applications using:
         </p>
-        <div className='flex flex-col gap-1 py-2'>
+        <div className='flex flex-col gap-0.5 py-2'>
             <a href='https://tailwindcss.com' className='self-start flex gap-2 font-semibold hover:text-cyan-400 text-lg md:text-xl font-mono'>Tailwindcss</a>
             <a href='https://nodejs.org' className='self-start flex gap-2 font-semibold hover:text-lime-500 text-lg md:text-xl font-mono'><FaNodeJs /> NodeJs</a>
             <a href='https://www.mongodb.com' className='self-start flex gap-2 font-semibold hover:text-green-600 text-lg md:text-xl font-mono'><FaWatchmanMonitoring /> MongoDB</a>
