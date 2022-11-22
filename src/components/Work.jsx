@@ -12,7 +12,7 @@ const Work = () => {
             <span className='inline-flex text-4xl tracking-tight font-extrabold font-mono text-center text-gray-300 dark:text-gray-200 border-b-4 border-green-500'>My Projects</span>
           </h2>
           <p className='py-1 text-center text-green-500 font-mono italic'>// Some, I developed alone, others I worked in collaboration with others.</p>
-          <p className='py-1 text-center text-green-500 font-mono italic'>// They are all open-source. So,   you can clone, modify them as you wish; just give me some credits 😊😁</p>
+          <p className='py-1 text-center text-green-500 font-mono italic'>// They are all open-source. So, you can clone, modify them as you wish; just give me some credits 😊😁</p>
           <p className='py-1 text-center text-green-500 font-mono italic'>// Just give me some credits 😊😁</p>
         </div>
         <div class="container px-2 mx-auto">
