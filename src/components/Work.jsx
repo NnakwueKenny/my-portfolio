@@ -1,6 +1,4 @@
 import React from 'react';
-import WorkImg from '../assets/workImg.jpeg';
-import realEstate from '../assets/realestate.jpg';
 import taskManager from '../assets/task-manager.png';
 import imagoQuad from '../assets/imago-quad.png';
 import sabiVoters from '../assets/sabivoters.png';
