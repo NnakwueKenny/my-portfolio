@@ -19,7 +19,7 @@ const Work = () => {
           <div class="flex flex-wrap -m-4">
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src={imagoQuad} />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src={'../assets/imago-quad.png'} />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
                   <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">iMAGO qUAD</h2>
                   <p class="leading-relaxed">In attempt to clone the features of the android app "4 pics one word", I built this using ReactJS and Tailwindcss.</p>
@@ -32,7 +32,7 @@ const Work = () => {
             </div>
             <div class="lg:w-1/3 sm:w-1/2 h-full p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src={taskManager} />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src={'../assets/task-manager.png'} />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
                   <h2 class="tracking-widest text-sm title-font font-semibold text-cyan-500 mb-1">Taskify</h2>
                   <p class="leading-relaxed">I implemented this using the MERN stack, and designed the UI with tailwindcss CSS utility-first framework. Though, still a work in progress.</p>
@@ -45,30 +45,28 @@ const Work = () => {
             </div>
             <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src={sabiVoters} />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src={'../assets/sabivoters.png'} />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
                   <h2 class="tracking-widest text-sm title-font font-semibold text-green-700 mb-1">sABI vOTERS</h2>
-                  <p class="leading-relaxed">In collaboration with some other PHP developers, I designed the UI of this site using JS and TailwindCss.</p>
+                  <p class="leading-relaxed">In collaboration with some other PHP developers, I designed the UI of this site using JS and TailwindCSS.</p>
                   <div className='w-full flex justify-around py-2'>
                     <a className='py-1 px-2 border-2 border-green-700 rounded text-green-700 hover:text-gray-50 hover:bg-green-700' href='https://sabivoters.000webhostapp.com/'>Visit Site</a>
                   </div>
                 </div>
               </div>
             </div>
-            {/*
-              <div class="lg:w-1/3 sm:w-1/2 p-4">
+            <div class="lg:w-1/3 sm:w-1/2 p-4">
               <div class="flex relative rounded-xl overflow-hidden">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="../assets/anjima.png" />
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="../assets/kolib.PNG" />
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-[90%] text-center">
-                  <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">Anjima</h2>
-                  <p class="leading-relaxed">The android app '4 pics one word' was my source of inspiration for this project. I built it using ReactJS and Tailwindcss</p>
+                  <h2 class="tracking-widest text-sm title-font font-semibold text-green-500 mb-1">Kolib</h2>
+                  <p class="leading-relaxed">In collaboration with some other PHP developers, I also designed the UI of this site using JS and TailwindCss.</p>
                   <div className='w-full flex justify-around py-2'>
                     <a className='py-1 px-2 border-2 border-green-500 rounded text-green-500 hover:text-gray-50 hover:bg-green-500' href='http://kolib.rf.gd'>Visit Site</a>
                   </div>
                 </div>
               </div>
-              </div>
-            */}
+            </div>
           </div>
         </div>
       </section>
