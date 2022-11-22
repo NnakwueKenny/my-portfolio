@@ -1,7 +1,4 @@
 import React from 'react';
-import taskManager from '../assets/task-manager.png';
-import imagoQuad from '../assets/imago-quad.png';
-import sabiVoters from '../assets/sabivoters.png';
 
 const Work = () => {
   return (
