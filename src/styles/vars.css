@@ -1,0 +1,68 @@
+:root {
+  /*
+    Color shades generated using:
+    https://mdigi.tools/color-shades
+  */
+  /* Mint */
+  --color-mint: rgb(14 165 233);
+  --color-mint-50: rgb(240 253 250);
+  --color-mint-100: rgb(204 251 241);
+  --color-mint-200: rgb(153 246 228);
+  --color-mint-300: rgb(94 234 212);
+  --color-mint-400: rgb(45 212 191);
+  --color-mint-500: rgb(14 165 233);
+  --color-mint-600: #00DC76;
+  --color-mint-700: #00A458;
+  --color-mint-800: #006C3A;
+  --color-mint-900: #00341C;
+  /* Orange */
+  --color-orange: #E8871E;
+  --color-orange-50: #F9E0C5;
+  --color-orange-100: #F7D6B2;
+  --color-orange-200: #F3C28D;
+  --color-orange-300: #F0AE68;
+  --color-orange-400: #EC9B43;
+  --color-orange-500: #E8871E;
+  --color-orange-600: #BB6A13;
+  --color-orange-700: #884D0E;
+  --color-orange-800: #553009;
+  --color-orange-900: #221303;
+  /* Silver */
+  --color-silver: #8491A3;
+  --color-silver-50: #EDEFF2;
+  --color-silver-100: #E1E4E9;
+  --color-silver-200: #CAD0D7;
+  --color-silver-300: #B3BBC6;
+  --color-silver-400: #9BA6B4;
+  --color-silver-500: #8491A3;
+  --color-silver-600: #667589;
+  --color-silver-700: #4E5969;
+  --color-silver-800: #363E48;
+  --color-silver-900: #1E2228;
+
+  /* Font sizes */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px, base */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-3xl: 1.75rem;  /* 28px */
+  --font-size-4xl: 2rem;     /* 32px */
+  --font-size-5xl: 2.25rem;  /* 36px */
+  --font-size-6xl: 2.5rem;   /* 40px */
+  --font-size-7xl: 2.75rem;  /* 44px */
+  --font-size-8xl: 3rem;     /* 48px */
+  --font-size-9xl: 3.25rem;  /* 52px */
+  --font-size-10xl: 3.5rem;  /* 56px */
+  --font-size-11xl: 3.75rem; /* 60px */
+  --font-size-12xl: 4rem;    /* 64px */
+  --font-size-13xl: 4.25rem; /* 68px */
+  --font-size-14xl: 4.5rem;  /* 72px */
+  --font-size-15xl: 4.75rem; /* 76px */
+  --font-size-16xl: 5rem;    /* 80px */
+
+  /* Font Family */
+  --font-family-IBM-Plex-Mono: 'IBM Plex Mono', sans-serif;
+  --font-family-Mukta: 'Mukta', sans-serif;
+}

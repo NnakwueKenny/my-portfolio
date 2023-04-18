@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #031c40;
+  color: var(--color-silver-200);
+  font-family: 'Mukta', sans-serif;
+  font-size: 1em;
+  min-height: 100%;
+  margin: 0;
+}
+
+.page {
+  // background: #031c40;
+  // background: linear-gradient(0deg, #000c09 0%, #031f49 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+}
+
+.page.menu-open {
+  position: fixed;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--color-mint);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.main-heading {
+  font-size: var(--font-size-8xl);
+  display: inline-block;
+  margin: 1.5rem 0 0.5rem 0;
+  color: var(--color-silver-100);
+}
+
+.sub-heading {
+  font-size: var(--font-size-4xl);
+  display: inline-block;
+  margin: 1.5rem 0 0.5rem 0;
+  color: var(--color-silver-100);
+}
+
+p {
+  color: var(--color-silver-200);
+  font-size: var(--font-size-lg);
+  margin: 0.5rem 0 0.75rem 0;
+  line-height: 1.65rem;
+}
+
+.buzzword {
+  color: #ffedda;
+}
+
+.form-control {
+  margin: 10px 0;
+  display: block;
+  width: 100%;
+  label {
+    display: block;
+    margin-bottom: 3px;
+  }
+  input,
+  textarea {
+    box-sizing: border-box;
+    font-size: var(--font-size-base);
+    color: white;
+    display: block;
+    padding: 8px;
+    background: rgb(209 209 209 / 2.5%);
+    border: 1px solid rgb(181 181 181 / 50%);
+    border-radius: 2px;
+    width: 100%;
+  }
+}
+
+/* Animations */
+.text-swipe-animation,
+.text-swipe-animation::after,
+.text-swipe-animation-reverse,
+.text-swipe-animation-reverse::after {
+  will-change: transform, transform-origin, clip-path;
+  animation-delay: 0.15s;
+  animation-iteration-count: 1;
+  animation-duration: 0.75s;
+  animation-fill-mode: backwards;
+}
+
+.text-swipe-animation {
+  position: relative;
+  animation-name: clip-text;
+}
+
+.text-swipe-animation-reverse {
+  position: relative;
+  animation-name: clip-text-reverse;
+}
+
+/* Text reveal ::after */
+.text-swipe-animation::after,
+.text-swipe-animation-reverse::after {
+  content: "";
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.text-swipe-animation::after {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  animation-name: text-swiper;
+  background-color: var(--color-mint);
+}
+
+.text-swipe-animation-reverse::after {
+  transform: scaleX(0);
+  transform-origin: 100% 50%;
+  animation-name: text-swiper-reverse;
+  background-color: var(--color-mint);
+}
+
+/* Keyframes for text reveal animation */
+@keyframes clip-text {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes text-swiper {
+  0%, 50% { transform-origin: 0 50%; }
+  60%, 100% { transform-origin: 100% 50%; }
+  60% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+
+@keyframes clip-text-reverse {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes text-swiper-reverse {
+  0%, 50% { transform-origin: 100% 50%; }
+  60%, 100% { transform-origin: 0 50%; }
+  60% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+
+@media screen and (max-width: 980px) {
+  .main-heading {
+    font-size: var(--font-size-4xl);
+  }
+
+  .sub-heading {
+    font-size: var(--font-size-2xl);
+  }
+}
