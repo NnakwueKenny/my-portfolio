@@ -17,6 +17,7 @@ export type Skills =
   | "MongoDB"
   | "PostgreSQL"
   | "MySQL"
+  | "Redis"
   | "Selenium"
   | "Mocha"
   | "Linux"

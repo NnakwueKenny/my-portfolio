@@ -6,7 +6,7 @@ import { writeToLocalDataFile, readLocalDataFile } from '../js/localDataManager'
 // Fetch stars count from GitHub
 async function getBinanceDCABotStars() {
   try {
-    const res = await fetch("https://api.github.com/repos/lukeliasi/binance-dca-bot");
+    const res = await fetch("https://api.github.com/repos/NnakwueKenny/my-portfolio");
     const data = await res.json();
 
     if (data.stargazers_count) {
@@ -31,7 +31,7 @@ if (binanceDCABotStars) {
 }
 ---
 
-<DefaultLayout documentTitle="Projects" documentDescription="Welcome to my portfolio, showcasing a selection of projects I've worked on.">
+<DefaultLayout documentTitle="Code Hermit | Projects" documentDescription="Welcome to my portfolio, showcasing a selection of projects I've worked on.">
   <div class="container">
     <h1 class="main-heading text-swipe-animation">Projects</h1>
     <div class="intro">
@@ -47,9 +47,6 @@ if (binanceDCABotStars) {
         tags={[
           "JavaScript",
           "TypeScript",
-          "Node.js",
-          "Directus",
-          "PostgreSQL",
           "HTML",
           "CSS",
           "Tailwind CSS"
@@ -72,7 +69,6 @@ if (binanceDCABotStars) {
         tags={[
           "JavaScript",
           "Node.js",
-          "Docker",
           "MongoDB"
         ]}>
         <p slot="subtitle">Command-line trading bot using Node.js that connects to the Binance exchange and automatically executes trades via their API.</p>
@@ -95,7 +91,6 @@ if (binanceDCABotStars) {
           "HTML",
           "CSS",
           "Node.js",
-          "PostgreSQL",
           "AWS"
         ]}>
         <p slot="subtitle">Full-stack application that streamlines the process of booking housing for students.</p>
@@ -115,10 +110,8 @@ if (binanceDCABotStars) {
           "JavaScript",
           "TypeScript",
           "React",
-          "Next.js",
           "HTML",
           "CSS",
-          "SanityCMS"
         ]}>
         <p slot="subtitle">Next.js webapp with an intuitive UI that provides users with useful cryptocurrency pricing and information.</p>
 
@@ -135,8 +128,6 @@ if (binanceDCABotStars) {
         projectLink="https://fionabarker.co.uk/"
         tags={[
           "WordPress",
-          "PHP",
-          "MySQL",
           "HTML",
           "CSS",
           "JavaScript"

@@ -56,14 +56,14 @@ const {
 
       <div class="buttons">
         {projectLink && (
-          <Button variant="outline" href={projectLink} domProps={{ target: "_blank", rel: "noopener noreferrer" }}>
+          <Button variant="outline" colorScheme='lime' href={projectLink} domProps={{ target: "_blank", rel: "noopener noreferrer" }}>
             View Project
             <svg style="margin-left: 5px;" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path><path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path></svg>
           </Button>
         )}
 
         {sourceCode && (
-          <Button variant="outline" href={sourceCode} domProps={{ target: "_blank", rel: "noopener noreferrer" }}>
+          <Button variant="outline" colorScheme='silver' href={sourceCode} domProps={{ target: "_blank", rel: "noopener noreferrer" }}>
             View Source Code
             <svg style="margin-left: 5px;" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
               <path d="m7.375 16.781 1.25-1.562L4.601 12l4.024-3.219-1.25-1.562-5 4a1 1 0 0 0 0 1.562l5 4zm9.25-9.562-1.25 1.562L19.399 12l-4.024 3.219 1.25 1.562 5-4a1 1 0 0 0 0-1.562l-5-4zm-1.649-4.003-4 18-1.953-.434 4-18z" stroke="none"/>
@@ -140,8 +140,8 @@ const {
 
   .open-source-badge {
     font-size: 12px;
-    color: var(--color-orange-400);
-    border: 1px solid var(--color-orange-400);
+    color: var(--color-lime-400);
+    border: 1px solid var(--color-lime-400);
     padding: 2px 12px;
     border-radius: 4px;
   }

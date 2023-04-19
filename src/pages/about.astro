@@ -5,7 +5,7 @@ import DevLogo, { devIcons } from '../components/DevLogo.astro';
 import TimelineItem from "../components/TimelineItem.astro";
 ---
 
-<DefaultLayout documentTitle="About" documentDescription="I'm Luke, a Senior Software Developer based in the UK with over 9 years of experience building software.">
+<DefaultLayout documentTitle="Code Hermit | About" documentDescription="I'm Luke, a Senior Software Developer based in the UK with over 9 years of experience building software.">
   <section class="container">
     <h1 class="main-heading text-swipe-animation" id="greeting">
       <!-- Value inserted via greeting.js -->
@@ -24,6 +24,9 @@ import TimelineItem from "../components/TimelineItem.astro";
     </div>
   </section>
 
+  <div class="container">
+    <h2 class='sub-heading' style="margin-top: 65px; margin-bottom: 0">Tools and Frameworks</h2>
+  </div>
   <section class="marquee">
     <div class="marquee-content">
       {devIcons.map(devIcon => <DevLogo icon={devIcon.title} />)}
@@ -45,7 +48,7 @@ import TimelineItem from "../components/TimelineItem.astro";
         title="FrontEnd Web Developer"
         startDate="January 2023"
         logo="/images/LondonLink_Logo.svg"
-        workMode="Remote"
+        workMode="remote"
         responsibilities={[
           "Lead front end engineer, designing and implementing new features for the trading platform.",
           "Implementing real-time websocket interfaces, which help to improve data concurrency/consistency and user experience.",
@@ -59,7 +62,7 @@ import TimelineItem from "../components/TimelineItem.astro";
         title="FullStack Web Developer"
         startDate="August 2022"
         logo="/images/LondonLink_Logo.svg"
-        workMode="On-site"
+        workMode="on-site"
         responsibilities={[
           "Lead front end engineer, designing and implementing new features for the trading platform.",
           "Implementing real-time websocket interfaces, which help to improve data concurrency/consistency and user experience.",
@@ -74,7 +77,7 @@ import TimelineItem from "../components/TimelineItem.astro";
         startDate="Nov 2021"
         endDate="June 2022"
         logo="/images/LondonLink_Logo.svg"
-        workMode="On-site"
+        workMode="on-site"
         responsibilities={[
           "Lead front end engineer, designing and implementing new features for the trading platform.",
           "Implementing real-time websocket interfaces, which help to improve data concurrency/consistency and user experience.",
@@ -89,7 +92,7 @@ import TimelineItem from "../components/TimelineItem.astro";
       startDate="Nov 2021"
       endDate="June 2022"
       logo="/images/LondonLink_Logo.svg"
-      workMode="On-site"
+      workMode="on-site"
         responsibilities={[
           "Project lead responsible for the successful launch of the Tefal UK e-commerce Magento store project, delivering the project on time and within budget. Duties include maintaining strict timelines and deadlines, and managing multiple cross-company teams and personnel, as well as collaborating with the client to understand their requirements.",
           "Plan and lead the development of a bespoke medical application that is composed of a Node.js back end and a React.js front end, ensuring strict compliance with security and privacy requirements while coordinating the work of an in-house team.",
@@ -103,7 +106,7 @@ import TimelineItem from "../components/TimelineItem.astro";
         startDate="Sep 2014"
         endDate="Feb 2022"
         endDate="Oct 2017"
-        workMode='on-Site'
+        workMode='on-site'
         logo="/images/Dodec_Logo.png"
         responsibilities={[
           "Directing the development of landing pages showcasing new products for household brands, including Tefal and Krups, optimising them for mobile compatibility using responsive design techniques, resulting in increased conversions.",
@@ -117,6 +120,7 @@ import TimelineItem from "../components/TimelineItem.astro";
         title="Junior Software Developer"
         startDate="Sep 2013"
         endDate="Sep 2014"
+        workMode='hybrid'
         logo="/images/Dodec_Logo.png"
         responsibilities={[
           "Assisting in designing and developing static websites using HTML, CSS, and JavaScript.",
@@ -215,6 +219,7 @@ import TimelineItem from "../components/TimelineItem.astro";
 
 <script hoist>
   import { greeting } from "../js/greeting";
-  const greetingContainer = document.getElementById("greeting");
+  const greeting
+   = document.getElementById("greeting");
   greetingContainer.innerText = greeting();
 </script>

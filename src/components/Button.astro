@@ -3,7 +3,7 @@ interface Props {
   variant?: "solid" | "outline";
   href?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-  colorScheme?: "blue" | "orange" | "green" | "silver";
+  colorScheme?: "blue" | "lime" | "mint" | "silver" | 'yellow';
   class?: string;
   domProps?: { [key: string]: any }
 }
@@ -12,7 +12,7 @@ const {
   variant = "solid",
   href,
   size = "md",
-  colorScheme = "green",
+  colorScheme = "mint",
   domProps = {}
 } = Astro.props;
 
@@ -56,7 +56,7 @@ const className = `button ${variant} size-${size} colorScheme-${colorScheme} ${A
           background: var(--color-silver-400);
         }
       }
-      &.colorScheme-green {
+      &.colorScheme-mint {
         background: var(--color-mint);
         &:hover {
           background: var(--color-mint-400);
@@ -68,10 +68,16 @@ const className = `button ${variant} size-${size} colorScheme-${colorScheme} ${A
           background: var(--color-blue-400);
         }
       }
-      &.colorScheme-orange {
-        background: var(--color-orange);
+      &.colorScheme-lime {
+        background: var(--color-lime);
         &:hover {
-          background: var(--color-orange-400);
+          background: var(--color-lime-400);
+        }
+      }
+      &.colorScheme-yellow {
+        background: var(--color-yellow-400);
+        &:hover {
+          background: var(--color-yellow-400);
         }
       }
     }
@@ -85,7 +91,7 @@ const className = `button ${variant} size-${size} colorScheme-${colorScheme} ${A
           color: initial;
         }
       }
-      &.colorScheme-green {
+      &.colorScheme-mint {
         border-color: var(--color-mint);
         color: var(--color-mint);
         &:hover {
@@ -101,11 +107,19 @@ const className = `button ${variant} size-${size} colorScheme-${colorScheme} ${A
           color: initial;
         }
       }
-      &.colorScheme-orange {
-        border-color: var(--color-orange);
-        color: var(--color-orange);
+      &.colorScheme-lime {
+        border-color: var(--color-lime);
+        color: var(--color-lime);
         &:hover {
-          background: var(--color-orange-400);
+          background: var(--color-lime-400);
+          color: initial;
+        }
+      }
+      &.colorScheme-yellow {
+        border-color: var(--color-yellow-400);
+        color: var(--color-yellow-400);
+        &:hover {
+          background: var(--color-yellow-400);
           color: initial;
         }
       }

@@ -4,19 +4,20 @@ import Button from '../components/Button.astro';
 import { yearsInIndustry } from "../js/yearsInIndustry";
 ---
 
-<DefaultLayout documentTitle="Luke Liasi">
+<DefaultLayout documentTitle="Code Hermit | Home">
   <section class="container" style="z-index: 1; position: relative;">
     <h1>
-      <span class="intro-welcome">Welcome, my name is <br></span>
-      <span class="intro-name text-swipe-animation">Luke Liasi.</span>
+      <span class="intro-welcome">Welcome, I am <br></span>
+      <span class="intro-name text-swipe-animation">Code Hermit.</span>
     </h1>
-    <h2 class="intro">I build compelling <br class="intro-break" />digital experiences.</h2>
+    <h2 class="intro">I develop captivating<br class="intro-break" />web experiences.</h2>
     <p class="desc">
-      Software engineer, passionate about solving problems with code.<br class="desc-break" /> Over {yearsInIndustry} years of industry experience specialising in JavaScript, React & Node.
+      Passionate full-stack developer adept at problem-solving through code.<br class="desc-break" />
+      {yearsInIndustry}+ years industry experience, specialized in HTML, CSS, JavaScript, TypeScript, React & Node.
     </p>
 
-    <Button href="/projects" variant="outline" size="lg" colorScheme="green">
-      See my projects
+    <Button href="/projects" variant="outline" size="lg" colorScheme="mint">
+      View my projects
       <svg style="margin-left: 5px" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
     </Button>
   </section>
@@ -60,7 +61,7 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
   }
 
   .intro-welcome {
-    color: var(--color-mint);
+    color: var(--color-lime);
     font-family: var(--font-family-IBM-Plex-Mono);
     font-weight: 600;
     font-size: var(--font-size-base);

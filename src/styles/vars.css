@@ -5,30 +5,42 @@
   */
   /* Mint */
   --color-mint: rgb(14 165 233);
-  --color-mint-50: rgb(240 253 250);
-  --color-mint-100: rgb(204 251 241);
-  --color-mint-200: rgb(153 246 228);
-  --color-mint-300: rgb(94 234 212);
-  --color-mint-400: rgb(45 212 191);
+  --color-mint-50: rgb(240 249 255);
+  --color-mint-100: rgb(224 242 254);
+  --color-mint-200: rgb(186 230 253);
+  --color-mint-300: rgb(125 211 252);
+  --color-mint-400: rgb(56 189 248);
   --color-mint-500: rgb(14 165 233);
-  --color-mint-600: #00DC76;
-  --color-mint-700: #00A458;
-  --color-mint-800: #006C3A;
-  --color-mint-900: #00341C;
-  /* Orange */
-  --color-orange: #E8871E;
-  --color-orange-50: #F9E0C5;
-  --color-orange-100: #F7D6B2;
-  --color-orange-200: #F3C28D;
-  --color-orange-300: #F0AE68;
-  --color-orange-400: #EC9B43;
-  --color-orange-500: #E8871E;
-  --color-orange-600: #BB6A13;
-  --color-orange-700: #884D0E;
-  --color-orange-800: #553009;
-  --color-orange-900: #221303;
+  --color-mint-600: rgb(2 132 199);
+  --color-mint-700: rgb(3 105 161);
+  --color-mint-800: rgb(7 89 133);
+  --color-mint-900: rgb(12 74 110);
+  /* lime */
+  --color-lime: rgb(132 204 22);
+  --color-lime-50: rgb(247 254 231);
+  --color-lime-100: rgb(236 252 203);
+  --color-lime-200: rgb(217 249 157);
+  --color-lime-300: rgb(190 242 100);
+  --color-lime-400: rgb(163 230 53);
+  --color-lime-500: rgb(132 204 22);
+  --color-lime-600: rgb(101 163 13);
+  --color-lime-700: rgb(77 124 15);
+  --color-lime-800: rgb(63 98 18);
+  --color-lime-900: rgb(54 83 20);
+  /* yellow */
+  --color-yellow: rgb(234 179 8);
+  --color-yellow-50: rgb(254 252 232);
+  --color-yellow-100: rgb(254 249 195);
+  --color-yellow-200: rgb(254 240 138);
+  --color-yellow-300: rgb(253 224 71);
+  --color-yellow-400: rgb(250 204 21);
+  --color-yellow-500: rgb(234 179 8);
+  --color-yellow-600: rgb(161 98 7);
+  --color-yellow-700: rgb(77 124 15);
+  --color-yellow-800: rgb(133 77 14);
+  --color-yellow-900: rgb(113 63 18);
   /* Silver */
-  --color-silver: #8491A3;
+  --color-silver: rgb(120 113 108);
   --color-silver-50: #EDEFF2;
   --color-silver-100: #E1E4E9;
   --color-silver-200: #CAD0D7;

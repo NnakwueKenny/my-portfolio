@@ -1,1 +1,0 @@
-import"./mobileMenu.5c131579.js";import"./DevLogo.astro_astro_type_script_index_0_lang.8ab8e71c.js";const n=new Date,e=n.getHours();function t(){return e>=4&&e<12?"Good morning!":e>=12&&e<18?"Good afternoon!":e>=18&&e<=23?"Good evening!":"Hey there!"}const r=document.getElementById("greeting");r.innerText=t();
