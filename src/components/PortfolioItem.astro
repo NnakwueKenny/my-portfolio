@@ -8,7 +8,7 @@ interface Props {
   tags: Skills[];
   image: string;
   isOpenSource?: boolean;
-  githubStarsCount?: number;
+  githubStarsCount?: Promise<number>;
   projectLink?: string;
   sourceCode?: string;
   projectYear: string;

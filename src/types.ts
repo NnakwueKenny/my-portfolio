@@ -13,6 +13,7 @@ export type Skills =
   | "CSS"
   | "Sass"
   | "Tailwind CSS"
+  | "Material UI"
   | "Python"
   | "MongoDB"
   | "PostgreSQL"

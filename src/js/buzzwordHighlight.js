@@ -2,6 +2,14 @@
  * These words are buzzwords that should be highlighted
  */
 const buzzwords = [
+  'Coding',
+  'Gaming',
+  'Movies',
+  'Football',
+  'Movies',
+  'Material UI',
+  'Yoris Africa',
+  'Twitter',
   "Adobe Illustrator",
   "Adobe Photoshop",
   "Adobe XD",
@@ -17,6 +25,7 @@ const buzzwords = [
   "Express",
   "Figma",
   "Git",
+  "GitHub",
   "HTML",
   "JavaScript",
   "Linux",
