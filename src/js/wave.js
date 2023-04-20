@@ -7,13 +7,13 @@ const ClassicalNoise = function() {
   this.grad3 = [
     [1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0],
     [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1],
-    [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]
+    [0, 1, 1], [0, -1, -1], [0, 1, -1], [0, -1, 0]
   ];
 
   this.p = [];
 
   for (let i = 0; i < 256; i++) {
-    this.p[i] = Math.floor(r.random() * 256);
+    this.p[i] = Math.floor(r.random() * 200);
   }
 
   // To remove the need for index wrapping, double the permutation table length

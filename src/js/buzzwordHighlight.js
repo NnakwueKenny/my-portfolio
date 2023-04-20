@@ -53,6 +53,7 @@ const buzzwords = [
   "TailwindCSS",
   "TypeScript",
   "WordPress",
+  "REST",
   "Vanilla Javascript",
 ];
 
