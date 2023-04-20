@@ -1,5 +1,5 @@
 # lukeliasi.com
-Source code for my personal website [lukeliasi.com](http://lukeliasi.com).
+Source code for my personal website [codehermit.netlify.app](http://codehermit.netlify.app).
 
 ## 🛠️ Built with
 - [Astro](https://astro.build/)

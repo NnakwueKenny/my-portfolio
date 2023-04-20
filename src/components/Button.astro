@@ -2,6 +2,7 @@
 interface Props {
   variant?: "solid" | "outline";
   href?: string;
+  target?:string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   colorScheme?: "blue" | "lime" | "mint" | "silver" | 'yellow';
   class?: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const {
   variant = "solid",
-  href,
+  href, target,
   size = "md",
   colorScheme = "mint",
   domProps = {}
@@ -20,7 +21,7 @@ const className = `button ${variant} size-${size} colorScheme-${colorScheme} ${A
 ---
 
 {href ? (
-  <a class={className} href={href} {...domProps}>
+  <a class={className} href={href} target={target} {...domProps}>
     <slot />
   </a>
 ) : (
