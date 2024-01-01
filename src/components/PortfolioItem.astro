@@ -51,7 +51,7 @@ const {
       <slot name="description" />
 
       <div class="tags">
-        {tags.map(tag => <DevLogo icon={tag} size={30} />)}
+        {tags.map((tag: any) => <DevLogo icon={tag} size={30} />)}
       </div>
 
       <div class="buttons">

@@ -37,6 +37,7 @@ const buzzwords = [
   "Node",
   "Node/Express.js",
   "NoSQL",
+  "NotJustEvent",
   "PHP",
   "PostgreSQL",
   "Python",

@@ -34,9 +34,14 @@ const months = Math.floor(duration / 1000 / 60 / 60 / 24 / 30) % 12;
     <p class="time">
        {startDate} - {endDate || "Present"}
     </p>
-    <ul class="responsibilities">
-      {responsibilities.map((responsibility) => (
-        <li>{responsibility}</li>
+    <ul class=`responsibilities ${workMode}`>
+      {responsibilities.map((responsibility: any) => (
+        <li>
+          <span
+            style={workMode === 'remote' ? 'color: var(--color-yellow-400)' : workMode === 'on-site' ? 'color: var(--color-mint-400)' : 'color: var(--color-lime-400)'}
+          >►&nbsp;</span>
+          {responsibility}
+          </li>
       ))}
     </ul>
   </div>
@@ -63,13 +68,13 @@ const months = Math.floor(duration / 1000 / 60 / 60 / 24 / 30) % 12;
     font-weight: 600;
     text-transform: capitalize;
     .remote-mode {;
-      color: var(--color-mint-400);
+      color: var(--color-yellow-400);
     }
     .site-mode {
-      color: var(--color-lime-400);
+      color: var(--color-mint-400);
     }
     .hybrid-mode {
-      color: var(--color-yellow-400);
+      color: var(--color-lime-400);
     }
   }
 
@@ -106,10 +111,7 @@ const months = Math.floor(duration / 1000 / 60 / 60 / 24 / 30) % 12;
     line-height: 1.5rem;
     li {
       margin: 8px 0;
-      &::marker {
-        content: "►   ";
-        color: var(--color-mint);
-      }
+      list-style: none;
     }
   }
 

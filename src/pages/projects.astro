@@ -46,6 +46,34 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
     <section class="projects">
       <PortfolioItem
         projectYear="2023"
+        title="NotJustEvent"
+        image="/images/nje-website.png"
+        projectLink="https://dev.notjustevent.com"
+        tags={[
+          "React",
+          "TypeScript",
+          "Node.js",
+          "MongoDB",
+          "Git"
+        ]}>
+        <p slot="subtitle">An all-in-one event management platform, NotJustEvent.</p>
+
+        <div slot="description">
+          <p>
+            Built using TailwindCSS, Material UI, React, Node and Express. The backend API, built using Node and Express,
+            efficiently handles data while the frontend, created with React.js, presents it in an intuitive and user-friendly interface.
+            Pages are rendered client-side with dynamic content using Material UI and TailwindCSS on the client side.
+          </p>
+          <p>
+            I worked extensively on the backend API, creating custom-design API endpoints using Express(Typescript) for handling user(s)'
+            data, and managing the entire data fed to the client side. Built to be optimized for speed and efficient data retrival and
+            optimized search queries.
+          </p>
+        </div>
+      </PortfolioItem>
+
+      <PortfolioItem
+        projectYear="2023"
         title="Yoris Africa"
         image="/images/yoris-website.png"
         projectLink="https://yoris-website.vercel.app"

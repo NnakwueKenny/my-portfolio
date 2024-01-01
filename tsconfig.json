@@ -1,3 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": true
+  },
   "extends": "astro/tsconfigs/strict"
 }
