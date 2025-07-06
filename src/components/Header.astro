@@ -2,49 +2,146 @@
 import Menu from "../components/Menu.astro";
 ---
 
-<header class="container">
-  <div class="header-left">
-    <a href="/" class="avatar">
-      <img width="35px" class="profile-pic" src="/site-photo.png" alt="Code Hermit profile picture" />
-      <span class="name">Code Hermit</span>
-    </a>
-  </div>
+<header class="header" id="main-header">
+  <div class="container header-content">
+    <div class="header-left">
+      <a href="/" class="avatar">
+        <div class="avatar-icon">
+          <svg viewBox="0 0 100 100" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#15ff93;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="48" fill="url(#avatarGradient)" stroke="#ffffff" stroke-width="2"/>
+            <text x="50" y="58" text-anchor="middle" fill="white" font-family="IBM Plex Mono, monospace" font-size="32" font-weight="bold">CH</text>
+          </svg>
+        </div>
+        <span class="name">Code Hermit</span>
+      </a>
+    </div>
 
-  <div class="header-right">
-    <Menu />
+    <div class="header-right">
+      <Menu />
+    </div>
   </div>
 </header>
 
 <style lang="scss">
-  header {
-    padding-top: 25px;
-    width: 100%;
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(2, 8, 23, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &.scrolled {
+      background: rgba(2, 8, 23, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border-bottom-color: rgba(21, 255, 147, 0.2);
+    }
+  }
+
+  .header-content {
+    padding: 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: padding 0.3s ease;
+  }
+
+  .scrolled .header-content {
+    padding: 0.75rem 0;
   }
 
   .avatar {
     color: var(--color-silver-100);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     display: flex;
     align-items: center;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 50px;
+    
     &:hover {
       text-decoration: none;
       color: white;
-      .profile-pic {
-        filter: brightness(125%);
+      background: rgba(21, 255, 147, 0.1);
+      transform: translateY(-2px);
+      
+      .avatar-icon {
+        transform: scale(1.1);
       }
     }
   }
 
-  .profile-pic {
+  .avatar-icon {
+    transition: transform 0.3s ease;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .name {
     margin-left: 0.75rem;
-    font-size: 18px;
+    font-size: 1.125rem;
+    background: linear-gradient(135deg, #ffffff 0%, #15ff93 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: var(--font-family-IBM-Plex-Mono);
+  }
+
+  :global(main) {
+    position: relative;
+    z-index: 1;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+  }
+
+  @media screen and (max-width: 980px) {
+    .header-content {
+      padding: 0.75rem 0;
+    }
+    
+    .scrolled .header-content {
+      padding: 0.5rem 0;
+    }
+    
+    .name {
+      font-size: 1rem;
+    }
   }
 </style>
+
+<script>
+  // Header scroll behavior
+  const header = document.getElementById('main-header');
+  let lastScrollY = window.scrollY;
+
+  function updateHeader() {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > 50) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+    
+    lastScrollY = scrollY;
+  }
+
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  
+  // Initialize on load
+  updateHeader();
+</script>

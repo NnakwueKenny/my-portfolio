@@ -1,60 +1,482 @@
 ---
-interface Props {
-  canonical?: string;
-  documentTitle: string;
-  documentDescription?: string;
-}
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
+// Import styles directly
 import "../styles/reset.css";
-import 'tippy.js/dist/tippy.css';
 import "../styles/fonts.css";
 import "../styles/vars.css";
 import "../styles/global.scss";
-import { yearsInIndustry } from "../js/yearsInIndustry";
+import 'tippy.js/dist/tippy.css';
 
-import Header from "../components/Header.astro"
-import Footer from "../components/Footer.astro"
+interface Props {
+  documentTitle?: string;
+  documentDescription?: string;
+  canonicalURL?: string;
+  socialImage?: string;
+  socialImageAlt?: string;
+  pageType?: 'website' | 'article' | 'profile';
+  publishDate?: string;
+  modifiedDate?: string;
+  author?: string;
+  keywords?: string;
+  robots?: string;
+}
 
-const title = import.meta.env.PUBLIC_SITE_NAME;
-const defaultDesc = `Software engineer, passionate about solving problems with code. Over ${yearsInIndustry} years of industry experience specialising in JavaScript, React & Node.`;
-const site_url = Astro.site;
-const site_domain = import.meta.env.PUBLIC_SITE_DOMAIN;
+const {
+  documentTitle = 'Code Hermit - Full Stack Developer',
+  documentDescription = 'Kenechukwu (Code Hermit) is a passionate Full Stack Developer specializing in Node.js, React, and modern web technologies. Available for remote work and exciting projects.',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  socialImage = '/images/social-preview.jpg',
+  socialImageAlt = 'Code Hermit - Full Stack Developer Portfolio',
+  pageType = 'website',
+  publishDate,
+  modifiedDate,
+  author = 'Kenechukwu Nnakwue (Code Hermit)',
+  keywords = 'full stack developer, web developer, JavaScript, TypeScript, Node.js, React, Next.js, MongoDB, portfolio, Nigeria developer, remote work, software engineer',
+  robots = 'index, follow'
+} = Astro.props;
 
-// Props
-const canonical = Astro.props.canonical || undefined;
-const documentTitle = Astro.props.documentTitle || title;
-const documentDescription = Astro.props.documentDescription || defaultDesc;
+const siteTitle = 'Code Hermit';
+const siteURL = 'https://codehermit.netlify.app';
+const fullSocialImageURL = new URL(socialImage, siteURL).href;
+const currentYear = new Date().getFullYear();
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kenechukwu Nnakwue",
+  "alternateName": "Code Hermit",
+  "url": siteURL,
+  "image": fullSocialImageURL,
+  "sameAs": [
+    "https://github.com/NnakwueKenny",
+    "https://twitter.com/kenny_nnakwue",
+    "https://www.linkedin.com/in/kenechukwu-nnakwue-a854081b5"
+  ],
+  "jobTitle": "Full Stack Developer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Freelance"
+  },
+  "knowsAbout": [
+    "JavaScript",
+    "TypeScript",
+    "Node.js",
+    "React",
+    "Next.js",
+    "MongoDB",
+    "Express.js",
+    "Web Development",
+    "Full Stack Development"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "Nigeria"
+  },
+  "description": documentDescription
+};
+
+// Organization structured data
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": siteTitle,
+  "url": siteURL,
+  "logo": {
+    "@type": "ImageObject",
+    "url": `${siteURL}/images/logo.png`
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Professional",
+    "availableLanguage": "English"
+  }
+};
+
+// Website structured data
+const websiteData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": siteTitle,
+  "url": siteURL,
+  "description": documentDescription,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${siteURL}/search?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    {canonical && <link rel="canonical" href={canonical}>}
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/site-icon-2.ico" type="image/png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content={robots} />
+    
+    <!-- Primary Meta Tags -->
     <title>{documentTitle}</title>
-    <meta name="description" content={documentDescription}>
-    <meta property="og:title" content={title} />
+    <meta name="title" content={documentTitle} />
+    <meta name="description" content={documentDescription} />
+    <meta name="author" content={author} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Theme and Color Meta Tags -->
+    <meta name="theme-color" content="#15ff93" />
+    <meta name="msapplication-navbutton-color" content="#15ff93" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="msapplication-TileColor" content="#15ff93" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={pageType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={documentDescription} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={site_url + (canonical || "")} />
-    <meta property="og:image" content={site_url + "images/ogimage.png"} />
+    <meta property="og:image" content={fullSocialImageURL} />
+    <meta property="og:image:alt" content={socialImageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={documentTitle} />
+    <meta name="twitter:description" content={documentDescription} />
+    <meta name="twitter:image" content={fullSocialImageURL} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
+    <meta name="twitter:creator" content="@kenny_nnakwue" />
+    <meta name="twitter:site" content="@kenny_nnakwue" />
+    
+    <!-- LinkedIn -->
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta name="linkedin:owner" content="kenechukwu-nnakwue-a854081b5" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/site-icon-2.ico" type="image/x-icon" />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//api.github.com" />
+    <link rel="dns-prefetch" href="//formspree.io" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationData)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteData)} />
+    
+    <!-- Publication Dates -->
+    {publishDate && <meta name="article:published_time" content={publishDate} />}
+    {modifiedDate && <meta name="article:modified_time" content={modifiedDate} />}
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Performance Hints -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content={siteTitle} />
+    
+    <!-- Additional Meta for SEO -->
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="NG" />
+    <meta name="geo.country" content="Nigeria" />
+    <meta name="ICBM" content="6.5244, 3.3792" />
+    <meta name="geo.position" content="6.5244;3.3792" />
+    <meta name="geo.placename" content="Lagos, Nigeria" />
+    
+    <!-- Copyright and Rights -->
+    <meta name="copyright" content={`© ${currentYear} ${author}`} />
+    <meta name="rights" content={`© ${currentYear} ${author}. All rights reserved.`} />
   </head>
-  <body class="page">
+  <body>
     <Header />
-
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </button>
     <main>
       <slot />
     </main>
-
     <Footer />
+    
+    <script>
+      // Theme management
+      const THEME_KEY = 'theme';
+      const THEME_DARK = 'dark';
+      const THEME_LIGHT = 'light';
+      const THEME_SYSTEM = 'system';
+      
+      const themeToggle = document.getElementById('themeToggle');
+      const sunIcon = document.querySelector('.sun-icon');
+      const moonIcon = document.querySelector('.moon-icon');
+      
+      // Get system theme preference
+      function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? THEME_DARK : THEME_LIGHT;
+      }
+      
+      // Get current theme
+      function getCurrentTheme() {
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        if (savedTheme && [THEME_DARK, THEME_LIGHT, THEME_SYSTEM].includes(savedTheme)) {
+          return savedTheme;
+        }
+        return THEME_SYSTEM; // Default to system theme
+      }
+      
+      // Apply theme to document
+      function applyTheme(theme) {
+        const actualTheme = theme === THEME_SYSTEM ? getSystemTheme() : theme;
+        
+        if (actualTheme === THEME_DARK) {
+          document.documentElement.removeAttribute('data-theme');
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      }
+      
+      // Cycle through themes: system -> dark -> light -> system
+      function cycleTheme() {
+        const currentTheme = getCurrentTheme();
+        let nextTheme;
+        
+        switch (currentTheme) {
+          case THEME_SYSTEM:
+            nextTheme = THEME_DARK;
+            break;
+          case THEME_DARK:
+            nextTheme = THEME_LIGHT;
+            break;
+          case THEME_LIGHT:
+            nextTheme = THEME_SYSTEM;
+            break;
+          default:
+            nextTheme = THEME_SYSTEM;
+        }
+        
+        localStorage.setItem(THEME_KEY, nextTheme);
+        applyTheme(nextTheme);
+        
+        // Show temporary indicator
+        showThemeIndicator(nextTheme);
+      }
+      
+      // Show theme change indicator
+      function showThemeIndicator(theme) {
+        const indicator = document.createElement('div');
+        indicator.className = 'theme-indicator';
+        indicator.textContent = `Theme: ${theme === THEME_SYSTEM ? 'System' : theme.charAt(0).toUpperCase() + theme.slice(1)}`;
+        document.body.appendChild(indicator);
+        
+        setTimeout(() => {
+          indicator.remove();
+        }, 2000);
+      }
+      
+      // Initialize theme
+      applyTheme(getCurrentTheme());
+      
+      // Add theme toggle listener
+      themeToggle?.addEventListener('click', cycleTheme);
+      
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getCurrentTheme() === THEME_SYSTEM) {
+          applyTheme(THEME_SYSTEM);
+        }
+      });
+      
+      // Keyboard shortcut for theme toggle (Ctrl/Cmd + Shift + T)
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
+          e.preventDefault();
+          cycleTheme();
+        }
+      });
+    </script>
   </body>
 </html>
 
-<style lang="scss">
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-IBM-Plex-Sans);
+    background: var(--color-gray-900);
+    color: var(--color-silver-100);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  
   main {
-    flex-grow: 1;
+    min-height: calc(100vh - 160px);
+  }
+  
+  *:focus {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+  }
+  
+  /* Improve accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-lime: #00ff00;
+      --color-silver-100: #ffffff;
+      --color-silver-300: #e5e5e5;
+      --color-gray-900: #000000;
+    }
+  }
+  
+  /* Theme toggle button styles */
+  .theme-toggle {
+    position: fixed;
+    top: 6rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--color-background-tertiary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    
+    &:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-border-hover);
+      transform: scale(1.05);
+    }
+    
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover svg {
+      transform: rotate(15deg);
+    }
+    
+    @media screen and (max-width: 980px) {
+      top: 5rem;
+      right: 1rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+  
+  /* Theme indicator styles */
+  .theme-indicator {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: var(--color-background-tertiary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+    animation: slideInFromRight 0.3s ease-out, slideOutToRight 0.3s ease-in 1.7s forwards;
+    
+    @media screen and (max-width: 980px) {
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.75rem;
+      padding: 0.5rem 0.75rem;
+    }
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOutToRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    body {
+      background: white;
+      color: black;
+    }
+    
+    .no-print,
+    .theme-toggle,
+    .theme-indicator {
+      display: none;
+    }
   }
 </style>
 

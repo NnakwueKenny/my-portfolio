@@ -4,119 +4,691 @@ import Button from '../components/Button.astro';
 import { yearsInIndustry } from "../js/yearsInIndustry";
 ---
 
-<DefaultLayout documentTitle="Code Hermit | Home">
-  <section class="container" style="z-index: 1; position: relative;">
-    <h1>
-      <span class="intro-welcome">Welcome, I am <br></span>
-      <span class="intro-name text-swipe-animation">Code Hermit.</span>
-    </h1>
-    <h2 class="intro">I develop captivating<br class="intro-break" />web experiences.</h2>
-    <p class="desc">
-      Passionate full-stack developer adept at problem-solving through code.<br class="desc-break" />
-      {yearsInIndustry}+ years industry experience, specialized in HTML, CSS, JavaScript, TypeScript, React & Node.
-    </p>
-
-    <Button href="/projects" variant="outline" size="lg" colorScheme="mint">
-      View my projects
-      <svg style="margin-left: 5px" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-    </Button>
+<DefaultLayout documentTitle="Code Hermit | Home" documentDescription="Welcome to Code Hermit's portfolio. I'm a passionate full-stack developer with 5+ years of experience creating innovative web solutions.">
+  <!-- Wave Background -->
+  <canvas id="waves"></canvas>
+  
+  <section class="container hero-section animated-background" style="z-index: 1; position: relative;">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="intro-welcome">Welcome, I am <br></span>
+        <span class="intro-name text-swipe-animation">Code Hermit.</span>
+      </h1>
+      <h2 class="hero-subtitle">I craft innovative<br class="intro-break" />web solutions.</h2>
+      <p class="hero-description">
+        Passionate full-stack developer specializing in scalable web applications.<br class="intro-break" />
+        With <span class="highlight">{yearsInIndustry}+ years</span> of experience, I turn complex problems into elegant solutions.
+      </p>
+      
+      <div class="hero-actions">
+        <Button variant="solid" colorScheme="lime" class="primary-cta">
+          <a href="/contact">Let's Work Together</a>
+        </Button>
+        
+        <!-- Resume Download Modal -->
+        <button class="btn btn-outline resume-download-btn" id="resumeDownloadBtn">
+          <svg class="download-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 16l4-4h-3V4h-2v8H8l4 4z" fill="currentColor"/>
+            <path d="M20 18v2H4v-2h16z" fill="currentColor"/>
+          </svg>
+          <span class="button-text">Download Resume</span>
+          <svg class="loading-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+              <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+              <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">{yearsInIndustry}+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hero-visual">
+      <div class="floating-elements">
+        <div class="floating-element animate-float" style="--delay: 0s;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.46 9-11V7l-10-5z" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="floating-element animate-float" style="--delay: 1s;">
+          <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="floating-element animate-float" style="--delay: 2s;">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="about-preview">
+    <div class="container">
+      <h2 class="section-heading">About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I'm a passionate full-stack developer who loves building web applications that make a difference. 
+            With expertise in modern JavaScript, Node.js, and React, I create solutions that are both 
+            performant and user-friendly.
+          </p>
+          <p>
+            My journey in web development spans over {yearsInIndustry} years, during which I've worked on 
+            diverse projects from e-commerce platforms to SaaS applications. I'm always eager to learn 
+            new technologies and tackle challenging problems.
+          </p>
+          <Button variant="outline" class="learn-more-btn">
+            <a href="/about">Learn More About Me</a>
+          </Button>
+        </div>
+        <div class="about-image">
+          <div class="avatar-container">
+            <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#15ff93;stop-opacity:1" />
+                  <stop offset="50%" style="stop-color:#0ea5e9;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="90" fill="url(#avatarGradient)" opacity="0.9"/>
+              <text x="100" y="120" text-anchor="middle" fill="white" font-family="IBM Plex Mono, monospace" font-size="60" font-weight="bold">CH</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <canvas id="waves"></canvas>
+  <!-- Resume Download Modal -->
+  <div id="resumeModal" class="resume-modal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Download Resume</h3>
+        <button class="modal-close" id="modalClose">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Choose your preferred format:</p>
+        <div class="resume-options-grid">
+          <button class="resume-option-card" data-format="pdf">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+              <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 13H8v2h8v-2z" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 17H8v2h8v-2z" stroke="currentColor" stroke-width="2"/>
+              <path d="M10 9H8v2h2V9z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <div class="option-details">
+              <h4>PDF Format</h4>
+              <p>Perfect for printing and sharing</p>
+            </div>
+          </button>
+          
+          <button class="resume-option-card" data-format="docx">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+              <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 18v-6l-2 2-2-2v6h4z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 12l2-2v-2h-4v2l2 2z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <div class="option-details">
+              <h4>Word Format</h4>
+              <p>Editable for ATS systems</p>
+            </div>
+          </button>
+          
+          <button class="resume-option-card" data-format="view">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <div class="option-details">
+              <h4>View Online</h4>
+              <p>Interactive web version</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </DefaultLayout>
 
 <style lang="scss">
-  // Home page is full screen so we can fix the height of the page to 100%
-  // this is better than setting 100vh globally as there becomes issues on mobile with the address bar causing a scroll
-  :global(.page) {
+  /* Wave Canvas */
+  #waves {
     position: fixed;
-    min-height: 100%;
-    width: 100%;
-  }
-
-  $waves-opacity: 0.5;
-
-  @keyframes fadeInWaves {
-    0% { opacity: 0 }
-    100% { opacity: $waves-opacity }
-  }
-
-  canvas#waves {
-    width: 100%;
-    height: 100vh;
-    animation: fadeInWaves 2s;
-    background: transparent;
-    opacity: $waves-opacity;
-    left: 0;
-    position: absolute;
-    right: 0;
     top: 0;
-    overflow: hidden;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
     pointer-events: none;
   }
 
-  h1 {
-    line-height: 2.5rem;
-    margin: 1rem 0;
+  .hero-section {
+    padding: 4rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    min-height: 80vh;
+    position: relative;
+    z-index: 2;
   }
 
-  .intro-welcome {
-    color: var(--color-lime);
-    font-family: var(--font-family-IBM-Plex-Mono);
-    font-weight: 600;
-    font-size: var(--font-size-base);
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 3;
   }
 
-  .intro-name {
-    font-family: var(--font-family-Mukta);
-    font-size: var(--font-size-14xl);
-    overflow: hidden;
-    display: inline-block;
-    padding: 10px 0;
-    color: white;
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+    
+    .intro-welcome {
+      color: var(--color-text-secondary);
+      font-size: 1.5rem;
+      font-weight: 400;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .intro-name {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   }
 
-  .intro {
-    color: var(--color-silver-300);
-    font-size: var(--font-size-11xl);
-    line-height: 3.25rem;
-    margin: 1rem 0;
+  .hero-subtitle {
+    font-size: 2rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.2;
   }
 
-  .desc {
-    color: var(--color-silver-100);
-    font-size: var(--font-size-lg);
-    line-height: 1.5em;
-    margin: 1.5rem 0;
+  .hero-description {
+    font-size: 1.125rem;
+    color: var(--color-text-tertiary);
+    line-height: 1.6;
+    margin: 0;
+    
+    .highlight {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+    
+    .primary-cta a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  .resume-download-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-normal);
+    
+    .loading-spinner {
+      display: none;
+      animation: spin 1s linear infinite;
+    }
+    
+    &.loading {
+      .download-icon,
+      .button-text {
+        opacity: 0.5;
+      }
+      
+      .loading-spinner {
+        display: block;
+      }
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Resume Modal */
+  .resume-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: none;
+    
+    &.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    position: relative;
+    background: var(--color-background-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    
+    h3 {
+      margin: 0;
+      color: var(--color-text-primary);
+      font-size: 1.5rem;
+    }
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+    
+    &:hover {
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+    }
+  }
+
+  .modal-body {
+    p {
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .resume-options-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .resume-option-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-align: left;
+    
+    &:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-border-hover);
+      transform: translateY(-2px);
+    }
+    
+    svg {
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+    
+    .option-details {
+      h4 {
+        margin: 0 0 0.25rem 0;
+        color: var(--color-text-primary);
+        font-size: 1rem;
+      }
+      
+      p {
+        margin: 0;
+        color: var(--color-text-tertiary);
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+    
+    .stat-item {
+      text-align: center;
+      
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        margin-bottom: 0.5rem;
+      }
+      
+      .stat-label {
+        color: var(--color-text-quaternary);
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+
+  .hero-visual {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .floating-elements {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .floating-element {
+    position: absolute;
+    color: var(--color-primary);
+    opacity: 0.6;
+    animation-delay: var(--delay);
+    
+    &:nth-child(1) {
+      top: 20%;
+      left: 10%;
+    }
+    
+    &:nth-child(2) {
+      top: 60%;
+      right: 20%;
+    }
+    
+    &:nth-child(3) {
+      bottom: 20%;
+      left: 50%;
+    }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .about-preview {
+    padding: 4rem 0;
+    background: var(--color-background-secondary);
+  }
+
+  .section-heading {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 2rem 0;
+    background: linear-gradient(135deg, #ffffff 0%, #15ff93 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text {
+    p {
+      font-size: 1.125rem;
+      color: var(--color-text-tertiary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .learn-more-btn {
+      margin-top: 1rem;
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .about-image {
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar-container {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #15ff93, #0ea5e9, #8b5cf6);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    svg {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.5;
+    }
   }
 
   @media screen and (max-width: 980px) {
-    h1 {
-      line-height: 1.75rem;
-      margin: 0.5rem 0;
+    .hero-section {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+      padding: 2rem 0;
     }
-
-    .intro-name {
-      font-size: var(--font-size-10xl);
-      line-height: 3rem;
+    
+    .hero-title {
+      font-size: 2.5rem;
     }
-
-    .intro {
-      font-size: var(--font-size-3xl);
-      line-height: 2rem;
-      margin: 0.5rem 0;
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
     }
-
+    
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      
+      .primary-cta,
+      .resume-download-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    
+    .hero-stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      
+      .stat-item .stat-number {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+    
+    .hero-visual {
+      height: 300px;
+    }
+    
     .intro-break {
-      display: none;
-    }
-
-    .desc-break {
       display: none;
     }
   }
 </style>
 
 <script>
-  import "../js/wave.js";
+  // Import wave animation
+  import '../js/wave.js';
+  
+  // Resume modal functionality
+  const resumeBtn = document.getElementById('resumeDownloadBtn');
+  const resumeModal = document.getElementById('resumeModal');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+  const optionCards = document.querySelectorAll('.resume-option-card');
+  
+  function showModal() {
+    resumeModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function hideModal() {
+    resumeModal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  
+  function setLoadingState(loading) {
+    if (loading) {
+      resumeBtn.classList.add('loading');
+    } else {
+      resumeBtn.classList.remove('loading');
+    }
+  }
+  
+  // Show modal on button click
+  resumeBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showModal();
+  });
+  
+  // Hide modal on overlay or close button click
+  modalOverlay?.addEventListener('click', hideModal);
+  modalClose?.addEventListener('click', hideModal);
+  
+  // Handle resume downloads
+  optionCards.forEach(card => {
+    card.addEventListener('click', async (e) => {
+      const format = card.dataset.format;
+      
+      setLoadingState(true);
+      hideModal();
+      
+      try {
+        // Simulate loading
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        switch (format) {
+          case 'pdf':
+            window.open('/Kene_CV.pdf', '_blank');
+            break;
+          case 'docx':
+            window.open('/my_cv.pdf', '_blank'); // Update when you have DOCX
+            break;
+          case 'view':
+            window.open('/about', '_blank');
+            break;
+        }
+      } catch (error) {
+        console.error('Error handling resume:', error);
+        alert('Sorry, there was an error. Please try again.');
+      } finally {
+        setLoadingState(false);
+      }
+    });
+  });
+  
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      hideModal();
+    }
+  });
+</script>
 </script>

@@ -5,155 +5,492 @@ import DevLogo, { devIcons } from '../components/DevLogo.astro';
 import TimelineItem from "../components/TimelineItem.astro";
 ---
 
-<DefaultLayout documentTitle="Code Hermit | About" documentDescription="I'm Kenechukwu (just call me Code Hemit 😁).">
-  <section class="container">
-    <h1 class="main-heading text-swipe-animation" id="greeting">
-      <!-- Value inserted via greeting.js -->
-    </h1>
-    <div class="intro">
-      <p>I'm Kenechukwu (just call me Code Hemit 😁),&nbsp; a FullStack Web Developer based in the Nigeria with over {yearsInIndustry} years of experience building Websites.</p>
-    </div>
-
-    <div class="main-section">
-      <img class="profile-photo" src="/site-photo.png" alt="Luke Liasi">
-      <div class="main-section-text">
-        <p>
-          At the moment, I mostly focus on backend web development using technologies such as: Node/Express.js( TypeScript ), MongoDB, RabbitMQ, Docker, etc.</p>
-          I have a keen interest in design and UI/UX, and I also when I have the time, I work on frontend projects using React.js, Next.js, TailwindCSS, etc.
-        <p>I'm passionate about solving problems and building efficient, organised web solutions that are fast, high-performant and accessible to everyone.</p>
-        <p>When I am not Coding, I enjoy activities such as Gaming 🎮, watching Movies 🎞, playing Football ⚽ and lifting 🦾🔩 heavy stuff.</p>
+<DefaultLayout documentTitle="Code Hermit | About" documentDescription="I'm Kenechukwu (just call me Code Hermit 😁), a passionate FullStack Developer with over 5 years of experience building scalable web applications.">
+  <section class="hero-section animated-background">
+    <div class="container">
+      <div class="hero-content">
+        <div class="greeting-wrapper">
+          <h1 class="main-heading text-swipe-animation" id="greeting">
+            <!-- Value inserted via greeting.js -->
+          </h1>
+          <div class="typing-indicator">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+        
+        <div class="intro-card">
+          <div class="intro-content">
+            <p class="intro-text">
+              I'm <span class="highlight">Kenechukwu</span> (just call me <span class="highlight">Code Hermit</span> 😁), a passionate FullStack Web Developer based in Nigeria with over <span class="highlight">{yearsInIndustry} years</span> of experience building scalable web applications and solving complex problems through code.
+            </p>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-number">{yearsInIndustry}+</div>
+                <div class="stat-label">Years Experience</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Projects Completed</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Technologies Mastered</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="container">
-    <h2 class='sub-heading' style="margin-top: 65px; margin-bottom: 0">Tools and Frameworks</h2>
-  </div>
-  <section class="marquee">
-    <div class="marquee-content">
-      {devIcons.map(devIcon => <DevLogo icon={devIcon.title} />)}
-    </div>
+  <section class="about-details">
+    <div class="container">
+      <div class="main-section">
+        <div class="content-grid">
+          <div class="profile-section">
+            <div class="profile-card">
+              <div class="profile-avatar">
+                <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="profileGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#15ff93;stop-opacity:1" />
+                      <stop offset="50%" style="stop-color:#0ea5e9;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                      <feMerge> 
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <circle cx="100" cy="100" r="90" fill="url(#profileGradient)" filter="url(#glow)" opacity="0.9"/>
+                  <text x="100" y="120" text-anchor="middle" fill="white" font-family="IBM Plex Mono, monospace" font-size="60" font-weight="bold">CH</text>
+                </svg>
+              </div>
+              <div class="profile-info">
+                <h3>Full-Stack Developer</h3>
+                <p>Nigeria 🇳🇬</p>
+                <div class="status-indicator">
+                  <span class="status-dot"></span>
+                  Available for work
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <!-- Logos duplicated for scrolling effect -->
-    <div aria-hidden="true" class="marquee-content">
-      {devIcons.map(devIcon => <DevLogo icon={devIcon.title} />)}
+          <div class="details-section">
+            <div class="detail-cards">
+              <div class="detail-card">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h4>Backend Specialist</h4>
+                <p>I focus on full-stack web development, specializing in backend technologies such as Node.js/Express.js with TypeScript, MongoDB, RabbitMQ, Docker, and modern cloud infrastructure. I'm passionate about building microservices architectures and API-first solutions.</p>
+              </div>
+
+              <div class="detail-card">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h4>Frontend Enthusiast</h4>
+                <p>I have a keen interest in design and UI/UX, and I enjoy working on frontend projects using React.js, Next.js, TailwindCSS, and modern JavaScript frameworks. I believe in creating beautiful, accessible, and performant user experiences.</p>
+              </div>
+
+              <div class="detail-card">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h4>Problem Solver</h4>
+                <p>I'm passionate about solving problems and building efficient, well-organized web solutions that are fast, high-performing, and accessible to everyone. I enjoy mentoring junior developers and contributing to open-source projects.</p>
+              </div>
+
+              <div class="detail-card">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <h4>Beyond Code</h4>
+                <p>When I'm not coding, I enjoy activities such as Gaming 🎮, watching Movies 🎞, playing Football ⚽, and staying active with fitness 🦾. I believe in maintaining a healthy work-life balance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="container">
-    <h2 class="sub-heading">Experience</h2>
+  <section class="tech-stack">
+    <div class="container">
+      <h2 class='section-heading'>Tools & Technologies</h2>
+      <p class="section-subtitle">Technologies I work with on a daily basis</p>
+    </div>
+    
+    <div class="marquee">
+      <div class="marquee-content">
+        {devIcons.map(devIcon => <DevLogo icon={devIcon.title} />)}
+      </div>
+      <div aria-hidden="true" class="marquee-content">
+        {devIcons.map(devIcon => <DevLogo icon={devIcon.title} />)}
+      </div>
+    </div>
+  </section>
 
-    <div class="timeline-items">
-      <TimelineItem
-        isCurrent
-        company="NotJustEvent"
-        title="Backend Engineer"
-        startDate="July 2023"
-        logo="https://dev.notjustevent.com/assets/logo-b8be853a.png"
-        workMode="remote"
-        responsibilities={[
-          "Lead the backend team in building the company's backend APIs and maintaning them",
-          "Integrated payment gateways such as Stripe and Paystack with the company's backend APIs",
-          "Implemented the event creteion module/service and also, the ticketing system to make events creation and ticketing easy for users and also seamless",
-          "Implemented promo codes and discount codes generation and validation system for event organizers, vendors and attendees",
-        ]}
-      />
-      <TimelineItem
-        isCurrent
-        company="Yoris Africa"
-        title="FullStack Web Developer"
-        startDate="May 2023"
-        logo="/images/yoris-logo.png"
-        workMode="on-site"
-        responsibilities={[
-          "Built and maintained backend APIs using Node/Express.js ( TypeScript ) and MongoDB",
-          "Worked with RabbitMQ, and integrated it with the company's backend APIs to build a microservice architecture",
-          "Revamped the company's admin interface using React and TypeScript, and integrated it with the backend APIs",
-          "Worked with Docker to deploy the company's APIs",
-        ]}
-      />
-      <TimelineItem
-        isCurrent
-        company="LogRocket"
-        title="Content Advisory Board Member"
-        startDate="February 2023"
-        logo="/images/logrocket-logo.png"
-        workMode="remote"
-        responsibilities={[
-          "Reviewed and provided input on blog posts, articles, videos, and other content produced by LogRocket.",
-          "Provided guidance and feedback on LogRocket's content strategy and direction as a Content Advisory Board Member.",
-          "Stayed up-to-date with industry trends and developments to provide insights and recommendations on LogRocket's content strategy.",
-          "Demonstrated strong analytical and communication skills to provide actionable recommendations and feedback on LogRocket's content strategy.",
-        ]}
-      />
-      <TimelineItem
-        isCurrent
-        company="Yoris Africa"
-        title="FrontEnd Web Developer"
-        startDate="January 2023"
-        logo="/images/yoris-logo.png"
-        workMode="remote"
-        responsibilities={[
-          "Created the admin interface of the company alongside other developers.",
-          "Develop and maintain responsive web applications using React and JavaScript.",
-          "Create clean, maintainable, and scalable code that adheres to coding standards.",
-          "Collaborate with a team of developers, designers, and product owners to deliver high-quality software.",
-        ]}
-      />
-      <TimelineItem
-        isCurrent
-        company="Stemlab NG"
-        title="FullStack Web Developer"
-        startDate="February 2023"
-        endDate="April 2023"
-        logo="/images/stemlab-logo.png"
-        workMode="hybrid"
-        responsibilities={[]}
-      />
-      <TimelineItem
-        company="Stemlab NG"
-        title="FullStack Web Developer"
-        startDate="August 2022"
-        endDate="January 2023"
-        logo="/images/stemlab-logo.png"
-        workMode="on-site"
-        responsibilities={[
-          "Met with clients to discuss project requirements and workflow.",
-          "Designed and coded websites, from layout to function, according to client specifications.",
-          "Project lead responsible for the successful completion and launching of various company web products.",
-          "Involved in various team-based project development and using technologies, tool, and frameworks tools like: React, Node, Express, MongoDB",
-          "Mentoring junior developers by providing technical guidance and support. Implementing best practices and standards for coding and testing, including using linting tools like ESLint and implementing pull-request workflows, to improve the team's code performance and reliability.",
-        ]}
-      />
+  <section class="experience">
+    <div class="container">
+      <h2 class="section-heading">Professional Experience</h2>
+      <p class="section-subtitle">My journey through the tech industry</p>
 
-      <TimelineItem
-      company="Stemlab NG"
-      title="Junior Web Developer"
-      startDate="Nov 2021"
-      endDate="June 2022"
-      logo="/images/stemlab-logo.png"
-      workMode="on-site"
-        responsibilities={[
-          "Designed mainly the company's frontend interfaces using HTML, CSS, Bootstrap",
-          "Added some functionalities to already-existing company's codebase using Vanilla Javascript",
-          "Mentoring junior developers by providing technical guidance and support. Implementing best practices and standards for coding and testing, including using linting tools like ESLint and implementing pull-request workflows, to improve the team's code performance and reliability."
-        ]}
-      />
+      <div class="timeline-items">
+        <TimelineItem
+          isCurrent
+          company="BitKwa"
+          title="FullStack Developer (Volunteer)"
+          startDate="July 2024"
+          logo="https://dev.notjustevent.com/assets/logo-b8be853a.png"
+          workMode="remote"
+          responsibilities={[
+            "Lead the backend team in building and maintaining the company's backend APIs",
+            "Integrated payment gateways such as Stripe and Paystack with the company's backend APIs",
+            "Implemented the event creation module/service and ticketing system to make event creation and ticketing seamless for users",
+            "Developed promo codes and discount codes generation and validation system for event organizers, vendors and attendees",
+          ]}
+        />
+        <TimelineItem
+          isCurrent
+          company="NotJustEvent"
+          title="Lead Software Engineer"
+          startDate="July 2023"
+          logo="https://dev.notjustevent.com/assets/logo-b8be853a.png"
+          workMode="remote"
+          responsibilities={[
+            "Lead the backend team in building and maintaining the company's backend APIs",
+            "Integrated payment gateways such as Stripe and Paystack with the company's backend APIs",
+            "Implemented the event creation module/service and ticketing system to make event creation and ticketing seamless for users",
+            "Developed promo codes and discount codes generation and validation system for event organizers, vendors and attendees",
+          ]}
+        />
+        <TimelineItem
+          isCurrent
+          company="LogRocket"
+          title="Content Advisory Board Member"
+          startDate="February 2023"
+          logo="/images/logrocket-logo.png"
+          workMode="remote"
+          responsibilities={[
+            "Reviewed and provided input on blog posts, articles, videos, and other content produced by LogRocket",
+            "Provided guidance and feedback on LogRocket's content strategy and direction as a Content Advisory Board Member",
+            "Stayed up-to-date with industry trends and developments to provide insights and recommendations on LogRocket's content strategy",
+            "Demonstrated strong analytical and communication skills to provide actionable recommendations and feedback on LogRocket's content strategy",
+          ]}
+        />
+        <TimelineItem
+          company="Punch Group"
+          title="Engineering Lead"
+          startDate="April 2022"
+          endDate="July 2022"
+          logo="https://dev.notjustevent.com/assets/logo-b8be853a.png"
+          workMode="on-site"
+          responsibilities={[
+            "As an Engineering Lead, I drove the technical vision and execution of projects, ensuring alignment with business goals. I led cross-functional teams, architected scalable systems, and oversaw the end-to-end software development lifecycle",
+            "Mentored engineers, enforced best practices, conducted technical reviews, and facilitated collaboration between product, design, and engineering teams to deliver high-quality solutions on time",
+            "Contributed to strategic planning, team growth, and continuous process improvements",
+          ]}
+        />
+        <TimelineItem
+          company="Punch Group"
+          title="Software Engineer"
+          startDate="January 2022"
+          endDate="March 2022"
+          logo="https://dev.notjustevent.com/assets/logo-b8be853a.png"
+          workMode="on-site"
+          responsibilities={[
+            "As a Software Engineer at Punch Group in Lagos, Nigeria, I was responsible for developing innovative software solutions to meet the company's needs",
+            "Collaborated with teams to implement new features, conduct code reviews, and provide technical guidance to junior team members",
+          ]}
+        />
+        <TimelineItem
+          company="Yoris Africa"
+          title="Software Engineer"
+          startDate="January 2021"
+          endDate="December 2022"
+          logo="/images/yoris-logo.png"
+          workMode="remote"
+          responsibilities={[
+            "Built and maintained backend APIs using Node.js/Express.js with TypeScript and MongoDB",
+            "Worked with RabbitMQ, and integrated it with the company's backend APIs to build a microservice architecture",
+            "Revamped the company's admin interface using React and TypeScript, and integrated it with the backend APIs",
+            "Worked with Docker to deploy and containerize the company's APIs for improved scalability and maintainability",
+          ]}
+        />
+        <TimelineItem
+          company="Stemlab NG"
+          title="FullStack Web Developer"
+          startDate="August 2020"
+          endDate="December 2020"
+          logo="/images/stemlab-logo.png"
+          workMode="on-site"
+          responsibilities={[
+            "Met with clients to discuss project requirements and workflow",
+            "Designed and coded websites, from layout to function, according to client specifications",
+            "Project lead responsible for the successful completion and launching of various company web products",
+            "Involved in various team-based project development using technologies, tools, and frameworks like React, Node.js, Express, and MongoDB",
+            "Mentored junior developers by providing technical guidance and support, implementing best practices and standards for coding and testing, including using linting tools like ESLint",
+          ]}
+        />
+
+        <TimelineItem
+          company="Stemlab NG"
+          title="Junior Web Developer"
+          startDate="November 2019"
+          endDate="July 2020"
+          logo="/images/stemlab-logo.png"
+          workMode="on-site"
+          responsibilities={[
+            "Designed the company's frontend interfaces using HTML, CSS, and Bootstrap",
+            "Added functionalities to existing company codebases using Vanilla JavaScript",
+            "Learned best practices for coding and testing, including using linting tools like ESLint and implementing pull-request workflows",
+          ]}
+        />
+      </div>
     </div>
   </section>
 </DefaultLayout>
 
 <style lang="scss">
-  .main-section {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
-    align-items: center;
+  .hero-section {
+    padding: 4rem 0 2rem;
+    background: linear-gradient(135deg, rgba(2, 8, 23, 0.9) 0%, rgba(13, 42, 148, 0.1) 100%);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(21, 255, 147, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
   }
 
-  .profile-photo {
-    max-width: 250px;
-    border-radius: 30%;
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .greeting-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-lime);
+      animation: typing 1.5s infinite;
+      
+      &:nth-child(2) { animation-delay: 0.2s; }
+      &:nth-child(3) { animation-delay: 0.4s; }
+    }
+  }
+
+  @keyframes typing {
+    0%, 60%, 100% { opacity: 0.3; transform: scale(1); }
+    30% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .intro-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .intro-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-silver-200);
+    margin-bottom: 2rem;
+    
+    .highlight {
+      background: linear-gradient(135deg, #15ff93 0%, #0ea5e9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-lime);
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: var(--color-silver-400);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .about-details {
+    padding: 4rem 0;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .profile-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    position: sticky;
+    top: 120px;
+  }
+
+  .profile-avatar {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-info {
+    h3 {
+      margin: 0 0 0.5rem 0;
+      color: var(--color-silver-100);
+      font-size: 1.25rem;
+    }
+    
+    p {
+      color: var(--color-silver-400);
+      margin: 0 0 1rem 0;
+    }
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--color-lime);
+    font-size: 0.875rem;
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-lime);
+      animation: pulse 2s infinite;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .detail-cards {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .detail-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(21, 255, 147, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .card-icon {
+      color: var(--color-lime);
+      margin-bottom: 1rem;
+    }
+    
+    h4 {
+      margin: 0 0 1rem 0;
+      color: var(--color-silver-100);
+      font-size: 1.125rem;
+    }
+    
+    p {
+      color: var(--color-silver-300);
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+
+  .tech-stack {
+    padding: 4rem 0;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .experience {
+    padding: 4rem 0;
+  }
+
+  .section-heading {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(135deg, #ffffff 0%, #15ff93 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-silver-400);
+    margin: 0 0 3rem 0;
+    font-size: 1.125rem;
   }
 
   /* Marquee styles */
@@ -197,34 +534,51 @@ import TimelineItem from "../components/TimelineItem.astro";
     }
   }
 
-  .sub-heading {
-    margin-top: 0;
-    margin-bottom: 25px;
-  }
-
   .timeline-items {
     display: flex;
     flex-direction: column;
-    row-gap: 0rem;
+    gap: 1rem;
   }
 
-
   @media screen and (max-width: 980px) {
-    .main-section {
+    .hero-section {
+      padding: 2rem 0 1rem;
+    }
+    
+    .greeting-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    
+    .intro-card {
+      padding: 1.5rem;
+    }
+    
+    .intro-text {
+      font-size: 1.125rem;
+    }
+    
+    .stats-grid {
+      grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-      display: block;
-      word-break: break-word;
+      
+      .stat-number {
+        font-size: 1.5rem;
+      }
     }
-
-    .profile-photo {
-      float: left;
-      width: 152px;
-      margin: 10px;
+    
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
-
-    :global(.devicon) {
-      width: 45px !important;
-      height: 45px !important;
+    
+    .profile-card {
+      position: static;
+    }
+    
+    .section-heading {
+      font-size: 2rem;
     }
   }
 </style>
@@ -234,5 +588,6 @@ import TimelineItem from "../components/TimelineItem.astro";
   const greeting = document.getElementById("greeting");
   if (greeting) {
     greeting.innerHTML = greetingFunction();
-  };
+  }
+</script>
 </script>

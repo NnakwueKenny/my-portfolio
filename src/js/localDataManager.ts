@@ -1,5 +1,5 @@
-
-import { writeFile, readFile, access } from 'node:fs/promises';
+import fs from 'fs/promises';
+import path from 'path';
 
 interface Data {
   [key: string]: any;
@@ -7,41 +7,29 @@ interface Data {
 
 const dataFile = './src/data/data.json';
 
-export async function writeToLocalDataFile(key: string, value: any): Promise<void> {
+export async function writeToLocalDataFile(filePath: string, data: any): Promise<void> {
   try {
-    await access(dataFile);
-    let data: Data = {};
-    try {
-      data = JSON.parse(await readFile(dataFile, 'utf8')) as Data;
-    } catch (err) {
-      console.log(err);
-    }
-    data[key] = value;
-    await writeFile(dataFile, JSON.stringify(data));
-  } catch (err) {
-    console.error(err);
+    // Ensure the directory exists
+    const dir = path.dirname(filePath);
+    await fs.mkdir(dir, { recursive: true });
+    
+    // Write the data
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
+  } catch (error) {
+    console.warn(`Failed to write to local data file ${filePath}:`, error);
+    // Don't throw error during build process
   }
 }
 
-export async function readLocalDataFile(key: string): Promise<any> {
+export async function readLocalDataFile(filePath: string): Promise<any> {
   try {
-    await access(dataFile);
-    let data: Data = {};
-    try {
-      data = JSON.parse(await readFile(dataFile, 'utf8')) as Data;
-    } catch (err) {
-      console.log(err);
-    }
-
-    // Handle nested keys
-    const keys = key.split('.');
-    let result = data;
-    for (const k of keys) {
-      result = result[k];
-    }
-
-    return result;
-  } catch (err) {
-    console.error(err);
+    // Check if file exists first
+    await fs.access(filePath);
+    const data = await fs.readFile(filePath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    // Return null if file doesn't exist or can't be read
+    // This is expected for first builds or when cache is cleared
+    return null;
   }
 }

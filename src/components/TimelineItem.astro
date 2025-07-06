@@ -23,25 +23,34 @@ const months = Math.floor(duration / 1000 / 60 / 60 / 24 / 30) % 12;
 ---
 
 <div class={`timeline-item ${isCurrent ? "active" : ""}`}>
-  <img class="logo" width="40px" height="40px" src={logo} alt={company} />
-  <div class="details">
-    <div class="title">
-      {title}
-      <span class="sep">|</span> <span class="company">{company}</span>
-      <span class='sep'>|</span> 
-      <span class={workMode === 'remote'? 'remote-mode': workMode === 'on-site'? 'site-mode': 'hybrid-mode'}>{workMode}</span>
+  <div class="timeline-icon">
+    <div class="logo-container">
+      <img class="logo" width="40" height="40" src={logo} alt={company} onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+      <div class="logo-fallback" style="display: none;">
+        <span>{company.charAt(0)}</span>
+      </div>
     </div>
-    <p class="time">
-       {startDate} - {endDate || "Present"}
-    </p>
-    <ul class=`responsibilities ${workMode}`>
+  </div>
+  
+  <div class="timeline-content">
+    <div class="timeline-header">
+      <h3 class="job-title">{title}</h3>
+      <div class="company-info">
+        <span class="company-name">{company}</span>
+        <span class="work-mode" class:list={[workMode]}>{workMode}</span>
+        {isCurrent && <span class="current-badge">Current</span>}
+      </div>
+      <p class="time-period">
+        {startDate} - {endDate || "Present"}
+      </p>
+    </div>
+    
+    <ul class="responsibilities">
       {responsibilities.map((responsibility: any) => (
         <li>
-          <span
-            style={workMode === 'remote' ? 'color: var(--color-yellow-400)' : workMode === 'on-site' ? 'color: var(--color-mint-400)' : 'color: var(--color-lime-400)'}
-          >►&nbsp;</span>
+          <span class="bullet">•</span>
           {responsibility}
-          </li>
+        </li>
       ))}
     </ul>
   </div>
@@ -50,97 +59,205 @@ const months = Math.floor(duration / 1000 / 60 / 60 / 24 / 30) % 12;
 <style lang="scss">
   .timeline-item {
     position: relative;
-    gap: 1.5rem;
     display: flex;
-    padding: 20px;
-    background: rgb(227 255 233 / 5%);
-    border-left: 10px solid;
-    border-left-color: rgb(153 164 173 / 15%);
-    border-bottom: 1px solid rgb(153 164 173 / 15%);
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(21, 255, 147, 0.2);
+      transform: translateY(-2px);
+    }
+    
     &.active {
-      border-left-color: rgb(134 255 160 / 30%);
+      border-color: rgba(21, 255, 147, 0.4);
+      background: rgba(21, 255, 147, 0.05);
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--color-lime);
+        border-radius: 2px;
+      }
     }
   }
 
-  .title {
-    font-size: var(--font-size-2xl);
-    color: var(--color-silver-200);
+  .timeline-icon {
+    flex-shrink: 0;
+    position: relative;
+    
+    .logo-container {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+  }
+
+  .timeline-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .timeline-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .job-title {
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
     font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+  }
+
+  .company-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .company-name {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .work-mode {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 500;
     text-transform: capitalize;
-    .remote-mode {;
-      color: var(--color-yellow-400);
+    
+    &.remote {
+      background: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
     }
-    .site-mode {
-      color: var(--color-mint-400);
+    
+    &.on-site {
+      background: rgba(21, 255, 147, 0.2);
+      color: var(--color-lime);
     }
-    .hybrid-mode {
-      color: var(--color-lime-400);
+    
+    &.hybrid {
+      background: rgba(14, 165, 233, 0.2);
+      color: #0ea5e9;
     }
   }
 
-  .time {
-    color: var(--color-silver-500);
-    font-size: var(--font-size-base);
+  .current-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-lime);
+    color: var(--color-gray-900);
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .time-period {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
     font-family: var(--font-family-IBM-Plex-Mono);
-    margin-top: 0;
-  }
-
-  .company {
-    font-size: var(--font-size-xl);
-    color: var(--color-silver-600);
-  }
-
-  .sep {
-    margin: 0 5px;
-    color: var(--color-silver-800);
+    margin: 0;
   }
 
   .responsibilities {
-    color: var(--color-silver-400);
-    font-size: var(--font-size-lg);
-  }
-
-  .logo {
-    background: white;
-    padding: 5px;
-    border-radius: 4px;
-  }
-
-  .responsibilities {
-    padding-left: 15px;
-    line-height: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
     li {
-      margin: 8px 0;
-      list-style: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-tertiary);
+      line-height: 1.6;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .bullet {
+      color: var(--color-lime);
+      font-weight: 600;
+      margin-top: 0.125rem;
+      flex-shrink: 0;
     }
   }
 
   @media screen and (max-width: 980px) {
     .timeline-item {
       flex-direction: column;
-      margin: 0 -25px;
-      border-width: 5px;
+      padding: 1.5rem;
+      gap: 1rem;
     }
-
-    .title {
-      font-size: var(--font-size-lg);
+    
+    .timeline-icon {
+      align-self: flex-start;
+      
+      .logo-container {
+        width: 48px;
+        height: 48px;
+      }
     }
-
-    .company {
-      font-size: var(--font-size-md);
+    
+    .job-title {
+      font-size: 1.125rem;
     }
-
-    .sep {
-      display: none;
+    
+    .company-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
     }
-
-    .time {
-      font-size: var(--font-size-sm);
-    }
-
+    
     .responsibilities {
-      font-size: var(--font-size-md);
-      line-height: 1.5rem;
+      font-size: 0.9rem;
+      
+      li {
+        gap: 0.5rem;
+      }
     }
   }
 </style>

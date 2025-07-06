@@ -103,7 +103,7 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
       <PortfolioItem
         projectYear="2022"
         isOpenSource
-        githubStarsCount={getRepoStars('imagoQuad', 'NnakwueKenny/imago_quad/tree/main/imago_quad')}
+        githubStarsCount={await getRepoStars('imagoQuad', 'NnakwueKenny/imago_quad')}
         title="Imago Quad"
         image="/images/imago-quad-website.png"
         projectLink="https://imago-quad.vercel.app"
@@ -125,7 +125,7 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
       <PortfolioItem
         projectYear="2022"
         isOpenSource
-        githubStarsCount={getRepoStars('learncha', 'NnakwueKenny/learncha')}
+        githubStarsCount={await getRepoStars('learncha', 'NnakwueKenny/learncha')}
         title="Learncha"
         image="/images/learncha-website.png"
         projectLink="https://learncha.vercel.app"
@@ -154,7 +154,7 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
         title="Ribbons"
         image="/images/ribbons-website.png"
         projectLink="https://ribbons.vercel.app/admin"
-        githubStarsCount={getRepoStars('ribbons', 'NnakwueKenny/learncha')}
+        githubStarsCount={await getRepoStars('ribbons', 'NnakwueKenny/ribbons')}
         sourceCode="https://github.com/NnakwueKenny/ribbons"
         tags={[
           "HTML",

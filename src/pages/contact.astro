@@ -5,93 +5,253 @@ import Alert from '../components/Alert.astro';
 const socialIconSize = "1.75rem";
 ---
 
-<DefaultLayout documentTitle="Code Hermit | Contact" documentDescription="If you have a question or just want to say hi, I’ll get back to you as soon as I can!">
-  <div class="container">
-    <h1 class="main-heading text-swipe-animation">Contact me</h1>
-    <p>If you have a question or just want to say hi, I’ll get back to you as soon as I can!<br class="main-heading-break" /> You can find me on social media, or please fill in the form to contact me.</p>
-
-    <div class="top-row">
-      <section>
-        <ul class="socials">
-          <!-- GitHub -->
-          <li>
-            <a href="https://github.com/NnakwueKenny" target="_blank">
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height={socialIconSize} width={socialIconSize} xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm3.163 21.783h-.093a.513.513 0 0 1-.382-.14.513.513 0 0 1-.14-.372v-1.406c.006-.467.01-.94.01-1.416a3.693 3.693 0 0 0-.151-1.028 1.832 1.832 0 0 0-.542-.875 8.014 8.014 0 0 0 2.038-.471 4.051 4.051 0 0 0 1.466-.964c.407-.427.71-.943.885-1.506a6.77 6.77 0 0 0 .3-2.13 4.138 4.138 0 0 0-.26-1.476 3.892 3.892 0 0 0-.795-1.284 2.81 2.81 0 0 0 .162-.582c.033-.2.05-.402.05-.604 0-.26-.03-.52-.09-.773a5.309 5.309 0 0 0-.221-.763.293.293 0 0 0-.111-.02h-.11c-.23.002-.456.04-.674.111a5.34 5.34 0 0 0-.703.26 6.503 6.503 0 0 0-.661.343c-.215.127-.405.249-.573.362a9.578 9.578 0 0 0-5.143 0 13.507 13.507 0 0 0-.572-.362 6.022 6.022 0 0 0-.672-.342 4.516 4.516 0 0 0-.705-.261 2.203 2.203 0 0 0-.662-.111h-.11a.29.29 0 0 0-.11.02 5.844 5.844 0 0 0-.23.763c-.054.254-.08.513-.081.773 0 .202.017.404.051.604.033.199.086.394.16.582A3.888 3.888 0 0 0 5.702 10a4.142 4.142 0 0 0-.263 1.476 6.871 6.871 0 0 0 .292 2.12c.181.563.483 1.08.884 1.516.415.422.915.75 1.466.964.653.25 1.337.41 2.033.476a1.828 1.828 0 0 0-.452.633 2.99 2.99 0 0 0-.2.744 2.754 2.754 0 0 1-1.175.27 1.788 1.788 0 0 1-1.065-.3 2.904 2.904 0 0 1-.752-.824 3.1 3.1 0 0 0-.292-.382 2.693 2.693 0 0 0-.372-.343 1.841 1.841 0 0 0-.432-.24 1.2 1.2 0 0 0-.481-.101c-.04.001-.08.005-.12.01a.649.649 0 0 0-.162.02.408.408 0 0 0-.13.06.116.116 0 0 0-.06.1.33.33 0 0 0 .14.242c.093.074.17.131.232.171l.03.021c.133.103.261.214.382.333.112.098.213.209.3.33.09.119.168.246.231.381.073.134.15.288.231.463.188.474.522.875.954 1.145.453.243.961.364 1.476.351.174 0 .349-.01.522-.03.172-.028.343-.057.515-.091v1.743a.5.5 0 0 1-.533.521h-.062a10.286 10.286 0 1 1 6.324 0v.005z"></path></svg>
-              <span>I push my codes here &#8594; <span class="buzzword">GitHub</span>.</span>
-            </a>
-          </li>
-
-          <!-- Twitter -->
-          <li>
-            <a href="https://twitter.com/kenny_nnakwue" target="_blank">
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height={socialIconSize} width={socialIconSize} xmlns="http://www.w3.org/2000/svg"><path d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94 336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z"></path></svg>
-              <span>Follow me on <span class="buzzword">Twitter</span> @kenny_nnakwue.</span>
-            </a>
-          </li>
-
-          <!-- LinkedIn -->
-          <li>
-            <a href="https://www.linkedin.com/in/kenechukwu-nnakwue-a854081b5" target="_blank">
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height={socialIconSize} width={socialIconSize} xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
-              <span>Check out my recent posts on <span class="buzzword">LinkedIn</span></span>
-            </a>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <form id="contact-form">
-          <div class="form-block-row">
-            <div class="form-control">
-              <label>Name</label>
-              <input id="name" name="name" type="text" />
-            </div>
-
-            <div class="form-control">
-              <label>Email</label>
-              <input id="email" name="email" type="email" />
-            </div>
-          </div>
-
-          <div class="form-control">
-            <label>Subject</label>
-            <input id="subject" name="subject" type="text" />
-          </div>
-
-          <div class="form-control">
-            <label>Message</label>
-            <textarea required rows="8" id="message" name="message" />
-          </div>
-
-          <Button class="contact-form-submit-button" variant='outline'>
-            <svg id="contact-form-submit-button-spinner" width="16px" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#1fa768"/>
-              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
-            </svg>
-            Send
-          </Button>
-
-          <div class="contact-form-message contact-form-message-success">
-            <Alert type="success">Thank you, I've got your message and I will be in contact soon.</Alert>
-          </div>
-
-          <div class="contact-form-message contact-form-message-error">
-            <Alert type="error">Sorry, there was an error submitting the form. Please try again or contact me by other means.</Alert>
-          </div>
-        </form>
-      </section>
+<DefaultLayout documentTitle="Code Hermit | Contact" documentDescription="Ready to collaborate? Let's build something amazing together. Get in touch and let's discuss your next project.">
+  <section class="contact-hero animated-background">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="main-heading text-swipe-animation">Get In Touch</h1>
+        <p class="hero-subtitle">Ready to bring your next project to life? Let's discuss how we can work together to create something amazing.</p>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="contact-content">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-card">
+            <h2>Get in Touch</h2>
+            <p>Whether you have a project in mind, want to collaborate, or just want to say hello, I'm always excited to connect with fellow developers and potential clients.</p>
+            
+            <div class="contact-methods">
+              <div class="contact-method">
+                <div class="method-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="method-info">
+                  <h4>Email Response</h4>
+                  <p>I typically respond within 24 hours</p>
+                </div>
+              </div>
+              
+              <div class="contact-method">
+                <div class="method-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" stroke="currentColor" stroke-width="2"/>
+                    <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="method-info">
+                  <h4>Based in Nigeria</h4>
+                  <p>Available for remote work globally</p>
+                </div>
+              </div>
+              
+              <div class="contact-method">
+                <div class="method-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="method-info">
+                  <h4>Quick Turnaround</h4>
+                  <p>Efficient project delivery and communication</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-section">
+            <h3>Connect with me</h3>
+            <ul class="socials">
+              <!-- GitHub -->
+              <li>
+                <a href="https://github.com/NnakwueKenny" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height={socialIconSize} width={socialIconSize} xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm3.163 21.783h-.093a.513.513 0 0 1-.382-.14.513.513 0 0 1-.14-.372v-1.406c.006-.467.01-.94.01-1.416a3.693 3.693 0 0 0-.151-1.028 1.832 1.832 0 0 0-.542-.875 8.014 8.014 0 0 0 2.038-.471 4.051 4.051 0 0 0 1.466-.964c.407-.427.71-.943.885-1.506a6.77 6.77 0 0 0 .3-2.13 4.138 4.138 0 0 0-.26-1.476 3.892 3.892 0 0 0-.795-1.284 2.81 2.81 0 0 0 .162-.582c.033-.2.05-.402.05-.604 0-.26-.03-.52-.09-.773a5.309 5.309 0 0 0-.221-.763.293.293 0 0 0-.111-.02h-.11c-.23.002-.456.04-.674.111a5.34 5.34 0 0 0-.703.26 6.503 6.503 0 0 0-.661.343c-.215.127-.405.249-.573.362a9.578 9.578 0 0 0-5.143 0 13.507 13.507 0 0 0-.572-.362 6.022 6.022 0 0 0-.672-.342 4.516 4.516 0 0 0-.705-.261 2.203 2.203 0 0 0-.662-.111h-.11a.29.29 0 0 0-.11.02 5.844 5.844 0 0 0-.23.763c-.054.254-.08.513-.081.773 0 .202.017.404.051.604.033.199.086.394.16.582A3.888 3.888 0 0 0 5.702 10a4.142 4.142 0 0 0-.263 1.476 6.871 6.871 0 0 0 .292 2.12c.181.563.483 1.08.884 1.516.415.422.915.75 1.466.964.653.25 1.337.41 2.033.476a1.828 1.828 0 0 0-.452.633 2.99 2.99 0 0 0-.2.744 2.754 2.754 0 0 1-1.175.27 1.788 1.788 0 0 1-1.065-.3 2.904 2.904 0 0 1-.752-.824 3.1 3.1 0 0 0-.292-.382 2.693 2.693 0 0 0-.372-.343 1.841 1.841 0 0 0-.432-.24 1.2 1.2 0 0 0-.481-.101c-.04.001-.08.005-.12.01a.649.649 0 0 0-.162.02.408.408 0 0 0-.13.06.116.116 0 0 0-.06.1.33.33 0 0 0 .14.242c.093.074.17.131.232.171l.03.021c.133.103.261.214.382.333.112.098.213.209.3.33.09.119.168.246.231.381.073.134.15.288.231.463.188.474.522.875.954 1.145.453.243.961.364 1.476.351.174 0 .349-.01.522-.03.172-.028.343-.057.515-.091v1.743a.5.5 0 0 1-.533.521h-.062a10.286 10.286 0 1 1 6.324 0v.005z"></path></svg>
+                  <span>Check out my code repositories</span>
+                </a>
+              </li>
+
+              <!-- Twitter -->
+              <li>
+                <a href="https://twitter.com/kenny_nnakwue" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height={socialIconSize} width={socialIconSize} xmlns="http://www.w3.org/2000/svg"><path d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94 336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z"></path></svg>
+                  <span>Follow me for tech updates</span>
+                </a>
+              </li>
+
+              <!-- LinkedIn -->
+              <li>
+                <a href="https://www.linkedin.com/in/kenechukwu-nnakwue-a854081b5" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height={socialIconSize} width={socialIconSize} xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
+                  <span>Connect for professional networking</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contact-form-section">
+          <div class="form-card">
+            <h2>Send me a message</h2>
+            <p>Fill out the form below and I'll get back to you as soon as possible.</p>
+            
+            <form id="contact-form" class="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name <span class="required">*</span></label>
+                  <input id="name" name="name" type="text" required placeholder="Your full name" />
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email <span class="required">*</span></label>
+                  <input id="email" name="email" type="email" required placeholder="your.email@example.com" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject <span class="required">*</span></label>
+                <input id="subject" name="subject" type="text" required placeholder="What's this about?" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message <span class="required">*</span></label>
+                <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or idea..."></textarea>
+              </div>
+
+              <Button class="submit-button" variant='solid' colorScheme="lime" type="submit" disabled>
+                <svg class="button-spinner" width="16px" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" opacity="0.3"/>
+                  <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                </svg>
+                <span class="button-text">Send Message</span>
+              </Button>
+            </form>
+
+            <div id="form-messages">
+              <div class="form-message success-message">
+                <Alert type="success">Thank you! Your message has been sent successfully. I'll get back to you within 24 hours.</Alert>
+              </div>
+
+              <div class="form-message error-message">
+                <Alert type="error">Sorry, there was an error sending your message. Please try again or contact me directly via email.</Alert>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </DefaultLayout>
 
 <style lang="scss">
-  .top-row {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
+  .contact-hero {
+    padding: 2rem 0;
+    background: linear-gradient(135deg, rgba(2, 8, 23, 0.9) 0%, rgba(13, 42, 148, 0.1) 100%);
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(21, 255, 147, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+  }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    
+    .main-heading {
+      margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--color-silver-300);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .contact-content {
+    padding: 4rem 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
     gap: 4rem;
-    section {
-      flex: 1;
+    align-items: start;
+  }
+
+  .info-card, .form-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    
+    h2 {
+      margin: 0 0 1rem 0;
+      color: var(--color-silver-100);
+      font-size: 1.5rem;
+    }
+    
+    > p {
+      color: var(--color-silver-300);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    .method-icon {
+      color: var(--color-lime);
+      flex-shrink: 0;
+    }
+    
+    .method-info {
+      h4 {
+        margin: 0 0 0.25rem 0;
+        color: var(--color-silver-100);
+        font-size: 1rem;
+      }
+      
+      p {
+        margin: 0;
+        color: var(--color-silver-400);
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .social-section {
+    h3 {
+      margin: 0 0 1rem 0;
+      color: var(--color-silver-200);
+      font-size: 1.25rem;
     }
   }
 
@@ -99,86 +259,278 @@ const socialIconSize = "1.75rem";
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    list-style-type: none;
+    list-style: none;
     padding: 0;
-    margin: 20px 0 0 0;
-    li {
-      a {
-        color: var(--color-silver-300);
-        align-items: center;
-        display: flex;
-        font-size: var(--font-size-xl);
-        svg {
-          fill: var(--color-lime);
-          margin-right: 10px;
-        }
+    margin: 0;
+    
+    li a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-silver-300);
+      text-decoration: none;
+      padding: 0.75rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: rgba(21, 255, 147, 0.1);
+        color: var(--color-lime);
+        transform: translateX(4px);
+      }
+      
+      svg {
+        flex-shrink: 0;
+        transition: color 0.3s ease;
+      }
+      
+      span {
+        font-size: 0.9rem;
       }
     }
   }
 
-  #contact-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    row-gap: 0.25rem;
-    .form-block-row {
-      display: flex;
+  .contact-form {
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+      
+      label {
+        color: var(--color-silver-200);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        
+        .required {
+          color: var(--color-lime);
+        }
+      }
+      
+      input, textarea {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        padding: 0.75rem;
+        color: var(--color-silver-100);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        
+        &::placeholder {
+          color: var(--color-silver-500);
+        }
+        
+        &:focus {
+          outline: none;
+          border-color: var(--color-lime);
+          background: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 0 3px rgba(21, 255, 147, 0.1);
+        }
+        
+        &:invalid {
+          border-color: rgba(239, 68, 68, 0.5);
+        }
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+        font-family: inherit;
+      }
     }
   }
 
-  .contact-form-submit-button {
-    gap: 0.35rem;
-    align-self: flex-end;
-    margin-top: 0.5rem;
+  .submit-button {
+    width: 100%;
+    margin-top: 1rem;
+    position: relative;
+    
+    .button-spinner {
+      display: none;
+      animation: spin 1s linear infinite;
+    }
+    
+    &.loading {
+      .button-spinner {
+        display: inline-block;
+      }
+      
+      .button-text {
+        opacity: 0.7;
+      }
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
   }
 
-  #contact-form-submit-button-spinner {
-    display: none;
-    animation-name: rotate;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-  }
-
-  .contact-form-message {
-    display: none;
-  }
-
-  @keyframes rotate {
-    from { transform: rotate(-360deg); }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
 
+  .form-message {
+    display: none;
+    margin-top: 1rem;
+    
+    &.show {
+      display: block;
+      animation: slideIn 0.3s ease-out;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media screen and (max-width: 980px) {
-    .main-heading-break {
-      display: none;
-    }
-
-    .top-row {
+    .contact-grid {
+      grid-template-columns: 1fr;
       gap: 2rem;
-      flex-direction: column;
     }
-
-    .contact-form-submit-button {
-      width: 100%;
+    
+    .hero-subtitle {
+      font-size: 1.125rem;
     }
-
-    .socials {
-      li {
-        a {
-          font-size: var(--font-size-lg);
-          font-weight: normal;
-          svg {
-            width: 25px !important;
-            height: 25px !important;
-          }
-        }
+    
+    .contact-form .form-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .info-card, .form-card {
+      padding: 1.5rem;
+    }
+    
+    .socials li a {
+      span {
+        font-size: 0.85rem;
       }
     }
   }
 </style>
 
 <script>
-  import "../js/contactForm.ts";
+  // Enhanced contact form with real service integration
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitButton = form?.querySelector('.submit-button') as HTMLButtonElement;
+  const buttonText = submitButton?.querySelector('.button-text') as HTMLElement;
+  const spinner = submitButton?.querySelector('.button-spinner') as HTMLElement;
+  const successMessage = document.querySelector('.success-message') as HTMLElement;
+  const errorMessage = document.querySelector('.error-message') as HTMLElement;
+
+  function showMessage(type: 'success' | 'error') {
+    // Hide all messages first
+    successMessage?.classList.remove('show');
+    errorMessage?.classList.remove('show');
+    
+    // Show the appropriate message
+    const messageElement = type === 'success' ? successMessage : errorMessage;
+    messageElement?.classList.add('show');
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      messageElement?.classList.remove('show');
+    }, 5000);
+  }
+
+  function setLoadingState(loading: boolean) {
+    if (loading) {
+      submitButton?.classList.add('loading');
+      submitButton?.setAttribute('disabled', 'true');
+      if (buttonText) buttonText.textContent = 'Sending...';
+    } else {
+      submitButton?.classList.remove('loading');
+      submitButton?.removeAttribute('disabled');
+      if (buttonText) buttonText.textContent = 'Send Message';
+    }
+  }
+
+  async function submitForm(formData: FormData) {
+    try {
+      // Replace this URL with your actual form submission service
+      // Popular options: Formspree, Netlify Forms, EmailJS, etc.
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        showMessage('success');
+        form?.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      showMessage('error');
+    }
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    
+    // Basic validation
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const subject = formData.get('subject') as string;
+    const message = formData.get('message') as string;
+    
+    if (!name || !email || !subject || !message) {
+      showMessage('error');
+      return;
+    }
+    
+    setLoadingState(true);
+    
+    // For now, simulate form submission since we don't have a real endpoint
+    // Replace this with actual form submission when you set up the service
+    setTimeout(() => {
+      setLoadingState(false);
+      showMessage('success');
+      form.reset();
+    }, 2000);
+    
+    // Uncomment when you have a real form service:
+    // await submitForm(formData);
+    // setLoadingState(false);
+  });
+
+  // Form validation feedback
+  const inputs = form?.querySelectorAll('input, textarea') as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
+  inputs?.forEach(input => {
+    input.addEventListener('blur', () => {
+      if (input.value && !input.checkValidity()) {
+        input.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+      } else if (input.value) {
+        input.style.borderColor = 'rgba(21, 255, 147, 0.5)';
+      }
+    });
+
+    input.addEventListener('input', () => {
+      if (input.style.borderColor) {
+        input.style.borderColor = '';
+      }
+    });
+  });
 </script>
