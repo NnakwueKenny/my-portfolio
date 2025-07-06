@@ -3,6 +3,8 @@
   // Dark theme (default)
   --color-primary: #15ff93;
   --color-primary-hover: #12d975;
+  --color-secondary: #0ea5e9;
+  --color-secondary-hover: #0284c7;
   --color-background: #020817;
   --color-background-secondary: rgba(255, 255, 255, 0.02);
   --color-background-tertiary: rgba(255, 255, 255, 0.05);
@@ -15,15 +17,32 @@
   --color-border: rgba(255, 255, 255, 0.1);
   --color-border-hover: rgba(21, 255, 147, 0.3);
   
+  // Extended color palette
+  --color-green: #15ff93;
+  --color-green-hover: #12d975;
+  --color-blue: #0ea5e9;
+  --color-blue-hover: #0284c7;
+  --color-purple: #8b5cf6;
+  --color-purple-hover: #7c3aed;
+  --color-yellow: #fbbf24;
+  --color-yellow-hover: #f59e0b;
+  --color-red: #ef4444;
+  --color-red-hover: #dc2626;
+  
   // Legacy color variables for backward compatibility
   --color-lime: #15ff93;
+  --color-lime-400: #12d975;
   --color-mint: #15ff93;
+  --color-mint-400: #12d975;
   --color-gray-900: #020817;
+  --color-silver: #64748b;
   --color-silver-100: #ffffff;
   --color-silver-200: #e2e8f0;
   --color-silver-300: #cbd5e1;
   --color-silver-400: #94a3b8;
   --color-silver-500: #64748b;
+  --color-blue-400: #0284c7;
+  --color-yellow-400: #f59e0b;
   
   // Gradients
   --gradient-primary: linear-gradient(135deg, #ffffff 0%, #15ff93 100%);
@@ -50,8 +69,10 @@
 
 // Light theme
 [data-theme="light"] {
-  --color-primary: #15ff93;
-  --color-primary-hover: #12d975;
+  --color-primary: #059669;
+  --color-primary-hover: #047857;
+  --color-secondary: #0ea5e9;
+  --color-secondary-hover: #0284c7;
   --color-background: #ffffff;
   --color-background-secondary: #f8fafc;
   --color-background-tertiary: #f1f5f9;
@@ -62,33 +83,52 @@
   --color-text-tertiary: #64748b;
   --color-text-quaternary: #94a3b8;
   --color-border: rgba(0, 0, 0, 0.08);
-  --color-border-hover: rgba(21, 255, 147, 0.4);
+  --color-border-hover: rgba(5, 150, 105, 0.4);
+  
+  // Extended color palette for light theme
+  --color-green: #059669;
+  --color-green-hover: #047857;
+  --color-blue: #0ea5e9;
+  --color-blue-hover: #0284c7;
+  --color-purple: #8b5cf6;
+  --color-purple-hover: #7c3aed;
+  --color-yellow: #f59e0b;
+  --color-yellow-hover: #d97706;
+  --color-red: #ef4444;
+  --color-red-hover: #dc2626;
   
   // Legacy overrides
-  --color-lime: #15ff93;
-  --color-mint: #15ff93;
+  --color-lime: #059669;
+  --color-lime-400: #047857;
+  --color-mint: #059669;
+  --color-mint-400: #047857;
   --color-gray-900: #ffffff;
+  --color-silver: #64748b;
   --color-silver-100: #0f172a;
   --color-silver-200: #334155;
   --color-silver-300: #475569;
   --color-silver-400: #64748b;
   --color-silver-500: #94a3b8;
+  --color-blue-400: #0284c7;
+  --color-yellow-400: #d97706;
   
   // Gradients
-  --gradient-primary: linear-gradient(135deg, #0f172a 0%, #15ff93 100%);
+  --gradient-primary: linear-gradient(135deg, #0f172a 0%, #059669 100%);
   --gradient-background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.1) 100%);
-  --gradient-radial-primary: radial-gradient(circle at 30% 20%, rgba(21, 255, 147, 0.08) 0%, transparent 50%);
+  --gradient-radial-primary: radial-gradient(circle at 30% 20%, rgba(5, 150, 105, 0.08) 0%, transparent 50%);
   --gradient-radial-secondary: radial-gradient(circle at 70% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
   
   // Shadows
-  --shadow-glow: 0 0 20px rgba(21, 255, 147, 0.3);
+  --shadow-glow: 0 0 20px rgba(5, 150, 105, 0.3);
 }
 
 // System theme detection
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
-    --color-primary: #15ff93;
-    --color-primary-hover: #12d975;
+    --color-primary: #059669;
+    --color-primary-hover: #047857;
+    --color-secondary: #0ea5e9;
+    --color-secondary-hover: #0284c7;
     --color-background: #ffffff;
     --color-background-secondary: #f8fafc;
     --color-background-tertiary: #f1f5f9;
@@ -99,23 +139,30 @@
     --color-text-tertiary: #64748b;
     --color-text-quaternary: #94a3b8;
     --color-border: rgba(0, 0, 0, 0.08);
-    --color-border-hover: rgba(21, 255, 147, 0.4);
+    --color-border-hover: rgba(5, 150, 105, 0.4);
     
-    --color-lime: #15ff93;
-    --color-mint: #15ff93;
+    --color-green: #059669;
+    --color-green-hover: #047857;
+    --color-lime: #059669;
+    --color-lime-400: #047857;
+    --color-mint: #059669;
+    --color-mint-400: #047857;
     --color-gray-900: #ffffff;
+    --color-silver: #64748b;
     --color-silver-100: #0f172a;
     --color-silver-200: #334155;
     --color-silver-300: #475569;
     --color-silver-400: #64748b;
     --color-silver-500: #94a3b8;
+    --color-blue-400: #0284c7;
+    --color-yellow-400: #d97706;
     
-    --gradient-primary: linear-gradient(135deg, #0f172a 0%, #15ff93 100%);
+    --gradient-primary: linear-gradient(135deg, #0f172a 0%, #059669 100%);
     --gradient-background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.1) 100%);
-    --gradient-radial-primary: radial-gradient(circle at 30% 20%, rgba(21, 255, 147, 0.08) 0%, transparent 50%);
+    --gradient-radial-primary: radial-gradient(circle at 30% 20%, rgba(5, 150, 105, 0.08) 0%, transparent 50%);
     --gradient-radial-secondary: radial-gradient(circle at 70% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
     
-    --shadow-glow: 0 0 20px rgba(21, 255, 147, 0.3);
+    --shadow-glow: 0 0 20px rgba(5, 150, 105, 0.3);
   }
 }
 
@@ -499,54 +546,6 @@ button {
   &.loading {
     opacity: 0.8;
     cursor: not-allowed;
-  }
-}
-
-// Theme toggle button
-.theme-toggle {
-  position: fixed;
-  top: 6rem;
-  right: 2rem;
-  width: 3rem;
-  height: 3rem;
-  border: 2px solid var(--color-border);
-  border-radius: 6px;
-  background: var(--color-background-tertiary);
-  color: var(--color-text-primary);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-normal);
-  z-index: 1000;
-  backdrop-filter: var(--backdrop-blur);
-  
-  &:hover {
-    background: var(--color-surface-hover);
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-  }
-  
-  svg {
-    width: 1.25rem;
-    height: 1.25rem;
-    transition: transform var(--transition-normal);
-  }
-  
-  &:hover svg {
-    transform: rotate(15deg);
-  }
-  
-  @media screen and (max-width: 980px) {
-    top: 5rem;
-    right: 1rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    
-    svg {
-      width: 1rem;
-      height: 1rem;
-    }
   }
 }
 

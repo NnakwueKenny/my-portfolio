@@ -4,7 +4,7 @@ interface Props {
   href?: string;
   target?:string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-  colorScheme?: "blue" | "lime" | "mint" | "silver" | 'yellow';
+  colorScheme?: "blue" | "lime" | "mint" | "silver" | 'yellow' | 'green';
   class?: string;
   domProps?: { [key: string]: any }
 }
@@ -99,6 +99,14 @@ const className = `button ${variant} size-${size} colorScheme-${colorScheme} ${A
           border-color: var(--color-lime-400);
         }
       }
+      &.colorScheme-green {
+        background: var(--color-green);
+        border-color: var(--color-green);
+        &:hover:not(:disabled) {
+          background: var(--color-green-hover);
+          border-color: var(--color-green-hover);
+        }
+      }
       &.colorScheme-yellow {
         background: var(--color-yellow-400);
         border-color: var(--color-yellow-400);
@@ -141,6 +149,14 @@ const className = `button ${variant} size-${size} colorScheme-${colorScheme} ${A
         color: var(--color-lime);
         &:hover:not(:disabled) {
           background: var(--color-lime-400);
+          color: var(--color-background);
+        }
+      }
+      &.colorScheme-green {
+        border-color: var(--color-green);
+        color: var(--color-green);
+        &:hover:not(:disabled) {
+          background: var(--color-green-hover);
           color: var(--color-background);
         }
       }
