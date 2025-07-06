@@ -351,14 +351,16 @@ button {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-primary);
+  font-size: 0.875rem;
   font-weight: 600;
-  font-size: 0.9rem;
   text-decoration: none;
   cursor: pointer;
   transition: all var(--transition-normal);
-  border: none;
   
   &:focus {
     outline: 2px solid var(--color-primary);
@@ -369,27 +371,33 @@ button {
     opacity: 0.6;
     cursor: not-allowed;
   }
-}
-
-.btn-primary {
-  background: var(--color-primary);
-  color: var(--color-background);
   
-  &:hover {
-    background: var(--color-primary-hover);
+  &:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: var(--color-background);
     transform: translateY(-2px);
   }
 }
 
-.btn-secondary {
-  background: var(--color-surface);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
+// Button variants
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-background);
   
-  &:hover {
-    background: var(--color-surface-hover);
+  &:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+    color: var(--color-background);
+  }
+}
+
+.btn-secondary {
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+  
+  &:hover:not(:disabled) {
+    background: var(--color-surface);
     color: var(--color-text-primary);
-    transform: translateY(-2px);
+    border-color: var(--color-border-hover);
   }
 }
 
@@ -404,6 +412,96 @@ button {
   }
 }
 
+// Button sizes
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-md {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+// Modal buttons
+.modal-close {
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+    transform: translateY(-2px);
+  }
+}
+
+// Resume option cards
+.resume-option-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: transparent;
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-align: left;
+  
+  &:hover {
+    background: var(--color-surface);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+  
+  svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  
+  .option-details {
+    h4 {
+      margin: 0 0 0.25rem 0;
+      color: var(--color-text-primary);
+      font-size: 1rem;
+    }
+    
+    p {
+      margin: 0;
+      color: var(--color-text-tertiary);
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// Submit buttons
+.submit-button {
+  background: var(--color-primary);
+  color: var(--color-background);
+  border: 2px solid var(--color-primary);
+  
+  &:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+  }
+  
+  &.loading {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+}
+
 // Theme toggle button
 .theme-toggle {
   position: fixed;
@@ -411,9 +509,9 @@ button {
   right: 2rem;
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
   background: var(--color-background-tertiary);
-  border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   cursor: pointer;
   display: flex;
@@ -425,8 +523,8 @@ button {
   
   &:hover {
     background: var(--color-surface-hover);
-    border-color: var(--color-border-hover);
-    transform: scale(1.05);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
   }
   
   svg {
@@ -450,6 +548,48 @@ button {
       height: 1rem;
     }
   }
+}
+
+// Mobile menu toggle
+#mobile-toggle-menu {
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+}
+
+// Resume download button
+.resume-download-btn {
+  position: relative;
+  
+  .loading-spinner {
+    display: none;
+    animation: spin 1s linear infinite;
+  }
+  
+  &.loading {
+    .download-icon,
+    .button-text {
+      opacity: 0.5;
+    }
+    
+    .loading-spinner {
+      display: block;
+    }
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 // Form styles
@@ -745,6 +885,7 @@ button {
 // Ensure main content has proper spacing
 main {
   min-height: 100vh;
+  padding-top: 80px;
   position: relative;
   z-index: 1;
 }
@@ -762,6 +903,42 @@ section {
   
   section {
     scroll-margin-top: 100px;
+  }
+}
+
+// Full-width background utility
+.full-width-bg {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  position: relative;
+  
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media screen and (max-width: 980px) {
+    margin-left: calc(50% - 50vw);
+  }
+}
+
+// Full-width background with gradient overlay
+.full-width-bg-gradient {
+  @extend .full-width-bg;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(21, 255, 147, 0.02) 0%, 
+      rgba(14, 165, 233, 0.02) 50%, 
+      rgba(139, 92, 246, 0.02) 100%
+    );
+    pointer-events: none;
   }
 }
 

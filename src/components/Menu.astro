@@ -8,13 +8,13 @@ import Button from "../components/Button.astro";
     <MenuItem text="Projects" link="/projects" />
     <MenuItem text="About" link="/about" />
     <MenuItem text="Contact" link="/contact" />
-    <!-- <Button variant="outline" size="md" colorScheme="yellow" href="/Kene_CV.pdf" target='_blank'> download -->
-    <Button variant="outline" size="md" colorScheme="yellow" href="/my_cv.pdf" target='_blank'> <!-- download -->
-      My Résumé
+    
+    <button class="btn btn-outline resume-btn" id="headerResumeBtn">
+      <span>My Résumé</span>
       <svg style="margin-top: -4px; margin-left: 8px; width: 16px;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" xmlns="http://www.w3.org/2000/svg">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>
       </svg>
-    </Button>
+    </button>
   </ul>
 
   <button id="mobile-toggle-menu">
@@ -28,6 +28,63 @@ import Button from "../components/Button.astro";
   </button>
 </nav>
 
+<!-- Resume Download Modal -->
+<div id="headerResumeModal" class="resume-modal">
+  <div class="modal-overlay" id="headerModalOverlay"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Download Resume</h3>
+      <button class="modal-close" id="headerModalClose">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Choose your preferred format:</p>
+      <div class="resume-options-grid">
+        <button class="resume-option-card" data-format="pdf">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+            <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 13H8v2h8v-2z" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 17H8v2h8v-2z" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 9H8v2h2V9z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="option-details">
+            <h4>PDF Format</h4>
+            <p>Perfect for printing and sharing</p>
+          </div>
+        </button>
+        
+        <button class="resume-option-card" data-format="docx">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+            <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 18v-6l-2 2-2-2v6h4z" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 12l2-2v-2h-4v2l2 2z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="option-details">
+            <h4>Word Format</h4>
+            <p>Editable for ATS systems</p>
+          </div>
+        </button>
+        
+        <button class="resume-option-card" data-format="view">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="option-details">
+            <h4>View Online</h4>
+            <p>Interactive web version</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style lang="scss">
   .menu {
     padding: 0;
@@ -37,10 +94,109 @@ import Button from "../components/Button.astro";
     list-style-type: none;
   }
 
-  #mobile-toggle-menu {
+  .resume-btn {
+    // All styling now comes from global .btn class
+  }
+
+  /* Resume Modal Styles */
+  .resume-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
     display: none;
+    
+    &.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    position: relative;
+    background: var(--color-background-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    
+    h3 {
+      margin: 0;
+      color: var(--color-text-primary);
+      font-size: 1.5rem;
+    }
+  }
+
+  .modal-close {
     background: none;
     border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+    
+    &:hover {
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+    }
+  }
+
+  .modal-body {
+    p {
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .resume-options-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .resume-option-card {
+    // All styling now comes from global .resume-option-card class
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Mobile menu toggle now uses global styling */
+  #mobile-toggle-menu {
+    display: none;
+    // All styling now comes from global #mobile-toggle-menu class
   }
 
   @media screen and (max-width: 980px) {
@@ -74,3 +230,68 @@ import Button from "../components/Button.astro";
     100% { opacity: 1; }
   }
 </style>
+
+<script>
+  // Header Resume Modal functionality
+  const headerResumeBtn = document.getElementById('headerResumeBtn');
+  const headerResumeModal = document.getElementById('headerResumeModal');
+  const headerModalOverlay = document.getElementById('headerModalOverlay');
+  const headerModalClose = document.getElementById('headerModalClose');
+  const headerOptionCards = document.querySelectorAll('#headerResumeModal .resume-option-card');
+  
+  function showHeaderModal() {
+    headerResumeModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function hideHeaderModal() {
+    headerResumeModal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  
+  // Show modal on button click
+  headerResumeBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showHeaderModal();
+  });
+  
+  // Hide modal on overlay or close button click
+  headerModalOverlay?.addEventListener('click', hideHeaderModal);
+  headerModalClose?.addEventListener('click', hideHeaderModal);
+  
+  // Handle resume downloads
+  headerOptionCards.forEach(card => {
+    card.addEventListener('click', async (e) => {
+      const format = card.dataset.format;
+      
+      hideHeaderModal();
+      
+      try {
+        // Simulate loading
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        switch (format) {
+          case 'pdf':
+            window.open('/my_cv.pdf', '_blank');
+            break;
+          case 'docx':
+            window.open('/my_cv.pdf', '_blank'); // Update when you have DOCX
+            break;
+          case 'view':
+            window.open('/about', '_blank');
+            break;
+        }
+      } catch (error) {
+        console.error('Error handling resume:', error);
+        alert('Sorry, there was an error. Please try again.');
+      }
+    });
+  });
+  
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      hideHeaderModal();
+    }
+  });
+</script>

@@ -14,15 +14,15 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
         <span class="intro-welcome">Welcome, I am <br></span>
         <span class="intro-name text-swipe-animation">Code Hermit.</span>
       </h1>
-      <h2 class="hero-subtitle">I craft innovative<br class="intro-break" />web solutions.</h2>
+      <h2 class="hero-subtitle">I architect scalable<br class="intro-break" />software solutions.</h2>
       <p class="hero-description">
-        Passionate full-stack developer specializing in scalable web applications.<br class="intro-break" />
-        With <span class="highlight">{yearsInIndustry}+ years</span> of experience, I turn complex problems into elegant solutions.
+        Passionate software engineer and team leader specializing in full-stack development.<br class="intro-break" />
+        With <span class="highlight">{yearsInIndustry}+ years</span> of experience building enterprise-scale applications and leading engineering teams.
       </p>
       
       <div class="hero-actions">
-        <Button variant="solid" colorScheme="lime" class="primary-cta">
-          <a href="/contact">Let's Work Together</a>
+        <Button variant="outline" colorScheme="green" class="primary-cta learn-more-btn">
+          <a href="/contact" class='home-button-link'>Let's Work Together</a>
         </Button>
         
         <!-- Resume Download Modal -->
@@ -79,38 +79,28 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     </div>
   </section>
   
-  <section class="about-preview">
+  <section class="about-preview full-width-bg-gradient">
     <div class="container">
       <h2 class="section-heading">About Me</h2>
       <div class="about-content">
         <div class="about-text">
           <p>
-            I'm a passionate full-stack developer who loves building web applications that make a difference. 
-            With expertise in modern JavaScript, Node.js, and React, I create solutions that are both 
-            performant and user-friendly.
+            I'm a passionate software engineer and team leader who specializes in building scalable web applications 
+            and leading engineering teams. With expertise in TypeScript, Next.js, Angular, NestJS, Python, Express, 
+            React, and modern software architecture, I create solutions that drive business growth.
           </p>
           <p>
-            My journey in web development spans over {yearsInIndustry} years, during which I've worked on 
-            diverse projects from e-commerce platforms to SaaS applications. I'm always eager to learn 
-            new technologies and tackle challenging problems.
+            My journey in software engineering spans over {yearsInIndustry} years, during which I've led development 
+            teams, architected enterprise solutions, and worked on diverse projects from fintech platforms to 
+            e-commerce applications. I'm passionate about mentoring developers and building high-performing teams.
           </p>
-          <Button variant="outline" class="learn-more-btn">
-            <a href="/about">Learn More About Me</a>
+          <Button variant="outline" colorScheme="green" class="learn-more-btn">
+            <a href="/about" class='home-button-link'>Learn More About Me</a>
           </Button>
         </div>
         <div class="about-image">
-          <div class="avatar-container">
-            <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#15ff93;stop-opacity:1" />
-                  <stop offset="50%" style="stop-color:#0ea5e9;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                </linearGradient>
-              </defs>
-              <circle cx="100" cy="100" r="90" fill="url(#avatarGradient)" opacity="0.9"/>
-              <text x="100" y="120" text-anchor="middle" fill="white" font-family="IBM Plex Mono, monospace" font-size="60" font-weight="bold">CH</text>
-            </svg>
+          <div class="profile-photo-container">
+            <img src="/images/kenechukwu-profile.jpeg" alt="Kenechukwu Nnakwue - Software Engineer" class="profile-photo" />
           </div>
         </div>
       </div>
@@ -261,31 +251,7 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
   }
 
   .resume-download-btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all var(--transition-normal);
-    
-    .loading-spinner {
-      display: none;
-      animation: spin 1s linear infinite;
-    }
-    
-    &.loading {
-      .download-icon,
-      .button-text {
-        opacity: 0.5;
-      }
-      
-      .loading-spinner {
-        display: block;
-      }
-    }
-    
-    &:hover {
-      transform: translateY(-2px);
-    }
+    // All styling now comes from global .btn and .resume-download-btn classes
   }
 
   /* Resume Modal */
@@ -342,18 +308,7 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
   }
 
   .modal-close {
-    background: none;
-    border: none;
-    color: var(--color-text-tertiary);
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: all var(--transition-fast);
-    
-    &:hover {
-      background: var(--color-surface);
-      color: var(--color-text-primary);
-    }
+    // All styling now comes from global .modal-close class
   }
 
   .modal-body {
@@ -369,41 +324,7 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
   }
 
   .resume-option-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    text-align: left;
-    
-    &:hover {
-      background: var(--color-surface-hover);
-      border-color: var(--color-border-hover);
-      transform: translateY(-2px);
-    }
-    
-    svg {
-      color: var(--color-primary);
-      flex-shrink: 0;
-    }
-    
-    .option-details {
-      h4 {
-        margin: 0 0 0.25rem 0;
-        color: var(--color-text-primary);
-        font-size: 1rem;
-      }
-      
-      p {
-        margin: 0;
-        color: var(--color-text-tertiary);
-        font-size: 0.875rem;
-      }
-    }
+    // All styling now comes from global .resume-option-card class
   }
 
   @keyframes modalSlideIn {
@@ -438,6 +359,68 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
         font-size: 0.875rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+      }
+    }
+  }
+
+  // Responsive breakpoints for hero stats
+  @media screen and (max-width: 1200px) {
+    .hero-stats {
+      gap: 1.5rem;
+      
+      .stat-item .stat-number {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .hero-stats {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 300px;
+      margin: 2rem auto 0;
+      
+      .stat-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        padding: 1rem;
+        background: var(--color-surface);
+        border-radius: 12px;
+        
+        .stat-number {
+          font-size: 1.5rem;
+          margin-bottom: 0;
+        }
+        
+        .stat-label {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .hero-stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      max-width: 100%;
+      
+      .stat-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 0.75rem;
+        
+        .stat-number {
+          font-size: 1.25rem;
+          margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+          font-size: 0.625rem;
+        }
       }
     }
   }
@@ -528,25 +511,57 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     justify-content: center;
   }
 
-  .avatar-container {
+  .profile-photo-container {
     position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
     
     &::before {
       content: '';
       position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      background: linear-gradient(45deg, #15ff93, #0ea5e9, #8b5cf6);
+      inset: -2px;
+      background: linear-gradient(45deg, 
+        rgba(21, 255, 147, 0.7),
+        rgba(14, 165, 233, 0.7),
+        rgba(139, 92, 246, 0.7)
+      );
       border-radius: 50%;
-      opacity: 0.3;
-      animation: pulse 2s ease-in-out infinite;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
     }
     
-    svg {
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, 
+        rgba(21, 255, 147, 0.2),
+        rgba(14, 165, 233, 0.2),
+        rgba(139, 92, 246, 0.2)
+      );
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    &:hover {
+      transform: scale(1.02);
+      
+      &::before {
+        opacity: 0.1;
+      }
+    }
+    
+    img {
       position: relative;
-      z-index: 2;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease-in-out;
     }
   }
 
@@ -558,6 +573,21 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     50% {
       transform: scale(1.05);
       opacity: 0.5;
+    }
+  }
+
+  .home-button-link {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      text-decoration: underline;
+      transform: translateY(-1px);
+    }
+    
+    &:active {
+      transform: translateY(0);
     }
   }
 
@@ -690,5 +720,4 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
       hideModal();
     }
   });
-</script>
 </script>

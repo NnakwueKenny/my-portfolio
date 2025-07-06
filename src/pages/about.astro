@@ -23,7 +23,7 @@ import TimelineItem from "../components/TimelineItem.astro";
         <div class="intro-card">
           <div class="intro-content">
             <p class="intro-text">
-              I'm <span class="highlight">Kenechukwu</span> (just call me <span class="highlight">Code Hermit</span> 😁), a passionate FullStack Web Developer based in Nigeria with over <span class="highlight">{yearsInIndustry} years</span> of experience building scalable web applications and solving complex problems through code.
+              I'm <span class="highlight">Kenechukwu</span> (just call me <span class="highlight">Code Hermit</span> 😁), a passionate Software Engineer and Team Leader based in Nigeria with over <span class="highlight">{yearsInIndustry} years</span> of experience architecting enterprise-scale solutions and leading high-performing engineering teams.
             </p>
             <div class="stats-grid">
               <div class="stat-item">
@@ -52,27 +52,12 @@ import TimelineItem from "../components/TimelineItem.astro";
           <div class="profile-section">
             <div class="profile-card">
               <div class="profile-avatar">
-                <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="profileGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#15ff93;stop-opacity:1" />
-                      <stop offset="50%" style="stop-color:#0ea5e9;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                    </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                      <feMerge> 
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  <circle cx="100" cy="100" r="90" fill="url(#profileGradient)" filter="url(#glow)" opacity="0.9"/>
-                  <text x="100" y="120" text-anchor="middle" fill="white" font-family="IBM Plex Mono, monospace" font-size="60" font-weight="bold">CH</text>
-                </svg>
+                <div class="profile-photo-wrapper">
+                  <img src="/images/kenechukwu-profile.jpeg" alt="Kenechukwu Nnakwue - Software Engineer" class="profile-photo" />
+                </div>
               </div>
               <div class="profile-info">
-                <h3>Full-Stack Developer</h3>
+                <h3>Software Engineer & Team Lead</h3>
                 <p>Nigeria 🇳🇬</p>
                 <div class="status-indicator">
                   <span class="status-dot"></span>
@@ -90,18 +75,20 @@ import TimelineItem from "../components/TimelineItem.astro";
                     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <h4>Backend Specialist</h4>
-                <p>I focus on full-stack web development, specializing in backend technologies such as Node.js/Express.js with TypeScript, MongoDB, RabbitMQ, Docker, and modern cloud infrastructure. I'm passionate about building microservices architectures and API-first solutions.</p>
+                <h4>Full-Stack Engineering</h4>
+                <p>I architect and build enterprise-scale applications using TypeScript, Next.js, Angular, NestJS, Python, Express, React, and modern cloud infrastructure. Passionate about microservices architectures, API-first design, and scalable solutions.</p>
               </div>
 
               <div class="detail-card">
                 <div class="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="17 11 19 13 23 9" stroke="currentColor" stroke-width="2"/>
                   </svg>
                 </div>
-                <h4>Frontend Enthusiast</h4>
-                <p>I have a keen interest in design and UI/UX, and I enjoy working on frontend projects using React.js, Next.js, TailwindCSS, and modern JavaScript frameworks. I believe in creating beautiful, accessible, and performant user experiences.</p>
+                <h4>Team Leadership</h4>
+                <p>I lead engineering teams, mentor developers, and drive technical decisions that scale. Experienced in agile methodologies, code reviews, and fostering collaborative environments that deliver high-quality software solutions.</p>
               </div>
 
               <div class="detail-card">
@@ -110,8 +97,8 @@ import TimelineItem from "../components/TimelineItem.astro";
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <h4>Problem Solver</h4>
-                <p>I'm passionate about solving problems and building efficient, well-organized web solutions that are fast, high-performing, and accessible to everyone. I enjoy mentoring junior developers and contributing to open-source projects.</p>
+                <h4>Solution Architecture</h4>
+                <p>I design and implement robust software architectures that solve complex business problems. From system design to deployment strategies, I ensure solutions are maintainable, performant, and future-proof.</p>
               </div>
 
               <div class="detail-card">
@@ -396,6 +383,60 @@ import TimelineItem from "../components/TimelineItem.astro";
     justify-content: center;
   }
 
+  .profile-photo-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, 
+        rgba(21, 255, 147, 0.7),
+        rgba(14, 165, 233, 0.7),
+        rgba(139, 92, 246, 0.7)
+      );
+      border-radius: 50%;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, 
+        rgba(21, 255, 147, 0.2),
+        rgba(14, 165, 233, 0.2),
+        rgba(139, 92, 246, 0.2)
+      );
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    &:hover {
+      transform: scale(1.02);
+      
+      &::before {
+        opacity: 0.1;
+      }
+    }
+    
+    .profile-photo {
+      position: relative;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
   .profile-info {
     h3 {
       margin: 0 0 0.5rem 0;
@@ -589,5 +630,4 @@ import TimelineItem from "../components/TimelineItem.astro";
   if (greeting) {
     greeting.innerHTML = greetingFunction();
   }
-</script>
 </script>

@@ -37,7 +37,7 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
 ---
 
 <DefaultLayout documentTitle="Code Hermit | Projects" documentDescription="Welcome to my portfolio, showcasing a selection of projects I've worked on.">
-  <div class="container">
+  <div class="container projects-container">
     <h1 class="main-heading text-swipe-animation">Projects</h1>
     <div class="intro">
       <p>Welcome to my portfolio, showcasing a selection of some projects I've worked on.</p>
@@ -182,6 +182,10 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
     flex-direction: column;
     margin-top: 3rem;
     row-gap: 2rem;
+  }
+
+  .projects-container {
+    margin-top: 2.5rem;;
   }
 
   @media screen and (max-width: 980px) {
