@@ -53,7 +53,7 @@ import TimelineItem from "../components/TimelineItem.astro";
             <div class="profile-card">
               <div class="profile-avatar">
                 <div class="profile-photo-wrapper">
-                  <img src="/images/kenechukwu-profile.jpeg" alt="Kenechukwu Nnakwue - Software Engineer" class="profile-photo" />
+                  <img src="/images/kenechukwu-profile-2.jpeg" alt="Kenechukwu Nnakwue - Software Engineer" class="profile-photo" />
                 </div>
               </div>
               <div class="profile-info">
@@ -142,9 +142,25 @@ import TimelineItem from "../components/TimelineItem.astro";
       <div class="timeline-items">
         <TimelineItem
           isCurrent
+          company="Techsense Developers"
+          title="Head of Engineering"
+          startDate="November 2025"
+          logo="/images/techsensedev-logo.jpeg"
+          workMode="remote"
+          responsibilities={[
+            "Lead and manage the engineering team, setting technical direction and ensuring alignment with business objectives",
+            "Architect and oversee the development of scalable systems and infrastructure across frontend and backend services",
+            "Drive engineering best practices, code quality standards, and implement robust CI/CD pipelines",
+            "Mentor and develop engineering talent, conduct performance reviews, and foster a culture of continuous improvement",
+            "Collaborate with product and design teams to translate business requirements into technical solutions",
+            "Manage technical debt, prioritize feature development, and ensure timely delivery of high-quality software"
+          ]}
+        />
+        <TimelineItem
           company="BitKwa"
           title="FullStack Developer (Volunteer)"
           startDate="July 2025"
+          endDate="January 2026"
           logo="/images/bitkwa-logo.jpeg"
           workMode="remote"
           responsibilities={[

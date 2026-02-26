@@ -44,11 +44,72 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
     </div>
 
     <section class="projects">
+
+      <PortfolioItem
+        projectYear="2026"
+        title='Skybod CarePass'
+        image="/images/skybod_carepass-website.png"
+        projectLink="https://skybodcarepass.com"
+        tags={[
+          "Git",
+          "NestJS",
+          "Next.js",
+          "MongoDB",
+          "TypeScript",
+          "Tailwind CSS",
+        ]}>
+        <p slot="subtitle">Compliance and jobs marketplace platform for the UK care industry.</p>
+
+        <div slot="description">
+          <p>
+            A specialized platform connecting care providers (care homes, agencies, hospitals, and supported living facilities) with verified carers. 
+            The system streamlines the hiring process by centralizing compliance document management, including DBS checks, Right to Work verification, 
+            training certificates, insurance, and references.
+          </p>
+          <p>
+            Built with Next.js and TypeScript for a robust frontend experience, and Node.js/Express backend for handling complex compliance workflows. 
+            Features include one-time document upload for carers, automated compliance scoring, document verification system, and a transparent dashboard 
+            for both carers and providers. The platform addresses critical compliance and hiring challenges specific to the UK care sector.
+          </p>
+        </div>
+      </PortfolioItem>
+
+      <PortfolioItem
+        projectYear="2025"
+        title='Naijagrocer'
+        image="/images/naijagrocer-website.png"
+        projectLink="https://naijagrocer.com"
+        tags={[
+          "Git",
+          "Next.js",
+          "PostgreSQL",
+          "TypeScript",
+          "Tailwind CSS",
+          "NestJS",
+          "Paystack",
+        ]}>
+        <p slot="subtitle">Subscription-based food pack platform delivering fresh groceries across Nigeria.</p>
+
+        <div slot="description">
+          <p>
+            An innovative e-commerce platform that brings market-quality groceries to customers' doorsteps with transparent pricing and flexible payment options. 
+            NaijaGrocer offers curated food packs (Student, Bachelor, Family packs) and custom grocery bundles, sourced directly from trusted suppliers and farms. 
+            Powered by Skybod Farms Nigeria Ltd (RC 8552610).
+          </p>
+          <p>
+            Built with Next.js and TypeScript for optimal performance, featuring a wallet system for installment payments, subscription management, 
+            referral rewards program, and real-time price comparison showing customer savings. The backend API handles complex order processing, 
+            payment integration with Paystack, inventory management, and delivery scheduling. Includes mobile apps on Google Play and App Store 
+            for seamless shopping on the go.
+          </p>
+        </div>
+      </PortfolioItem>
+
       <PortfolioItem
         projectYear="2025"
         title="NotJustEvent"
         image="/images/nje-website.png"
-        projectLink="https://demo.notjustevent.com"
+        projectLink="https://notjustevent.com"
         tags={[
           "Git",
           "Next.js",
@@ -63,7 +124,7 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
           <p>
             Built using TailwindCSS, Material UI, React, Node and Express. The backend API, built using Node and Express,
             efficiently handles data while the frontend, created with React.js, presents it in an intuitive and user-friendly interface.
-            Pages are rendered client-side with dynamic content using Material UI and TailwindCSS on the client side.
+            Pages are rendered client-side with dynamic content using NextJS and TailwindCSS on the client side.
           </p>
           <p>
             I worked extensively on the backend API, creating custom-design API endpoints using Express(Typescript) for handling user(s)'
@@ -77,7 +138,7 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
         projectYear="2025"
         title="Entrecore"
         image="/images/entrecore-website.png"
-        projectLink="https://staging.entrecore.com"
+        projectLink="https://entrecore.com"
         tags={[
           "Node.js",
           "Python",
@@ -130,7 +191,7 @@ const getRepoStars = async (repoName: string, repoLink: string) => {
         projectYear="2025"
         title="YCC - Yacht Crew Center"
         image="/images/ycc-website.png"
-        projectLink="https://yachtcrewcenter-dev.netlify.app"
+        projectLink="https://yachtcrewcenter.com"
         tags={[
           "Node.js",
           "Python",
