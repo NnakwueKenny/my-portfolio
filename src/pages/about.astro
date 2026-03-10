@@ -312,6 +312,14 @@ import TimelineItem from "../components/TimelineItem.astro";
     z-index: 2;
   }
 
+  .hero-section > .container,
+  .about-details > .container,
+  .tech-stack > .container,
+  .experience > .container {
+    position: relative;
+    z-index: 1;
+  }
+
   .greeting-wrapper {
     display: flex;
     align-items: center;
@@ -637,6 +645,15 @@ import TimelineItem from "../components/TimelineItem.astro";
     .hero-section {
       padding: 1.5rem 0 2rem;
     }
+
+    .hero-section > .container {
+      max-width: none;
+      padding-inline: 0;
+    }
+
+    .hero-content {
+      padding-inline: 1rem;
+    }
     
     .greeting-wrapper {
       flex-direction: column;
@@ -676,6 +693,13 @@ import TimelineItem from "../components/TimelineItem.astro";
     .detail-cards {
       grid-template-columns: 1fr;
     }
+
+    .about-details > .container,
+    .tech-stack > .container,
+    .experience > .container {
+      max-width: none;
+      padding-inline: 1rem;
+    }
     
     .section-heading {
       font-size: 2rem;
@@ -683,6 +707,13 @@ import TimelineItem from "../components/TimelineItem.astro";
   }
 
   @media screen and (max-width: 640px) {
+    .hero-content,
+    .about-details > .container,
+    .tech-stack > .container,
+    .experience > .container {
+      padding-inline: 0.75rem;
+    }
+
     .intro-card {
       border-radius: 20px;
       padding: 1.25rem;
