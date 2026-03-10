@@ -150,6 +150,8 @@ const socialIconSize = "1.75rem";
 
 <style lang="scss">
   .contact-hero {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     padding: 2rem 0;
     background: var(--gradient-background);
     position: relative;
@@ -376,9 +378,18 @@ const socialIconSize = "1.75rem";
   }
 
   @media screen and (max-width: 980px) {
+    .hero-content {
+      text-align: left;
+    }
+
+    .hero-subtitle {
+      max-width: none;
+      margin: 0;
+    }
+
     .contact-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
     }
     
     .hero-subtitle {
@@ -390,7 +401,7 @@ const socialIconSize = "1.75rem";
     }
     
     .info-card, .form-card {
-      padding: 1.5rem;
+      padding: 1.25rem;
     }
     
     .socials li a {

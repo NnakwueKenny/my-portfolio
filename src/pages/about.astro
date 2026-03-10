@@ -288,6 +288,8 @@ import TimelineItem from "../components/TimelineItem.astro";
 
 <style lang="scss">
   .hero-section {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     padding: clamp(2rem, 5vw, 4rem) 0 3rem;
     background: var(--gradient-background);
     position: relative;
@@ -346,7 +348,7 @@ import TimelineItem from "../components/TimelineItem.astro";
     border: 1px solid var(--color-border-strong);
     border-radius: 24px;
     padding: clamp(1.25rem, 3vw, 2rem);
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-md);
   }
 
   .intro-content {
@@ -684,6 +686,7 @@ import TimelineItem from "../components/TimelineItem.astro";
     .intro-card {
       border-radius: 20px;
       padding: 1.25rem;
+      box-shadow: none;
     }
 
     .stats-grid {
