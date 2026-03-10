@@ -32,36 +32,11 @@ import Menu from "../components/Menu.astro";
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
     
-    // CSS custom properties for dynamic colors
-    --color-background-rgb: 2, 8, 23;
-    
     &.scrolled {
-      background: rgba(var(--color-background-rgb), 0.95);
+      background: rgba(var(--color-background-rgb), 0.94);
       backdrop-filter: blur(20px);
       box-shadow: var(--shadow-lg);
-      border-bottom-color: var(--color-border-hover);
-    }
-  }
-
-  // Light theme adjustments
-  [data-theme="light"] .header {
-    --color-background-rgb: 255, 255, 255;
-    border-bottom: 1px solid var(--color-border);
-    
-    &.scrolled {
-      box-shadow: var(--shadow-md);
-    }
-  }
-
-  // System theme detection for light mode
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme]) .header {
-      --color-background-rgb: 255, 255, 255;
-      border-bottom: 1px solid var(--color-border);
-      
-      &.scrolled {
-        box-shadow: var(--shadow-md);
-      }
+      border-bottom-color: var(--color-border-strong);
     }
   }
 

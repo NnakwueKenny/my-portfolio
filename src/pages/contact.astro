@@ -151,7 +151,7 @@ const socialIconSize = "1.75rem";
 <style lang="scss">
   .contact-hero {
     padding: 2rem 0;
-    background: linear-gradient(135deg, rgba(2, 8, 23, 0.9) 0%, rgba(13, 42, 148, 0.1) 100%);
+    background: var(--gradient-background);
     position: relative;
     
     &::before {
@@ -161,7 +161,7 @@ const socialIconSize = "1.75rem";
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 70% 30%, rgba(21, 255, 147, 0.15) 0%, transparent 50%);
+      background: var(--gradient-radial-primary), var(--gradient-radial-secondary);
       pointer-events: none;
     }
   }
@@ -177,7 +177,7 @@ const socialIconSize = "1.75rem";
     
     .hero-subtitle {
       font-size: 1.25rem;
-      color: var(--color-silver-300);
+      color: var(--color-text-tertiary);
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.6;
@@ -196,20 +196,21 @@ const socialIconSize = "1.75rem";
   }
 
   .info-card, .form-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--gradient-surface);
+    border: 1px solid var(--color-border);
     border-radius: 20px;
     padding: 2rem;
     backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
     
     h2 {
       margin: 0 0 1rem 0;
-      color: var(--color-silver-100);
+      color: var(--color-text-primary);
       font-size: 1.5rem;
     }
     
     > p {
-      color: var(--color-silver-300);
+      color: var(--color-text-tertiary);
       line-height: 1.6;
       margin-bottom: 2rem;
     }
@@ -228,20 +229,20 @@ const socialIconSize = "1.75rem";
     gap: 1rem;
     
     .method-icon {
-      color: var(--color-lime);
+      color: var(--color-primary);
       flex-shrink: 0;
     }
     
     .method-info {
       h4 {
         margin: 0 0 0.25rem 0;
-        color: var(--color-silver-100);
+        color: var(--color-text-primary);
         font-size: 1rem;
       }
       
       p {
         margin: 0;
-        color: var(--color-silver-400);
+        color: var(--color-text-tertiary);
         font-size: 0.875rem;
       }
     }
@@ -252,7 +253,7 @@ const socialIconSize = "1.75rem";
     h3 {
       margin: 0 0 1rem 0;
       padding-left: 0.5rem;
-      color: var(--color-silver-200);
+      color: var(--color-text-secondary);
       font-size: 1.25rem;
     }
   }
@@ -269,15 +270,15 @@ const socialIconSize = "1.75rem";
       display: flex;
       align-items: center;
       gap: 1rem;
-      color: var(--color-silver-300);
+      color: var(--color-text-tertiary);
       text-decoration: none;
       padding: 0.75rem;
       border-radius: 10px;
       transition: all 0.3s ease;
       
       &:hover {
-        background: rgba(21, 255, 147, 0.1);
-        color: var(--color-lime);
+        background: var(--color-accent-soft);
+        color: var(--color-primary);
         transform: translateX(4px);
       }
       
@@ -306,33 +307,33 @@ const socialIconSize = "1.75rem";
       margin-bottom: 1rem;
       
       label {
-        color: var(--color-silver-200);
+        color: var(--color-text-secondary);
         font-weight: 500;
         margin-bottom: 0.5rem;
         font-size: 0.9rem;
         
         .required {
-          color: var(--color-lime);
+          color: var(--color-primary);
         }
       }
       
       input, textarea {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: var(--color-surface-subtle);
+        border: 1px solid var(--color-border);
         border-radius: 8px;
         padding: 0.75rem;
-        color: var(--color-silver-100);
+        color: var(--color-text-primary);
         font-size: 1rem;
         transition: all 0.3s ease;
         
         &::placeholder {
-          color: var(--color-silver-500);
+          color: var(--color-text-quaternary);
         }
         
         &:focus {
           outline: none;
-          border-color: var(--color-lime);
-          background: rgba(255, 255, 255, 0.08);
+          border-color: var(--color-border-hover);
+          background: var(--color-surface);
           box-shadow: 0 0 0 3px rgba(21, 255, 147, 0.1);
         }
         
@@ -496,9 +497,9 @@ const socialIconSize = "1.75rem";
   inputs?.forEach(input => {
     input.addEventListener('blur', () => {
       if (input.value && !input.checkValidity()) {
-        input.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+        input.style.borderColor = 'var(--color-red)';
       } else if (input.value) {
-        input.style.borderColor = 'rgba(21, 255, 147, 0.5)';
+        input.style.borderColor = 'var(--color-border-hover)';
       }
     });
 

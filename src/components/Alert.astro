@@ -21,31 +21,32 @@ const { type } = Astro.props;
     align-items: center;
     padding: 10px;
     gap: 0.8rem;
-    color: white;
+    color: var(--color-text-primary);
     margin: 10px 0;
-    border-radius: 4px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
     &.success {
-      background: #004a18;
+      background: var(--color-accent-soft);
       svg {
-        fill: #15ff93;
+        fill: var(--color-primary);
       }
     }
     &.error {
-      background: #4a0000;
+      background: rgba(239, 68, 68, 0.12);
       svg {
-        fill: #ff1515;
+        fill: var(--color-red);
       }
     }
     &.warning {
-      background: #564900;
+      background: var(--color-warning-soft);
       svg {
-        fill: #ffc415;
+        fill: var(--color-yellow-400);
       }
     }
     &.info {
-      background: #00194a;
+      background: var(--color-secondary-soft);
       svg {
-        fill: #1590ff;
+        fill: var(--color-secondary);
       }
     }
   }

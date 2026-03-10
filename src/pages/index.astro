@@ -280,23 +280,23 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(2, 8, 23, 0.95);
+    background: rgba(var(--color-background-rgb), 0.82);
     backdrop-filter: blur(8px);
     animation: fadeIn 0.3s ease;
   }
 
   .modal-content {
     position: relative;
-    background: linear-gradient(135deg, rgba(13, 42, 148, 0.2) 0%, rgba(2, 8, 23, 0.95) 100%);
-    border: 1px solid rgba(21, 255, 147, 0.2);
+    background: var(--gradient-overlay);
+    border: 1px solid var(--color-border-strong);
     border-radius: 20px;
     padding: 2.5rem;
     max-width: 540px;
     width: 90%;
     max-height: 85vh;
     overflow-y: auto;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
-                0 0 100px rgba(21, 255, 147, 0.1);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow);
     animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     
     &::before {
@@ -306,8 +306,7 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 30% 20%, rgba(21, 255, 147, 0.08) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
+      background: var(--gradient-radial-primary), var(--gradient-radial-secondary);
       border-radius: 20px;
       pointer-events: none;
       z-index: 0;
@@ -325,11 +324,11 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--color-border);
     
     h3 {
       margin: 0;
-      background: linear-gradient(135deg, #ffffff 0%, #15ff93 100%);
+      background: var(--gradient-primary);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -344,17 +343,17 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
-    color: var(--color-silver-400);
+    color: var(--color-text-tertiary);
     cursor: pointer;
     transition: all 0.3s ease;
     
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(21, 255, 147, 0.5);
-      color: var(--color-lime);
+      background: var(--color-surface-hover);
+      border-color: var(--color-border-hover);
+      color: var(--color-primary);
       transform: rotate(90deg);
     }
     
@@ -365,7 +364,7 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
 
   .modal-body {
     p {
-      color: var(--color-silver-300);
+      color: var(--color-text-tertiary);
       margin: 0 0 1.5rem 0;
       font-size: 1rem;
       line-height: 1.5;
@@ -382,22 +381,22 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     align-items: center;
     gap: 1.25rem;
     padding: 1.25rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
     
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(21, 255, 147, 0.5);
+      background: var(--color-surface);
+      border-color: var(--color-border-hover);
       transform: translateX(8px);
-      box-shadow: 0 8px 24px rgba(21, 255, 147, 0.15);
+      box-shadow: var(--shadow-lg);
       
       svg {
         transform: scale(1.1);
-        filter: drop-shadow(0 0 8px rgba(21, 255, 147, 0.5));
+        filter: drop-shadow(0 0 8px var(--color-accent-soft));
       }
     }
     
@@ -416,14 +415,14 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
       
       h4 {
         margin: 0 0 0.25rem 0;
-        color: var(--color-silver-100);
+        color: var(--color-text-primary);
         font-size: 1.125rem;
         font-weight: 600;
       }
       
       p {
         margin: 0;
-        color: var(--color-silver-400);
+        color: var(--color-text-tertiary);
         font-size: 0.875rem;
         line-height: 1.4;
       }
@@ -623,7 +622,7 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
     font-size: 2.5rem;
     text-align: center;
     margin: 0 0 2rem 0;
-    background: linear-gradient(135deg, #ffffff 0%, #15ff93 100%);
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -672,8 +671,8 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
       position: absolute;
       inset: -2px;
       background: linear-gradient(45deg, 
-        rgba(21, 255, 147, 0.7),
-        rgba(14, 165, 233, 0.7),
+        var(--color-primary),
+        var(--color-secondary),
         rgba(139, 92, 246, 0.7)
       );
       border-radius: 50%;
@@ -687,8 +686,8 @@ import { yearsInIndustry } from "../js/yearsInIndustry";
       position: absolute;
       inset: 0;
       background: linear-gradient(45deg, 
-        rgba(21, 255, 147, 0.2),
-        rgba(14, 165, 233, 0.2),
+        var(--color-accent-soft),
+        var(--color-secondary-soft),
         rgba(139, 92, 246, 0.2)
       );
       border-radius: 50%;

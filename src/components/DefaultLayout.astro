@@ -130,10 +130,10 @@ const websiteData = {
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Theme and Color Meta Tags -->
-    <meta name="theme-color" content="#15ff93" />
-    <meta name="msapplication-navbutton-color" content="#15ff93" />
+    <meta id="theme-color-meta" name="theme-color" content="#020817" />
+    <meta id="ms-nav-color-meta" name="msapplication-navbutton-color" content="#020817" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="msapplication-TileColor" content="#15ff93" />
+    <meta id="ms-tile-color-meta" name="msapplication-TileColor" content="#020817" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={pageType} />
@@ -203,10 +203,36 @@ const websiteData = {
     <!-- Copyright and Rights -->
     <meta name="copyright" content={`© ${currentYear} ${author}`} />
     <meta name="rights" content={`© ${currentYear} ${author}. All rights reserved.`} />
+    <script is:inline>
+      (() => {
+        const THEME_KEY = 'theme';
+        const THEME_DARK = 'dark';
+        const THEME_LIGHT = 'light';
+
+        try {
+          const storedTheme = localStorage.getItem(THEME_KEY);
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? THEME_DARK
+            : THEME_LIGHT;
+          const initialTheme =
+            storedTheme === THEME_DARK || storedTheme === THEME_LIGHT
+              ? storedTheme
+              : systemTheme;
+
+          if (!storedTheme) {
+            localStorage.setItem(THEME_KEY, initialTheme);
+          }
+
+          document.documentElement.setAttribute('data-theme', initialTheme);
+        } catch {
+          document.documentElement.setAttribute('data-theme', THEME_DARK);
+        }
+      })();
+    </script>
   </head>
   <body>
     <Header />
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme (Ctrl+Shift+T)">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Toggle color theme (Ctrl+Shift+T)">
       <div class="theme-toggle-inner">
         <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
@@ -214,11 +240,6 @@ const websiteData = {
         </svg>
         <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"/>
-        </svg>
-        <svg class="system-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
-          <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
-          <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
         </svg>
       </div>
     </button>
@@ -232,130 +253,106 @@ const websiteData = {
       const THEME_KEY = 'theme';
       const THEME_DARK = 'dark';
       const THEME_LIGHT = 'light';
-      const THEME_SYSTEM = 'system';
+      const META_THEME_COLORS = {
+        [THEME_DARK]: '#020817',
+        [THEME_LIGHT]: '#f6f8fb'
+      };
       
       const themeToggle = document.getElementById('themeToggle');
       const sunIcon = document.querySelector('.sun-icon');
       const moonIcon = document.querySelector('.moon-icon');
+      const themeColorMeta = document.getElementById('theme-color-meta');
+      const msNavColorMeta = document.getElementById('ms-nav-color-meta');
+      const msTileColorMeta = document.getElementById('ms-tile-color-meta');
       
-      // Prevent flash of wrong theme
-      function preventFlash() {
-        const saved = localStorage.getItem(THEME_KEY) || THEME_DARK;
-        const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const shouldBeDark = saved === THEME_SYSTEM ? systemIsDark : saved === THEME_DARK;
-        
-        if (!shouldBeDark) {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
+      function isValidTheme(theme) {
+        return theme === THEME_DARK || theme === THEME_LIGHT;
       }
       
-      // Run immediately to prevent flash
-      preventFlash();
-      
-      // Get system theme preference
       function getSystemTheme() {
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? THEME_DARK : THEME_LIGHT;
       }
       
-      // Get current theme
       function getCurrentTheme() {
         const savedTheme = localStorage.getItem(THEME_KEY);
-        if (savedTheme && [THEME_DARK, THEME_LIGHT, THEME_SYSTEM].includes(savedTheme)) {
+        if (isValidTheme(savedTheme)) {
           return savedTheme;
         }
-        return THEME_SYSTEM;
+
+        const systemTheme = getSystemTheme();
+        localStorage.setItem(THEME_KEY, systemTheme);
+        return systemTheme;
+      }
+
+      function updateMetaThemeColor(theme) {
+        const themeColor = META_THEME_COLORS[theme] || META_THEME_COLORS[THEME_DARK];
+
+        themeColorMeta?.setAttribute('content', themeColor);
+        msNavColorMeta?.setAttribute('content', themeColor);
+        msTileColorMeta?.setAttribute('content', themeColor);
+      }
+
+      function updateThemeToggle(theme) {
+        const isDarkTheme = theme === THEME_DARK;
+        const nextTheme = isDarkTheme ? THEME_LIGHT : THEME_DARK;
+
+        sunIcon.style.display = isDarkTheme ? 'none' : 'block';
+        moonIcon.style.display = isDarkTheme ? 'block' : 'none';
+        themeToggle?.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+        themeToggle?.setAttribute('title', `Switch to ${nextTheme} mode (Ctrl+Shift+T)`);
       }
       
-      // Apply theme to document
-      function applyTheme(theme) {
-        const actualTheme = theme === THEME_SYSTEM ? getSystemTheme() : theme;
-        
-        // Add smooth transition class
-        document.documentElement.classList.add('theme-transitioning');
-        
-        if (actualTheme === THEME_DARK) {
-          document.documentElement.removeAttribute('data-theme');
-          sunIcon.style.display = 'none';
-          moonIcon.style.display = 'block';
-          themeToggle.setAttribute('aria-label', `Current theme: ${theme === THEME_SYSTEM ? 'System (Dark)' : 'Dark'}. Click to change.`);
-        } else {
-          document.documentElement.setAttribute('data-theme', 'light');
-          sunIcon.style.display = 'block';
-          moonIcon.style.display = 'none';
-          themeToggle.setAttribute('aria-label', `Current theme: ${theme === THEME_SYSTEM ? 'System (Light)' : 'Light'}. Click to change.`);
+      function applyTheme(theme, options = {}) {
+        const { withTransition = true } = options;
+
+        if (!isValidTheme(theme)) {
+          return;
         }
-        
-        // Remove transition class after animation
-        setTimeout(() => {
-          document.documentElement.classList.remove('theme-transitioning');
-        }, 300);
+
+        if (withTransition) {
+          document.documentElement.classList.add('theme-transitioning');
+        }
+
+        document.documentElement.setAttribute('data-theme', theme);
+        updateMetaThemeColor(theme);
+        updateThemeToggle(theme);
+
+        if (withTransition) {
+          setTimeout(() => {
+            document.documentElement.classList.remove('theme-transitioning');
+          }, 300);
+        }
       }
       
-      // Cycle through themes: system -> light -> dark -> system
-      function cycleTheme() {
+      function toggleTheme() {
         const currentTheme = getCurrentTheme();
-        let nextTheme;
-        
-        switch (currentTheme) {
-          case THEME_SYSTEM:
-            nextTheme = THEME_LIGHT;
-            break;
-          case THEME_LIGHT:
-            nextTheme = THEME_DARK;
-            break;
-          case THEME_DARK:
-            nextTheme = THEME_SYSTEM;
-            break;
-          default:
-            nextTheme = THEME_DARK;
-        }
-        
+        const nextTheme = currentTheme === THEME_DARK ? THEME_LIGHT : THEME_DARK;
+
         localStorage.setItem(THEME_KEY, nextTheme);
         applyTheme(nextTheme);
-        
-        // Show temporary indicator
         showThemeIndicator(nextTheme);
-        
-        // Add click animation
-        themeToggle.classList.add('clicked');
+
+        themeToggle?.classList.add('clicked');
         setTimeout(() => {
-          themeToggle.classList.remove('clicked');
+          themeToggle?.classList.remove('clicked');
         }, 200);
       }
       
-      // Show theme change indicator
       function showThemeIndicator(theme) {
-        // Remove existing indicator
         const existing = document.querySelector('.theme-indicator');
         if (existing) existing.remove();
         
         const indicator = document.createElement('div');
         indicator.className = 'theme-indicator';
         
-        let themeText;
-        switch (theme) {
-          case THEME_SYSTEM:
-            const systemTheme = getSystemTheme();
-            themeText = `System (${systemTheme.charAt(0).toUpperCase() + systemTheme.slice(1)})`;
-            break;
-          case THEME_LIGHT:
-            themeText = 'Light Mode';
-            break;
-          case THEME_DARK:
-            themeText = 'Dark Mode';
-            break;
-          default:
-            themeText = 'Dark Mode';
-        }
+        const themeText = theme === THEME_LIGHT ? 'Light Mode' : 'Dark Mode';
         
         indicator.innerHTML = `
           <div class="theme-indicator-content">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               ${theme === THEME_LIGHT ? 
                 '<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>' :
-                theme === THEME_DARK ?
-                '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"/>' :
-                '<rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 9h6m-6 6h6" stroke="currentColor" stroke-width="2"/>'
+                '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"/>'
               }
             </svg>
             <span>${themeText}</span>
@@ -371,24 +368,14 @@ const websiteData = {
         }, 2500);
       }
       
-      // Initialize theme
-      applyTheme(getCurrentTheme());
+      applyTheme(getCurrentTheme(), { withTransition: false });
       
-      // Add theme toggle listener
-      themeToggle?.addEventListener('click', cycleTheme);
+      themeToggle?.addEventListener('click', toggleTheme);
       
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (getCurrentTheme() === THEME_SYSTEM) {
-          applyTheme(THEME_SYSTEM);
-        }
-      });
-      
-      // Keyboard shortcut for theme toggle (Ctrl/Cmd + Shift + T)
       document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
           e.preventDefault();
-          cycleTheme();
+          toggleTheme();
         }
       });
     </script>
@@ -461,9 +448,9 @@ const websiteData = {
     right: 2rem;
     width: 3rem;
     height: 3rem;
-    border: 2px solid var(--color-border);
+    border: 1px solid var(--color-border-strong);
     border-radius: 8px;
-    background: var(--color-background-tertiary);
+    background: var(--gradient-surface);
     color: var(--color-text-primary);
     cursor: pointer;
     display: flex;
@@ -475,7 +462,7 @@ const websiteData = {
     box-shadow: var(--shadow-md);
     
     &:hover {
-      background: var(--color-surface-hover);
+      background: var(--color-surface-elevated-hover);
       border-color: var(--color-primary);
       transform: translateY(-2px);
       box-shadow: var(--shadow-lg);
@@ -537,8 +524,8 @@ const websiteData = {
     position: fixed;
     top: 2rem;
     right: 2rem;
-    background: var(--color-background-tertiary);
-    border: 1px solid var(--color-border);
+    background: var(--gradient-surface);
+    border: 1px solid var(--color-border-strong);
     color: var(--color-text-primary);
     border-radius: 12px;
     font-size: 0.875rem;

@@ -288,8 +288,8 @@ import TimelineItem from "../components/TimelineItem.astro";
 
 <style lang="scss">
   .hero-section {
-    padding: 4rem 0 2rem;
-    background: linear-gradient(135deg, rgba(2, 8, 23, 0.9) 0%, rgba(13, 42, 148, 0.1) 100%);
+    padding: clamp(2rem, 5vw, 4rem) 0 3rem;
+    background: var(--gradient-background);
     position: relative;
     overflow: hidden;
     
@@ -300,8 +300,7 @@ import TimelineItem from "../components/TimelineItem.astro";
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 30% 20%, rgba(21, 255, 147, 0.15) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%);
+      background: var(--gradient-radial-primary), var(--gradient-radial-secondary);
       pointer-events: none;
     }
   }
@@ -314,8 +313,9 @@ import TimelineItem from "../components/TimelineItem.astro";
   .greeting-wrapper {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .typing-indicator {
@@ -340,22 +340,31 @@ import TimelineItem from "../components/TimelineItem.astro";
   }
 
   .intro-card {
-    background: rgba(255, 255, 255, 0.05);
+    width: 100%;
+    background: var(--gradient-surface);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 24px;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .intro-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
   }
 
   .intro-text {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: var(--color-silver-200);
-    margin-bottom: 2rem;
+    margin: 0;
+    max-width: 30ch;
+    font-size: clamp(1.08rem, 0.95rem + 0.7vw, 1.45rem);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
     
     .highlight {
-      background: linear-gradient(135deg, #15ff93 0%, #0ea5e9 100%);
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -366,7 +375,12 @@ import TimelineItem from "../components/TimelineItem.astro";
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 0.75rem;
+    align-content: center;
+    padding: 1.25rem;
+    background: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
   }
 
   .stat-item {
@@ -375,13 +389,14 @@ import TimelineItem from "../components/TimelineItem.astro";
     .stat-number {
       font-size: 2rem;
       font-weight: 700;
-      color: var(--color-lime);
+      color: var(--color-primary);
       margin-bottom: 0.5rem;
     }
     
     .stat-label {
-      color: var(--color-silver-400);
+      color: var(--color-text-quaternary);
       font-size: 0.875rem;
+      line-height: 1.5;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -389,23 +404,25 @@ import TimelineItem from "../components/TimelineItem.astro";
 
   .about-details {
     padding: 4rem 0;
+    background: linear-gradient(180deg, transparent 0%, var(--color-surface-subtle) 100%);
   }
 
   .content-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 4rem;
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
     align-items: start;
   }
 
   .profile-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--gradient-surface);
+    border: 1px solid var(--color-border);
     border-radius: 20px;
     padding: 2rem;
     text-align: center;
     position: sticky;
     top: 120px;
+    box-shadow: var(--shadow-lg);
   }
 
   .profile-avatar {
@@ -416,8 +433,8 @@ import TimelineItem from "../components/TimelineItem.astro";
 
   .profile-photo-wrapper {
     position: relative;
-    width: 280px;
-    height: 280px;
+    width: min(100%, 280px);
+    aspect-ratio: 1;
     border-radius: 50%;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
@@ -427,8 +444,8 @@ import TimelineItem from "../components/TimelineItem.astro";
       position: absolute;
       inset: -2px;
       background: linear-gradient(45deg, 
-        rgba(21, 255, 147, 0.7),
-        rgba(14, 165, 233, 0.7),
+        var(--color-primary),
+        var(--color-secondary),
         rgba(139, 92, 246, 0.7)
       );
       border-radius: 50%;
@@ -442,8 +459,8 @@ import TimelineItem from "../components/TimelineItem.astro";
       position: absolute;
       inset: 0;
       background: linear-gradient(45deg, 
-        rgba(21, 255, 147, 0.2),
-        rgba(14, 165, 233, 0.2),
+        var(--color-accent-soft),
+        var(--color-secondary-soft),
         rgba(139, 92, 246, 0.2)
       );
       border-radius: 50%;
@@ -471,12 +488,12 @@ import TimelineItem from "../components/TimelineItem.astro";
   .profile-info {
     h3 {
       margin: 0 0 0.5rem 0;
-      color: var(--color-silver-100);
+      color: var(--color-text-primary);
       font-size: 1.25rem;
     }
     
     p {
-      color: var(--color-silver-400);
+      color: var(--color-text-tertiary);
       margin: 0 0 1rem 0;
     }
   }
@@ -486,14 +503,14 @@ import TimelineItem from "../components/TimelineItem.astro";
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    color: var(--color-lime);
+    color: var(--color-primary);
     font-size: 0.875rem;
     
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--color-lime);
+      background: var(--color-primary);
       animation: pulse 2s infinite;
     }
   }
@@ -505,35 +522,37 @@ import TimelineItem from "../components/TimelineItem.astro";
 
   .detail-cards {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
   }
 
   .detail-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--gradient-surface);
+    border: 1px solid var(--color-border);
     border-radius: 16px;
     padding: 1.5rem;
     transition: all 0.3s ease;
     
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(21, 255, 147, 0.3);
+      background: var(--color-surface-elevated-hover);
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-md);
       transform: translateY(-2px);
     }
     
     .card-icon {
-      color: var(--color-lime);
+      color: var(--color-primary);
       margin-bottom: 1rem;
     }
     
     h4 {
       margin: 0 0 1rem 0;
-      color: var(--color-silver-100);
+      color: var(--color-text-primary);
       font-size: 1.125rem;
     }
     
     p {
-      color: var(--color-silver-300);
+      color: var(--color-text-tertiary);
       line-height: 1.6;
       margin: 0;
     }
@@ -541,7 +560,7 @@ import TimelineItem from "../components/TimelineItem.astro";
 
   .tech-stack {
     padding: 4rem 0;
-    background: rgba(255, 255, 255, 0.02);
+    background: linear-gradient(180deg, transparent 0%, var(--color-surface-subtle) 100%);
   }
 
   .experience {
@@ -552,7 +571,7 @@ import TimelineItem from "../components/TimelineItem.astro";
     font-size: 2.5rem;
     text-align: center;
     margin: 0 0 0.5rem 0;
-    background: linear-gradient(135deg, #ffffff 0%, #15ff93 100%);
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -560,7 +579,7 @@ import TimelineItem from "../components/TimelineItem.astro";
 
   .section-subtitle {
     text-align: center;
-    color: var(--color-silver-400);
+    color: var(--color-text-tertiary);
     margin: 0 0 3rem 0;
     font-size: 1.125rem;
   }
@@ -614,7 +633,7 @@ import TimelineItem from "../components/TimelineItem.astro";
 
   @media screen and (max-width: 980px) {
     .hero-section {
-      padding: 2rem 0 1rem;
+      padding: 1.5rem 0 2rem;
     }
     
     .greeting-wrapper {
@@ -623,17 +642,20 @@ import TimelineItem from "../components/TimelineItem.astro";
       gap: 0.5rem;
     }
     
-    .intro-card {
-      padding: 1.5rem;
+    .intro-content {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
     
     .intro-text {
-      font-size: 1.125rem;
+      max-width: none;
+      font-size: 1.08rem;
     }
     
     .stats-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
+      width: 100%;
       
       .stat-number {
         font-size: 1.5rem;
@@ -648,9 +670,38 @@ import TimelineItem from "../components/TimelineItem.astro";
     .profile-card {
       position: static;
     }
+
+    .detail-cards {
+      grid-template-columns: 1fr;
+    }
     
     .section-heading {
       font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .intro-card {
+      border-radius: 20px;
+      padding: 1.25rem;
+    }
+
+    .stats-grid {
+      padding: 1rem;
+      gap: 0.75rem;
+    }
+
+    .stat-item .stat-label {
+      font-size: 0.75rem;
+    }
+
+    .profile-card,
+    .detail-card {
+      padding: 1.25rem;
+    }
+
+    .profile-photo-wrapper {
+      width: min(100%, 240px);
     }
   }
 </style>
