@@ -40,7 +40,7 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function buildEmailContent({ name, email, subject, message }) {
+function buildOwnerEmailContent({ name, email, subject, message }) {
   const submittedAt = new Date().toLocaleString("en-US", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -78,7 +78,7 @@ function buildEmailContent({ name, email, subject, message }) {
               New portfolio inquiry
             </h1>
             <p style="margin:0;color:#c8f8e3;font-size:15px;line-height:1.7;">
-              Someone reached out through your contact form. Here is the message in a cleaner format.
+              Someone just reached out through your portfolio contact form.
             </p>
           </div>
 
@@ -154,6 +154,100 @@ function buildEmailContent({ name, email, subject, message }) {
   };
 }
 
+function buildConfirmationEmailContent({ name, subject, message }) {
+  const escapedName = escapeHtml(name);
+  const escapedSubject = escapeHtml(subject);
+  const escapedMessage = escapeHtml(message).replaceAll("\n", "<br />");
+
+  return {
+    text: [
+      `Hi ${name},`,
+      "",
+      "Thanks for reaching out through my portfolio.",
+      "I've received your message and I'll get back to you as soon as I can.",
+      "",
+      `Subject: ${subject}`,
+      "",
+      "Your message:",
+      message,
+      "",
+      "Best,",
+      "Kenechukwu",
+    ].join("\n"),
+    html: `
+      <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
+        Thanks for reaching out. Your message has been received.
+      </div>
+      <div style="margin:0;padding:32px 16px;background:#f3f6f8;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
+        <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #d9e2e8;border-radius:24px;overflow:hidden;box-shadow:0 18px 45px rgba(15,23,42,0.08);">
+          <div style="padding:28px 32px;background:linear-gradient(135deg,#081c15 0%,#0f3d2e 100%);">
+            <div style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(21,255,147,0.14);border:1px solid rgba(21,255,147,0.28);color:#9fffd0;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
+              Code Hermit
+            </div>
+            <h1 style="margin:18px 0 8px;color:#f8fffb;font-size:28px;line-height:1.2;font-weight:800;">
+              Thanks for reaching out
+            </h1>
+            <p style="margin:0;color:#c8f8e3;font-size:15px;line-height:1.7;">
+              Your message came through successfully. I'll review it and reply as soon as I can.
+            </p>
+          </div>
+
+          <div style="padding:28px 32px 12px;">
+            <p style="margin:0 0 18px;color:#334155;font-size:16px;line-height:1.8;">
+              Hi ${escapedName},
+            </p>
+            <p style="margin:0 0 18px;color:#334155;font-size:16px;line-height:1.8;">
+              Thanks for contacting me through my portfolio. This is a quick confirmation that I received your message and it is now in my inbox.
+            </p>
+
+            <div style="padding:20px 22px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;">
+              <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
+                Your subject
+              </div>
+              <div style="margin-bottom:18px;color:#0f172a;font-size:20px;line-height:1.5;font-weight:700;">
+                ${escapedSubject}
+              </div>
+              <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
+                Your message
+              </div>
+              <div style="color:#334155;font-size:15px;line-height:1.8;">
+                ${escapedMessage}
+              </div>
+            </div>
+
+            <p style="margin:22px 0 0;color:#334155;font-size:16px;line-height:1.8;">
+              Best,<br />
+              <span style="color:#0f172a;font-weight:700;">Kenechukwu</span>
+            </p>
+          </div>
+
+          <div style="padding:18px 32px 28px;color:#64748b;font-size:13px;line-height:1.7;text-align:center;">
+            This is an automatic confirmation from the Code Hermit portfolio contact form.
+          </div>
+        </div>
+      </div>
+    `,
+  };
+}
+
+async function sendResendEmail(apiKey, payload) {
+  const resendResponse = await fetch(RESEND_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!resendResponse.ok) {
+    const resendError = await resendResponse.text();
+    throw new Error(resendError || "Unknown Resend error");
+  }
+
+  return resendResponse;
+}
+
 function errorResponse(request, wantsJson, status, message) {
   if (wantsJson) {
     return json({ ok: false, error: message }, { status });
@@ -201,29 +295,30 @@ export default async (request) => {
     return errorResponse(request, wantsJson, 500, "Email service is not configured");
   }
 
-  const emailContent = buildEmailContent({ name, email, subject, message });
+  const ownerEmailContent = buildOwnerEmailContent({ name, email, subject, message });
+  const confirmationEmailContent = buildConfirmationEmailContent({ name, subject, message });
 
   try {
-    const resendResponse = await fetch(RESEND_API_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: [toEmail],
-        subject: `Portfolio contact: ${subject}`,
-        reply_to: email,
-        text: emailContent.text,
-        html: emailContent.html,
-      }),
+    await sendResendEmail(apiKey, {
+      from: fromEmail,
+      to: [toEmail],
+      subject: `Portfolio contact: ${subject}`,
+      reply_to: email,
+      text: ownerEmailContent.text,
+      html: ownerEmailContent.html,
     });
 
-    if (!resendResponse.ok) {
-      const resendError = await resendResponse.text();
-      console.error("Resend request failed:", resendError);
-      return errorResponse(request, wantsJson, 502, "Unable to send email right now");
+    try {
+      await sendResendEmail(apiKey, {
+        from: fromEmail,
+        to: [email],
+        subject: "I received your message",
+        reply_to: toEmail,
+        text: confirmationEmailContent.text,
+        html: confirmationEmailContent.html,
+      });
+    } catch (confirmationError) {
+      console.error("Confirmation email failed:", confirmationError);
     }
 
     if (wantsJson) {
