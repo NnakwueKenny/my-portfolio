@@ -2,6 +2,9 @@
   "name": "kenennakwue",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.0.0 <25"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

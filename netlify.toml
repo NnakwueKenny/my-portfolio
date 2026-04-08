@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "18.20.8"
+  NODE_VERSION = "22"
 
 # Custom headers for security and performance
 [[headers]]
