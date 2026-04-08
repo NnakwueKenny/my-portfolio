@@ -515,6 +515,11 @@ button {
   background: var(--color-primary);
   color: var(--color-background);
   border: 2px solid var(--color-primary);
+
+  .button-spinner {
+    display: none;
+    animation: spin 1s linear infinite;
+  }
   
   &:hover:not(:disabled) {
     background: var(--color-primary-hover);
@@ -524,6 +529,14 @@ button {
   &.loading {
     opacity: 0.8;
     cursor: not-allowed;
+
+    .button-spinner {
+      display: block;
+    }
+
+    .button-text {
+      opacity: 0.75;
+    }
   }
 }
 
