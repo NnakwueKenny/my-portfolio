@@ -3,11 +3,6 @@ import Alert from '../components/Alert.astro';
 import Button from '../components/Button.astro';
 import DefaultLayout from '../components/DefaultLayout.astro';
 
-const contactProvider = import.meta.env.PUBLIC_CONTACT_PROVIDER === 'resend' ? 'resend' : 'netlify';
-const isNetlifyProvider = contactProvider === 'netlify';
-const formAction = isNetlifyProvider ? '/contact/success/' : '/api/contact';
-const formSubmitEndpoint = isNetlifyProvider ? '/' : '/api/contact';
-
 const socialIconSize = '1.75rem';
 ---
 
@@ -109,15 +104,9 @@ const socialIconSize = '1.75rem';
             <form
               id='contact-form'
               class='contact-form'
-              data-provider={contactProvider}
-              data-submit-endpoint={formSubmitEndpoint}
               method='POST'
-              action={formAction}
-              name={isNetlifyProvider ? 'contact' : undefined}
-              data-netlify={isNetlifyProvider ? 'true' : undefined}
-              netlify-honeypot={isNetlifyProvider ? 'bot-field' : undefined}
+              action='/api/contact'
             >
-              {isNetlifyProvider && <input type='hidden' name='form-name' value='contact' />}
               <p class='sr-only'>
                 <label>
                   Do not fill this field if you're human
@@ -442,8 +431,7 @@ const socialIconSize = '1.75rem';
   const buttonText = submitButton?.querySelector('.button-text') as HTMLElement;
   const successMessage = document.querySelector('.success-message') as HTMLElement;
   const errorMessage = document.querySelector('.error-message') as HTMLElement;
-  const provider = form?.dataset.provider ?? 'netlify';
-  const submitEndpoint = form?.dataset.submitEndpoint ?? form?.action ?? '/';
+  const submitEndpoint = form?.action ?? '/api/contact';
 
   function clearMessages() {
     successMessage?.classList.remove('show');
@@ -473,33 +461,14 @@ const socialIconSize = '1.75rem';
     }
   }
 
-  function encodeFormData(formData: FormData) {
-    const params = new URLSearchParams();
-
-    for (const [key, value] of formData.entries()) {
-      params.append(key, value.toString());
-    }
-
-    return params.toString();
-  }
-
   async function submitForm(formData: FormData) {
-    const response = provider === 'netlify'
-      ? await fetch(submitEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
-          },
-          body: encodeFormData(formData)
-        })
-      : await fetch(submitEndpoint, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'
-          },
-          body: formData
-        });
+    const response = await fetch(submitEndpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json'
+      },
+      body: formData
+    });
 
     if (!response.ok) {
       throw new Error('Form submission failed');

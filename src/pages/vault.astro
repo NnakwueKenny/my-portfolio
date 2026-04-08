@@ -1,0 +1,948 @@
+---
+import DefaultLayout from '../components/DefaultLayout.astro';
+---
+
+<DefaultLayout
+  documentTitle='Code Hermit | Vault'
+  documentDescription='Private message workspace.'
+  robots='noindex, nofollow, noarchive, nosnippet'
+>
+  <section class='vault-page animated-background'>
+    <div class='container vault-container'>
+      <div class='vault-shell'>
+        <aside class='vault-sidebar'>
+          <p class='vault-eyebrow'>Private workspace</p>
+          <h1>Inbox Vault</h1>
+          <p class='vault-copy'>
+            This private area keeps your contact submissions in one place so you can read, track, and reply with a consistent email design.
+          </p>
+
+          <div class='vault-note'>
+            <h2>Security</h2>
+            <p>This route is unlinked, marked as noindex, and every inbox action is protected by a signed server-side session.</p>
+          </div>
+
+          <div class='vault-note compact'>
+            <h2>Reply Flow</h2>
+            <p>Replies sent from here go out through your Gmail SMTP setup, so recipients see your Gmail sender address.</p>
+          </div>
+        </aside>
+
+        <div class='vault-main'>
+          <div class='vault-card vault-login-card' id='vault-login-card'>
+            <div class='card-header'>
+              <div>
+                <p class='section-label'>Admin Login</p>
+                <h2>Unlock your inbox</h2>
+              </div>
+              <span class='status-pill'>Secure</span>
+            </div>
+
+            <form id='vault-login-form' class='vault-form'>
+              <label class='vault-label' for='vault-username'>Username</label>
+              <input id='vault-username' name='username' type='text' autocomplete='username' required />
+
+              <label class='vault-label' for='vault-password'>Password</label>
+              <input id='vault-password' name='password' type='password' autocomplete='current-password' required />
+
+              <div id='vault-login-feedback' class='vault-feedback'></div>
+
+              <button class='vault-button primary' type='submit'>Enter Vault</button>
+            </form>
+          </div>
+
+          <div class='vault-card vault-inbox-card hidden' id='vault-inbox-card'>
+            <div class='card-header inbox-header'>
+              <div>
+                <p class='section-label'>Private Inbox</p>
+                <h2>Contact messages</h2>
+              </div>
+
+              <div class='header-actions'>
+                <button class='vault-button secondary' id='vault-refresh-button' type='button'>Refresh</button>
+                <button class='vault-button ghost' id='vault-logout-button' type='button'>Log Out</button>
+              </div>
+            </div>
+
+            <div id='vault-inbox-feedback' class='vault-feedback'></div>
+
+            <div class='vault-inbox-grid'>
+              <div class='message-list-panel'>
+                <div class='panel-title-row'>
+                  <p class='section-label'>Messages</p>
+                  <span class='message-count' id='vault-message-count'>0</span>
+                </div>
+                <div class='message-list' id='vault-message-list'></div>
+              </div>
+
+              <div class='message-detail-panel'>
+                <div id='vault-empty-state' class='empty-state'>
+                  <h3>No message selected</h3>
+                  <p>Choose a submission from the left to view the message and send a reply.</p>
+                </div>
+
+                <div id='vault-message-detail' class='message-detail hidden'>
+                  <div class='detail-meta'>
+                    <div>
+                      <p class='section-label'>Selected message</p>
+                      <h3 id='vault-detail-subject'>Subject</h3>
+                    </div>
+                    <span class='detail-status' id='vault-detail-status'>New</span>
+                  </div>
+
+                  <div class='detail-grid'>
+                    <div class='detail-card'>
+                      <p class='detail-label'>From</p>
+                      <p class='detail-value' id='vault-detail-name'></p>
+                    </div>
+                    <div class='detail-card'>
+                      <p class='detail-label'>Email</p>
+                      <a class='detail-link' id='vault-detail-email' href='#'></a>
+                    </div>
+                    <div class='detail-card'>
+                      <p class='detail-label'>Received</p>
+                      <p class='detail-value' id='vault-detail-date'></p>
+                    </div>
+                    <div class='detail-card'>
+                      <p class='detail-label'>Last reply</p>
+                      <p class='detail-value' id='vault-detail-last-reply'>No replies yet</p>
+                    </div>
+                  </div>
+
+                  <div class='message-body-card'>
+                    <p class='detail-label'>Message</p>
+                    <div class='message-body' id='vault-detail-message'></div>
+                  </div>
+
+                  <div class='reply-history-card'>
+                    <div class='reply-history-header'>
+                      <p class='detail-label'>Reply history</p>
+                    </div>
+                    <div class='reply-history-list' id='vault-reply-history'></div>
+                  </div>
+
+                  <form id='vault-reply-form' class='vault-reply-form'>
+                    <p class='section-label'>Send Reply</p>
+                    <label class='vault-label' for='vault-reply-subject'>Reply subject</label>
+                    <input id='vault-reply-subject' name='subject' type='text' required />
+
+                    <label class='vault-label' for='vault-reply-body'>Reply message</label>
+                    <textarea id='vault-reply-body' name='body' rows='8' required placeholder='Write your response here...'></textarea>
+
+                    <div id='vault-reply-feedback' class='vault-feedback'></div>
+
+                    <button class='vault-button primary' id='vault-reply-button' type='submit'>Send Reply</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <noscript>
+    <div class='container'>
+      <p class='noscript-warning'>This private inbox requires JavaScript to handle login, message loading, and replies.</p>
+    </div>
+  </noscript>
+</DefaultLayout>
+
+<style lang='scss'>
+  .vault-page {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    min-height: calc(100vh - 8rem);
+    padding: 3rem 0 4rem;
+    background: var(--gradient-background);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-radial-primary), var(--gradient-radial-secondary);
+      pointer-events: none;
+    }
+  }
+
+  .vault-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vault-shell {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .vault-sidebar,
+  .vault-card {
+    background: linear-gradient(180deg, rgba(6, 12, 28, 0.96), rgba(10, 18, 38, 0.92));
+    border: 1px solid rgba(114, 134, 168, 0.22);
+    border-radius: 28px;
+    box-shadow: 0 24px 60px rgba(2, 6, 23, 0.34);
+    backdrop-filter: blur(14px);
+  }
+
+  .vault-sidebar {
+    padding: 1.75rem;
+
+    h1 {
+      margin: 0 0 0.75rem;
+      color: var(--color-text-primary);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+    }
+  }
+
+  .vault-eyebrow,
+  .section-label {
+    margin: 0 0 0.5rem;
+    color: var(--color-primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .vault-copy {
+    margin: 0 0 1.5rem;
+    color: var(--color-text-tertiary);
+    line-height: 1.8;
+  }
+
+  .vault-note {
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.66);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0 0 0.35rem;
+      color: var(--color-text-primary);
+      font-size: 1rem;
+    }
+
+    p {
+      margin: 0;
+      color: var(--color-text-tertiary);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+  }
+
+  .vault-note.compact {
+    margin-bottom: 0;
+  }
+
+  .vault-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .vault-card {
+    padding: 1.5rem;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      color: var(--color-text-primary);
+      font-size: 1.8rem;
+    }
+  }
+
+  .status-pill,
+  .detail-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(21, 255, 147, 0.14);
+    color: var(--color-primary);
+    border: 1px solid rgba(21, 255, 147, 0.28);
+  }
+
+  .vault-form,
+  .vault-reply-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .vault-label {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .vault-form input,
+  .vault-reply-form input,
+  .vault-reply-form textarea {
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background: rgba(15, 23, 42, 0.66);
+    color: var(--color-text-primary);
+    padding: 0.95rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+    &:focus {
+      outline: none;
+      border-color: rgba(21, 255, 147, 0.5);
+      box-shadow: 0 0 0 4px rgba(21, 255, 147, 0.08);
+      transform: translateY(-1px);
+    }
+  }
+
+  .vault-reply-form textarea {
+    min-height: 200px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.7;
+  }
+
+  .vault-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 14px;
+    padding: 0.85rem 1.15rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease, color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &.primary {
+      background: linear-gradient(135deg, #18e58d, #0ecf77);
+      color: #051017;
+    }
+
+    &.secondary {
+      background: rgba(21, 255, 147, 0.12);
+      color: var(--color-primary);
+      border: 1px solid rgba(21, 255, 147, 0.25);
+    }
+
+    &.ghost {
+      background: rgba(148, 163, 184, 0.12);
+      color: var(--color-text-secondary);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+  }
+
+  .vault-feedback:empty {
+    display: none;
+  }
+
+  .vault-feedback {
+    margin-top: 0.2rem;
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(15, 23, 42, 0.66);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .vault-feedback.success {
+    background: rgba(21, 255, 147, 0.1);
+    border-color: rgba(21, 255, 147, 0.2);
+    color: #bfffe0;
+  }
+
+  .vault-feedback.error {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #fecaca;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .inbox-header {
+    margin-bottom: 1rem;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .vault-inbox-grid {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .message-list-panel,
+  .message-detail-panel {
+    min-height: 640px;
+    padding: 1rem;
+    border-radius: 22px;
+    background: rgba(10, 18, 38, 0.62);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+  }
+
+  .panel-title-row,
+  .detail-meta,
+  .reply-history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .message-count {
+    min-width: 2rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(21, 255, 147, 0.12);
+    color: var(--color-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  .message-list-item {
+    width: 100%;
+    text-align: left;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(15, 23, 42, 0.74);
+    color: inherit;
+    border-radius: 18px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: rgba(21, 255, 147, 0.22);
+    }
+
+    &.active {
+      background: rgba(21, 255, 147, 0.1);
+      border-color: rgba(21, 255, 147, 0.25);
+    }
+  }
+
+  .message-list-item h4 {
+    margin: 0 0 0.3rem;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+  }
+
+  .message-list-item p {
+    margin: 0;
+    color: var(--color-text-tertiary);
+    line-height: 1.6;
+  }
+
+  .message-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .message-item-badge {
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(21, 255, 147, 0.12);
+    color: var(--color-primary);
+  }
+
+  .message-item-badge.replied,
+  .detail-status.replied {
+    background: rgba(59, 130, 246, 0.14);
+    color: #93c5fd;
+    border-color: rgba(59, 130, 246, 0.22);
+  }
+
+  .message-detail h3 {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin: 1rem 0 1.25rem;
+  }
+
+  .detail-card,
+  .message-body-card,
+  .reply-history-card {
+    border-radius: 20px;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(15, 23, 42, 0.58);
+  }
+
+  .detail-label {
+    margin: 0 0 0.35rem;
+    color: var(--color-text-secondary);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .detail-value,
+  .detail-link {
+    margin: 0;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    text-decoration: none;
+  }
+
+  .detail-link {
+    color: var(--color-primary);
+  }
+
+  .message-body {
+    color: var(--color-text-primary);
+    line-height: 1.8;
+    white-space: pre-wrap;
+  }
+
+  .reply-history-card {
+    margin: 1rem 0 1.25rem;
+  }
+
+  .reply-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .reply-entry {
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    background: rgba(2, 8, 23, 0.42);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  .reply-entry h4 {
+    margin: 0 0 0.3rem;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+  }
+
+  .reply-entry p {
+    margin: 0;
+    color: var(--color-text-tertiary);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .reply-entry time {
+    display: inline-block;
+    margin-top: 0.55rem;
+    color: var(--color-text-quaternary);
+    font-size: 0.85rem;
+  }
+
+  .empty-state {
+    display: grid;
+    place-items: center;
+    min-height: 100%;
+    text-align: center;
+    color: var(--color-text-tertiary);
+
+    h3 {
+      margin-bottom: 0.45rem;
+      color: var(--color-text-primary);
+    }
+  }
+
+  .noscript-warning {
+    padding: 1rem 1.2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    background: rgba(239, 68, 68, 0.12);
+    color: #fecaca;
+  }
+
+  @media screen and (max-width: 1080px) {
+    .vault-shell,
+    .vault-inbox-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .message-list-panel,
+    .message-detail-panel {
+      min-height: auto;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    .vault-page {
+      padding: 2rem 0 3rem;
+    }
+
+    .vault-sidebar,
+    .vault-card {
+      padding: 1.15rem;
+      border-radius: 22px;
+    }
+
+    .detail-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card-header,
+    .detail-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .header-actions {
+      width: 100%;
+    }
+
+    .header-actions .vault-button {
+      flex: 1 1 0;
+    }
+  }
+</style>
+
+<script>
+  const loginCard = document.getElementById('vault-login-card') as HTMLElement;
+  const inboxCard = document.getElementById('vault-inbox-card') as HTMLElement;
+  const loginForm = document.getElementById('vault-login-form') as HTMLFormElement;
+  const replyForm = document.getElementById('vault-reply-form') as HTMLFormElement;
+  const loginFeedback = document.getElementById('vault-login-feedback') as HTMLElement;
+  const inboxFeedback = document.getElementById('vault-inbox-feedback') as HTMLElement;
+  const replyFeedback = document.getElementById('vault-reply-feedback') as HTMLElement;
+  const messageList = document.getElementById('vault-message-list') as HTMLElement;
+  const messageCount = document.getElementById('vault-message-count') as HTMLElement;
+  const emptyState = document.getElementById('vault-empty-state') as HTMLElement;
+  const detail = document.getElementById('vault-message-detail') as HTMLElement;
+  const detailSubject = document.getElementById('vault-detail-subject') as HTMLElement;
+  const detailStatus = document.getElementById('vault-detail-status') as HTMLElement;
+  const detailName = document.getElementById('vault-detail-name') as HTMLElement;
+  const detailEmail = document.getElementById('vault-detail-email') as HTMLAnchorElement;
+  const detailDate = document.getElementById('vault-detail-date') as HTMLElement;
+  const detailLastReply = document.getElementById('vault-detail-last-reply') as HTMLElement;
+  const detailMessage = document.getElementById('vault-detail-message') as HTMLElement;
+  const replyHistory = document.getElementById('vault-reply-history') as HTMLElement;
+  const replySubject = document.getElementById('vault-reply-subject') as HTMLInputElement;
+  const replyBody = document.getElementById('vault-reply-body') as HTMLTextAreaElement;
+  const replyButton = document.getElementById('vault-reply-button') as HTMLButtonElement;
+  const logoutButton = document.getElementById('vault-logout-button') as HTMLButtonElement;
+  const refreshButton = document.getElementById('vault-refresh-button') as HTMLButtonElement;
+
+  const state = {
+    authenticated: false,
+    messages: [] as Array<any>,
+    selectedMessageId: null as number | null
+  };
+
+  function setFeedback(target: HTMLElement, message = '', type: 'success' | 'error' | '' = '') {
+    target.textContent = message;
+    target.className = 'vault-feedback';
+
+    if (type) {
+      target.classList.add(type);
+    }
+  }
+
+  function showLogin() {
+    loginCard.classList.remove('hidden');
+    inboxCard.classList.add('hidden');
+  }
+
+  function showInbox() {
+    loginCard.classList.add('hidden');
+    inboxCard.classList.remove('hidden');
+  }
+
+  async function api(path: string, options: RequestInit = {}) {
+    const response = await fetch(path, {
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+        ...(options.headers ?? {})
+      },
+      ...options
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Something went wrong');
+    }
+
+    return data;
+  }
+
+  function formatDate(value?: string | null) {
+    if (!value) return 'Not available';
+    return new Date(value).toLocaleString();
+  }
+
+  function selectMessage(messageId: number) {
+    state.selectedMessageId = messageId;
+    renderMessageList();
+    renderSelectedMessage();
+  }
+
+  function renderMessageList() {
+    messageCount.textContent = String(state.messages.length);
+
+    if (!state.messages.length) {
+      messageList.innerHTML = `<div class="empty-state"><div><h3>No messages yet</h3><p>Your new contact submissions will appear here.</p></div></div>`;
+      return;
+    }
+
+    messageList.innerHTML = state.messages.map((message) => {
+      const active = message.id === state.selectedMessageId ? 'active' : '';
+      const badgeClass = message.status === 'replied' ? 'replied' : '';
+      const preview = String(message.message).length > 90
+        ? `${String(message.message).slice(0, 90)}...`
+        : String(message.message);
+
+      return `
+        <button class="message-list-item ${active}" data-message-id="${message.id}" type="button">
+          <div class="message-item-top">
+            <h4>${message.name}</h4>
+            <span class="message-item-badge ${badgeClass}">${message.status}</span>
+          </div>
+          <p>${message.subject}</p>
+          <p>${preview}</p>
+        </button>
+      `;
+    }).join('');
+
+    messageList.querySelectorAll<HTMLButtonElement>('.message-list-item').forEach((button) => {
+      button.addEventListener('click', () => {
+        const messageId = Number(button.dataset.messageId);
+        selectMessage(messageId);
+      });
+    });
+  }
+
+  function renderReplyHistory(replies: Array<any>) {
+    if (!replies.length) {
+      replyHistory.innerHTML = `<div class="empty-state"><div><h3>No replies yet</h3><p>Your sent replies will appear here once you respond.</p></div></div>`;
+      return;
+    }
+
+    replyHistory.innerHTML = replies.map((reply) => `
+      <article class="reply-entry">
+        <h4>${reply.subject}</h4>
+        <p>${reply.body}</p>
+        <time datetime="${reply.created_at}">${formatDate(reply.created_at)}</time>
+      </article>
+    `).join('');
+  }
+
+  function renderSelectedMessage() {
+    const selected = state.messages.find((message) => message.id === state.selectedMessageId);
+
+    if (!selected) {
+      emptyState.classList.remove('hidden');
+      detail.classList.add('hidden');
+      return;
+    }
+
+    emptyState.classList.add('hidden');
+    detail.classList.remove('hidden');
+
+    detailSubject.textContent = selected.subject;
+    detailStatus.textContent = selected.status;
+    detailStatus.className = `detail-status ${selected.status === 'replied' ? 'replied' : ''}`;
+    detailName.textContent = selected.name;
+    detailEmail.textContent = selected.email;
+    detailEmail.href = `mailto:${selected.email}`;
+    detailDate.textContent = formatDate(selected.created_at);
+    detailLastReply.textContent = selected.last_replied_at ? formatDate(selected.last_replied_at) : 'No replies yet';
+    detailMessage.textContent = selected.message;
+
+    replySubject.value = `Re: ${selected.subject}`;
+    renderReplyHistory(selected.replies ?? []);
+  }
+
+  async function loadMessages() {
+    const data = await api('/api/admin/messages', { method: 'GET' });
+    state.messages = data.messages ?? [];
+
+    if (!state.messages.length) {
+      state.selectedMessageId = null;
+    } else if (!state.selectedMessageId || !state.messages.some((message) => message.id === state.selectedMessageId)) {
+      state.selectedMessageId = state.messages[0].id;
+    }
+
+    renderMessageList();
+    renderSelectedMessage();
+  }
+
+  async function checkSession() {
+    try {
+      const data = await api('/api/admin/session', { method: 'GET' });
+      state.authenticated = Boolean(data.authenticated);
+
+      if (state.authenticated) {
+        showInbox();
+        await loadMessages();
+      } else {
+        showLogin();
+      }
+    } catch (error) {
+      console.error(error);
+      showLogin();
+      setFeedback(loginFeedback, 'Unable to reach the admin session endpoint right now.', 'error');
+    }
+  }
+
+  loginForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    setFeedback(loginFeedback);
+
+    const formData = new FormData(loginForm);
+    const username = String(formData.get('username') || '').trim();
+    const password = String(formData.get('password') || '');
+
+    if (!username || !password) {
+      setFeedback(loginFeedback, 'Both username and password are required.', 'error');
+      return;
+    }
+
+    try {
+      await api('/api/admin/login', {
+        method: 'POST',
+        body: JSON.stringify({ username, password })
+      });
+
+      loginForm.reset();
+      state.authenticated = true;
+      setFeedback(loginFeedback);
+      showInbox();
+      await loadMessages();
+      setFeedback(inboxFeedback, 'Inbox unlocked successfully.', 'success');
+    } catch (error) {
+      setFeedback(loginFeedback, error instanceof Error ? error.message : 'Unable to log in right now.', 'error');
+    }
+  });
+
+  logoutButton?.addEventListener('click', async () => {
+    try {
+      await api('/api/admin/logout', {
+        method: 'POST',
+        body: JSON.stringify({})
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      state.authenticated = false;
+      state.messages = [];
+      state.selectedMessageId = null;
+      renderMessageList();
+      renderSelectedMessage();
+      showLogin();
+      setFeedback(inboxFeedback);
+      setFeedback(replyFeedback);
+    }
+  });
+
+  refreshButton?.addEventListener('click', async () => {
+    setFeedback(inboxFeedback);
+
+    try {
+      await loadMessages();
+      setFeedback(inboxFeedback, 'Inbox refreshed.', 'success');
+    } catch (error) {
+      setFeedback(inboxFeedback, error instanceof Error ? error.message : 'Unable to refresh messages right now.', 'error');
+    }
+  });
+
+  replyForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    setFeedback(replyFeedback);
+
+    if (!state.selectedMessageId) {
+      setFeedback(replyFeedback, 'Choose a message before sending a reply.', 'error');
+      return;
+    }
+
+    const subject = replySubject.value.trim();
+    const body = replyBody.value.trim();
+
+    if (!subject || !body) {
+      setFeedback(replyFeedback, 'Reply subject and message are required.', 'error');
+      return;
+    }
+
+    replyButton.setAttribute('disabled', 'true');
+    replyButton.textContent = 'Sending...';
+
+    try {
+      await api('/api/admin/reply', {
+        method: 'POST',
+        body: JSON.stringify({
+          messageId: state.selectedMessageId,
+          subject,
+          body
+        })
+      });
+
+      replyBody.value = '';
+      await loadMessages();
+      setFeedback(replyFeedback, 'Reply sent successfully.', 'success');
+    } catch (error) {
+      setFeedback(replyFeedback, error instanceof Error ? error.message : 'Unable to send the reply right now.', 'error');
+    } finally {
+      replyButton.removeAttribute('disabled');
+      replyButton.textContent = 'Send Reply';
+    }
+  });
+
+  checkSession();
+</script>
