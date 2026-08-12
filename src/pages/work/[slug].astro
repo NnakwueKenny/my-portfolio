@@ -12,7 +12,7 @@ const { project } = Astro.props;
 const nextProject = projects[(projects.findIndex((item) => item.slug === project.slug) + 1) % projects.length];
 ---
 
-<BaseLayout title={`${project.title} — CodeHermit`} description={project.description} image={project.image}>
+<BaseLayout title={`${project.title} — Kene · CodeHermit`} description={project.description} image={project.image}>
   <article class="case-study">
     <header class="case-study__hero shell">
       <div class="case-study__heading">

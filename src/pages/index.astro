@@ -7,7 +7,7 @@ import { profile, projects } from '../data/site';
 const featuredProjects = projects.filter((project) => project.featured);
 ---
 
-<BaseLayout title={`${profile.fullName} — ${profile.title}`}>
+<BaseLayout title={`${profile.familiarName} · ${profile.brandName} — ${profile.title}`}>
   <section class="home-hero shell">
     <div class="home-hero__copy">
       <h1 transition:name="home-headline">Hi, I’m Kene.</h1>

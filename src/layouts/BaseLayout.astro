@@ -13,7 +13,7 @@ interface Props {
 }
 
 const {
-  title = `${profile.brandName} — ${profile.title}`,
+  title = `${profile.familiarName} · ${profile.brandName} — ${profile.title}`,
   description = profile.summary,
   image = '/images/kenechukwu-nnakwue-2026.jpg',
 } = Astro.props;
@@ -46,7 +46,8 @@ const personSchema = {
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/site-icon.ico" sizes="any" />
+    <link rel="icon" href="/kene-codehermit-favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/kene-codehermit-favicon.png" />
     <link rel="preload" href="/fonts/fraunces-variable.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
     <link rel="preload" href="/fonts/instrument-sans-400.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
     <link rel="preload" href="/fonts/caveat-variable.ttf" as="font" type="font/ttf" crossorigin="anonymous" />

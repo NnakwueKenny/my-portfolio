@@ -58,6 +58,7 @@ The source and implementation were normalized to the same 1487 × 1058 viewport 
 - Mobile menu: open state set `aria-expanded=true`, opened navigation, and locked body scroll; close state reversed all three.
 - Homepage CTA: `See my work` settled at `#selected-work` with the section at the top of the viewport.
 - Project images, titles, case-study links, primary navigation, resume link, and contact links resolve to real routes/assets.
+- Browser identity: the current portrait cutout loads from `/kene-codehermit-favicon.png`; the homepage title is `Kene · CodeHermit — Senior Software Engineer`, and internal page titles retain the same `Kene · CodeHermit` suffix.
 - Contact form contract: POST to `/api/contact`, four required fields, email input type, honeypot, submit button state, and ARIA live status region are present.
 - Live Netlify endpoint verification: a clearly labelled verification message returned HTTP 200 with `{"ok":true}`, confirming the deployed database submission path accepts and stores messages. The new frontend uses the same endpoint contract.
 - Production build: 14 routes generated successfully, including `/work/credway`.
