@@ -2,7 +2,7 @@
 
 ## Visual target
 
-- Source of visual truth: `/Users/mac/.codex/generated_images/019ff592-e009-76f3-a8cc-14897c5055a9/exec-09e70daf-47bb-446f-a5d1-8124cdb9ac4d.png`
+- Source of visual truth: approved portfolio direction image
 - Source pixels: 1487 × 1058
 - Source CSS comparison size: 1487 × 1058
 - Source density: 1×
