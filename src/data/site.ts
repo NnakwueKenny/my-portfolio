@@ -47,6 +47,18 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: 'credway',
+    title: 'Credway',
+    year: '2026',
+    description: 'Media-first marketing website for a Nigerian moving and storage company.',
+    image: '/images/credway-website.jpg',
+    url: 'https://credway.com.ng',
+    role: 'Product design and frontend engineering',
+    contribution:
+      'Designed and built a responsive, static-first website that establishes Credway’s service hierarchy, local positioning, customer commitments, and direct enquiry paths, with a reusable design system and Netlify delivery.',
+    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Netlify'],
+  },
+  {
     slug: 'skybod-carepass',
     title: 'Skybod CarePass',
     year: '2026',

@@ -124,8 +124,8 @@ const featuredProjects = projects.filter((project) => project.featured);
     margin-bottom: 31px;
     font-size: clamp(4.1rem, 6vw, 6.05rem);
     opacity: 0;
-    transform: translateY(14px);
-    animation: hero-in 680ms var(--ease-out) 80ms forwards;
+    transform: translateY(34px);
+    animation: hero-in 820ms var(--ease-out) 80ms forwards;
   }
 
   .home-hero__title,
@@ -138,6 +138,18 @@ const featuredProjects = projects.filter((project) => project.featured);
   }
 
   .home-hero__summary { margin-bottom: 38px; }
+
+  .home-hero__title,
+  .home-hero__summary,
+  .home-hero__actions {
+    opacity: 0;
+    transform: translateY(26px);
+    animation: hero-in 760ms var(--ease-out) forwards;
+  }
+
+  .home-hero__title { animation-delay: 190ms; }
+  .home-hero__summary { animation-delay: 280ms; }
+  .home-hero__actions { animation-delay: 390ms; }
 
   .home-hero__actions {
     display: flex;
@@ -192,7 +204,10 @@ const featuredProjects = projects.filter((project) => project.featured);
   .home-hero__visual {
     position: relative;
     min-height: 490px;
+    opacity: 0;
     perspective: 1200px;
+    transform: translateY(38px) scale(0.98);
+    animation: hero-visual-in 900ms var(--ease-out) 260ms forwards;
   }
 
   .home-hero__dots {
@@ -294,8 +309,12 @@ const featuredProjects = projects.filter((project) => project.featured);
     margin-top: 8px;
     background: var(--accent);
     content: '';
-    transform: rotate(-1deg);
+    transform: scaleX(0) rotate(-1deg);
+    transform-origin: left center;
+    transition: transform 720ms var(--ease-out) 180ms;
   }
+
+  .selected-work__heading.is-visible h2::after { transform: scaleX(1) rotate(-1deg); }
 
   .selected-work__heading a {
     display: inline-flex;
@@ -326,6 +345,13 @@ const featuredProjects = projects.filter((project) => project.featured);
   .home-profile p { margin-bottom: 0; color: var(--muted); }
 
   @keyframes hero-in { to { opacity: 1; transform: translateY(0); } }
+
+  @keyframes hero-visual-in {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
 
   @media (max-width: 1080px) {
     .home-hero { grid-template-columns: minmax(0, 1fr) minmax(310px, 0.62fr); gap: 38px; }
