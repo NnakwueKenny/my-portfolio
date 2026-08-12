@@ -1,0 +1,74 @@
+---
+import DefaultLayout from '../../components/DefaultLayout.astro';
+import Button from '../../components/Button.astro';
+---
+
+<DefaultLayout
+  documentTitle="Code Hermit | Message Sent"
+  documentDescription="Your contact message has been sent successfully."
+>
+  <section class="contact-success animated-background">
+    <div class="container">
+      <div class="success-card">
+        <p class="eyebrow">Message received</p>
+        <h1>Thanks for reaching out.</h1>
+        <p>
+          Your message has been submitted successfully. I'll review it and reply by email as soon as I can.
+        </p>
+        <Button href="/contact" variant="solid" colorScheme="green">Back to Contact</Button>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  .contact-success {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 3rem 0;
+    background: var(--gradient-background);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-radial-primary), var(--gradient-radial-secondary);
+      pointer-events: none;
+    }
+  }
+
+  .success-card {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background: var(--gradient-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--color-text-tertiary);
+      line-height: 1.7;
+    }
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+</style>

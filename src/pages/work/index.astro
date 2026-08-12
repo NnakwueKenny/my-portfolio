@@ -1,0 +1,24 @@
+---
+import ProjectRow from '../../components/molecules/ProjectRow.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/site';
+---
+
+<BaseLayout
+  title="Selected work — CodeHermit"
+  description="Selected products and engineering work by Kenechukwu Nnakwue, Senior Software Engineer."
+>
+  <section class="page-hero shell">
+    <div class="page-hero__grid">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h1>Products I’ve helped shape and ship.</h1>
+      </div>
+      <p class="page-hero__copy">A selection of production work across architecture, frontend and backend engineering, integrations, cloud delivery, and technical leadership.</p>
+    </div>
+  </section>
+
+  <section class="work-list shell" aria-label="Projects">
+    {projects.map((project, index) => <ProjectRow project={project} index={index} />)}
+  </section>
+</BaseLayout>

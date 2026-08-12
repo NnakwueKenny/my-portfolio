@@ -1,0 +1,276 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { profile } from '../../data/site';
+---
+
+<BaseLayout
+  title="Contact — CodeHermit"
+  description="Start a conversation with Kenechukwu Nnakwue about software engineering, architecture, technical leadership, or product development."
+>
+  <section class="contact-hero shell">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h1>Tell me what you’re working on.</h1>
+    </div>
+    <p>Share the product, engineering problem, or leadership support you need. I typically respond within 24 hours.</p>
+  </section>
+
+  <section class="contact-body shell">
+    <aside>
+      <p class="eyebrow">Elsewhere</p>
+      <div class="contact-links">
+        <a href={`mailto:${profile.email}`}><span>Email</span><strong>{profile.email}</strong></a>
+        <a href={profile.github} target="_blank" rel="noreferrer"><span>GitHub</span><strong>Code and open-source work</strong></a>
+        <a href={profile.linkedin} target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>Professional background</strong></a>
+        <a href={profile.twitter} target="_blank" rel="noreferrer"><span>X</span><strong>Ideas and updates</strong></a>
+      </div>
+      <p class="contact-note">Based in Nigeria. Available for thoughtful remote collaborations across time zones.</p>
+    </aside>
+
+    <form class="contact-form" method="POST" action="/api/contact" data-contact-form>
+      <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+      <p class="visually-hidden">
+        <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
+      <div class="form-grid">
+        <label>
+          <span>Name</span>
+          <input name="name" type="text" required autocomplete="name" placeholder="Your name" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+        </label>
+      </div>
+      <label>
+        <span>Subject</span>
+        <input name="subject" type="text" required placeholder="What would you like to discuss?" />
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="7" required placeholder="A little context goes a long way."></textarea>
+      </label>
+      <button type="submit" data-submit-button>Send message</button>
+    </form>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+    const status = document.querySelector<HTMLElement>('[data-form-status]');
+    const button = document.querySelector<HTMLButtonElement>('[data-submit-button]');
+    if (!form || !status || !button) return;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      status.textContent = '';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error ?? 'Unable to send your message right now.');
+
+        form.reset();
+        status.textContent = 'Thanks—your message has been sent. I’ll be in touch soon.';
+        status.dataset.state = 'success';
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : 'Unable to send your message right now.';
+        status.dataset.state = 'error';
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Send message';
+      }
+    });
+  });
+</script>
+
+<style>
+  .contact-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.55fr);
+    gap: 8vw;
+    align-items: end;
+    padding-block: clamp(80px, 12vw, 160px);
+  }
+
+  .contact-hero h1 {
+    max-width: 920px;
+    margin-bottom: 0;
+  }
+
+  .contact-hero > p {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  }
+
+  .contact-body {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
+    gap: 9vw;
+    padding-block: clamp(60px, 8vw, 100px);
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .contact-links {
+    display: grid;
+    margin-bottom: 38px;
+  }
+
+  .contact-links a {
+    display: grid;
+    padding-block: 15px;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+    transition: padding-left 220ms var(--ease-out), color 180ms ease;
+  }
+
+  .contact-links a:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-links a:hover {
+    padding-left: 8px;
+    color: var(--blue);
+  }
+
+  .contact-links span {
+    font-weight: 700;
+  }
+
+  .contact-links strong {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .contact-note {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 22px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .contact-form label {
+    display: grid;
+    gap: 8px;
+  }
+
+  .contact-form label > span {
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 15px 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-small);
+    background: var(--paper-strong);
+    color: var(--ink);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px var(--blue-soft);
+    outline: none;
+  }
+
+  .contact-form textarea {
+    min-height: 180px;
+    resize: vertical;
+  }
+
+  .contact-form button {
+    width: fit-content;
+    min-height: 52px;
+    padding: 12px 22px;
+    border: 0;
+    border-radius: var(--radius-small);
+    background: var(--ink);
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 180ms ease, transform 180ms var(--ease-out), opacity 180ms ease;
+  }
+
+  .contact-form button:hover:not(:disabled) {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+
+  .contact-form button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
+  .form-status {
+    display: none;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    border-radius: var(--radius-small);
+  }
+
+  .form-status:not(:empty) {
+    display: block;
+  }
+
+  .form-status[data-state='success'] {
+    background: #dff6e7;
+    color: #155d32;
+  }
+
+  .form-status[data-state='error'] {
+    background: #fde8e5;
+    color: #8a2e24;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 820px) {
+    .contact-hero,
+    .contact-body {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-form button {
+      width: 100%;
+    }
+  }
+</style>

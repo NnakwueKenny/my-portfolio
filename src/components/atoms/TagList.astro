@@ -1,0 +1,12 @@
+---
+interface Props {
+  items: string[];
+  labelledBy?: string;
+}
+
+const { items, labelledBy } = Astro.props;
+---
+
+<ul class="tag-list" aria-labelledby={labelledBy}>
+  {items.map((item) => <li>{item}</li>)}
+</ul>

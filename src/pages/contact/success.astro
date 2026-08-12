@@ -1,74 +1,33 @@
 ---
-import DefaultLayout from '../../components/DefaultLayout.astro';
-import Button from '../../components/Button.astro';
+import ActionLink from '../../components/atoms/ActionLink.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<DefaultLayout
-  documentTitle="Code Hermit | Message Sent"
-  documentDescription="Your contact message has been sent successfully."
->
-  <section class="contact-success animated-background">
-    <div class="container">
-      <div class="success-card">
-        <p class="eyebrow">Message received</p>
-        <h1>Thanks for reaching out.</h1>
-        <p>
-          Your message has been submitted successfully. I'll review it and reply by email as soon as I can.
-        </p>
-        <Button href="/contact" variant="solid" colorScheme="green">Back to Contact</Button>
-      </div>
-    </div>
+<BaseLayout title="Message sent — CodeHermit" description="Your message has been sent to CodeHermit.">
+  <section class="success shell">
+    <p class="eyebrow">Message sent</p>
+    <h1>Thank you.<br />I’ll be in touch.</h1>
+    <p>Your message made it through. I typically reply within 24 hours.</p>
+    <ActionLink href="/">Return home</ActionLink>
   </section>
-</DefaultLayout>
+</BaseLayout>
 
-<style lang="scss">
-  .contact-success {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding: 3rem 0;
-    background: var(--gradient-background);
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-radial-primary), var(--gradient-radial-secondary);
-      pointer-events: none;
-    }
+<style>
+  .success {
+    display: grid;
+    min-height: 70svh;
+    justify-items: start;
+    align-content: center;
+    padding-block: 90px;
   }
 
-  .success-card {
-    position: relative;
-    z-index: 1;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-    background: var(--gradient-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 20px;
-    box-shadow: var(--shadow-md);
-
-    h1 {
-      margin-bottom: 1rem;
-    }
-
-    p {
-      color: var(--color-text-tertiary);
-      line-height: 1.7;
-    }
+  .success h1 {
+    margin-bottom: 30px;
   }
 
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-primary);
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+  .success > p:not(.eyebrow) {
+    margin-bottom: 30px;
+    color: var(--muted);
+    font-size: 1.18rem;
   }
 </style>

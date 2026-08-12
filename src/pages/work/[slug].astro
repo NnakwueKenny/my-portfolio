@@ -1,0 +1,142 @@
+---
+import ActionLink from '../../components/atoms/ActionLink.astro';
+import TagList from '../../components/atoms/TagList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/site';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const nextProject = projects[(projects.findIndex((item) => item.slug === project.slug) + 1) % projects.length];
+---
+
+<BaseLayout title={`${project.title} — CodeHermit`} description={project.description} image={project.image}>
+  <article class="case-study">
+    <header class="case-study__hero shell">
+      <div class="case-study__heading">
+        <p class="eyebrow">{project.year} · {project.role}</p>
+        <h1 transition:name={`project-title-${project.slug}`}>{project.title}</h1>
+        <p>{project.description}</p>
+      </div>
+      <div class="case-study__meta">
+        <TagList items={project.tags} />
+        <ActionLink href={project.url} variant="secondary" external>Visit live product</ActionLink>
+      </div>
+    </header>
+
+    <div class="case-study__visual shell" transition:name={`project-image-${project.slug}`}>
+      <img src={project.image} alt={`${project.title} product interface`} width="1680" height="844" />
+    </div>
+
+    <section class="case-study__story shell">
+      <p class="eyebrow">My contribution</p>
+      <div>
+        <h2>What I worked on.</h2>
+        <p>{project.contribution}</p>
+      </div>
+    </section>
+
+    <aside class="next-project shell" data-reveal>
+      <p class="eyebrow">Next project</p>
+      <a href={`/work/${nextProject.slug}`}>{nextProject.title}</a>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.5fr);
+    gap: 8vw;
+    align-items: end;
+    padding-block: clamp(74px, 11vw, 150px) clamp(50px, 7vw, 86px);
+  }
+
+  .case-study__heading h1 {
+    margin-bottom: 22px;
+  }
+
+  .case-study__heading > p:last-child {
+    max-width: 700px;
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  }
+
+  .case-study__meta {
+    display: grid;
+    gap: 28px;
+    justify-items: start;
+  }
+
+  .case-study__visual {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 30px 70px rgba(16, 17, 20, 0.1);
+  }
+
+  .case-study__visual img {
+    width: 100%;
+    aspect-ratio: 1.86 / 1;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .case-study__story {
+    display: grid;
+    grid-template-columns: 0.32fr minmax(0, 1fr);
+    gap: 8vw;
+    padding-block: clamp(90px, 13vw, 170px);
+  }
+
+  .case-study__story h2 {
+    max-width: 820px;
+    margin-bottom: 38px;
+  }
+
+  .case-study__story div > p {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  }
+
+  .next-project {
+    padding-block: 54px;
+    border-block: 1px solid var(--line-strong);
+  }
+
+  .next-project a {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 6.5rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .next-project a:hover {
+    color: var(--blue);
+  }
+
+  @media (max-width: 820px) {
+    .case-study__hero,
+    .case-study__story {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .case-study__visual {
+      width: 100%;
+      border-radius: 0;
+      border-inline: 0;
+    }
+
+    .case-study__visual img {
+      aspect-ratio: 1.28 / 1;
+    }
+  }
+</style>

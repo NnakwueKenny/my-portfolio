@@ -1,0 +1,255 @@
+---
+import ActionLink from '../../components/atoms/ActionLink.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { profile } from '../../data/site';
+
+const focusAreas = [
+  { title: 'Product architecture', icon: '/icons/architecture.svg', copy: 'System boundaries, data flows, integrations, and technical decisions that match the product.' },
+  { title: 'Hands-on engineering', icon: '/icons/engineering.svg', copy: 'Frontend applications, APIs, data stores, payments, infrastructure, and delivery pipelines.' },
+  { title: 'Technical leadership', icon: '/icons/leadership.svg', copy: 'Direction, reviews, mentoring, engineering standards, release quality, and team delivery.' },
+  { title: 'Communication', icon: '/icons/communication.svg', copy: 'Clear technical context for engineers, product partners, clients, and business stakeholders.' },
+];
+
+const tools = [
+  ['Angular', '/images/dev-logos/angular.svg'],
+  ['React', '/images/dev-logos/react.svg'],
+  ['Vue', '/images/dev-logos/vue.svg'],
+  ['TypeScript', '/images/dev-logos/typescript.svg'],
+  ['Node.js', '/images/dev-logos/nodejs.svg'],
+  ['Python', '/images/dev-logos/python.svg'],
+  ['FastAPI', '/images/dev-logos/fastapi.svg'],
+  ['PostgreSQL', '/images/dev-logos/postgresql.svg'],
+  ['MongoDB', '/images/dev-logos/mongodb.svg'],
+  ['AWS', '/images/dev-logos/aws.svg'],
+  ['Azure', '/images/dev-logos/azure.svg'],
+  ['Docker', '/images/dev-logos/docker.svg'],
+];
+---
+
+<BaseLayout
+  title="About Kene — CodeHermit"
+  description="About Kenechukwu Nnakwue, a senior software engineer and engineering leader based in Nigeria."
+>
+  <section class="about-hero shell">
+    <div class="about-hero__copy">
+      <p class="eyebrow">About</p>
+      <h1>I’m Kene.</h1>
+      <p>My name is Kenechukwu Nnakwue. Most people call me Kene; online, I’m {profile.brandName}.</p>
+      <p>I’m a senior software engineer based in Nigeria. I currently serve as Head of Engineering at Techsense Developers, where I lead technical direction without stepping away from implementation.</p>
+    </div>
+
+    <div class="about-hero__visual">
+      <div class="about-hero__dots" aria-hidden="true"></div>
+      <figure class="about-hero__portrait" transition:name="portrait">
+        <img class="about-hero__photo" src="/images/kenechukwu-nnakwue-2026.jpg" alt={profile.fullName} width="2157" height="2346" />
+        <img class="about-hero__tape" src="/images/design/masking-tape.png" alt="" width="600" height="215" />
+      </figure>
+      <p class="about-hero__note">CodeHermit,<br />around the web.</p>
+    </div>
+  </section>
+
+  <section class="about-story shell">
+    <p class="eyebrow">How I work</p>
+    <div class="about-story__content">
+      <h2>I like difficult product problems and clear engineering decisions.</h2>
+      <div>
+        <p>For more than seven years, I’ve built web products, APIs, integrations, and delivery infrastructure across logistics, events, commerce, care, and business operations.</p>
+        <p>My work now combines hands-on engineering with architecture, technical direction, code review, mentoring, CI/CD, and the practical habits that help teams ship dependable software.</p>
+        <p>I also review developer education content as a member of LogRocket’s Content Advisory Board.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-focus shell" aria-label="Areas of focus">
+    {focusAreas.map((area, index) => (
+      <article data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+        <img src={area.icon} alt="" width="28" height="28" />
+        <h3>{area.title}</h3>
+        <p>{area.copy}</p>
+      </article>
+    ))}
+  </section>
+
+  <section class="about-toolkit shell">
+    <div class="about-toolkit__heading" data-reveal>
+      <p class="eyebrow">Technical range</p>
+      <h2>Tools I use in production.</h2>
+    </div>
+    <ul>
+      {tools.map(([name, icon], index) => (
+        <li data-reveal style={`--reveal-delay: ${Math.min(index * 35, 210)}ms`}>
+          <img src={icon} alt="" width="32" height="32" loading="lazy" />
+          <span>{name}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="about-personal shell" data-reveal>
+    <div>
+      <p class="eyebrow">Outside work</p>
+      <h2>Gaming, films, football, and fitness.</h2>
+    </div>
+    <div>
+      <p>Those are the things I usually make time for when I’m away from engineering.</p>
+      <ActionLink href="/contact" variant="secondary">Get in touch</ActionLink>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero {
+    display: grid;
+    min-height: 650px;
+    grid-template-columns: minmax(0, 1fr) minmax(350px, 0.6fr);
+    gap: clamp(48px, 8vw, 110px);
+    align-items: center;
+    padding: clamp(64px, 8vw, 104px) clamp(30px, 5vw, 68px);
+  }
+
+  .about-hero h1 { margin-bottom: 30px; font-size: clamp(3.9rem, 6vw, 6.1rem); }
+
+  .about-hero__copy > p:not(.eyebrow) {
+    max-width: 760px;
+    color: var(--muted);
+    font-size: clamp(1.08rem, 1.55vw, 1.28rem);
+  }
+
+  .about-hero__visual { position: relative; min-height: 480px; }
+
+  .about-hero__dots {
+    position: absolute;
+    inset: 28px -20px 40px -80px;
+    background: url('/images/design/notebook-dots.png') center / 520px 520px;
+    opacity: 0.5;
+  }
+
+  .about-hero__portrait {
+    position: absolute;
+    z-index: 1;
+    top: 18px;
+    right: 24px;
+    width: min(86%, 390px);
+    margin: 0;
+    padding: 10px 10px 16px;
+    background: #fdfcf8;
+    box-shadow: 0 12px 24px rgba(41, 35, 27, 0.15);
+    transform: rotate(1.2deg);
+  }
+
+  .about-hero__photo { width: 100%; height: auto; filter: saturate(0.9); }
+
+  .about-hero__tape {
+    position: absolute;
+    top: -21px;
+    right: -13px;
+    width: 82px;
+    height: auto;
+    transform: rotate(9deg);
+  }
+
+  .about-hero__note {
+    position: absolute;
+    z-index: 2;
+    right: -6px;
+    bottom: 0;
+    color: var(--accent);
+    font-family: var(--font-hand);
+    font-size: 1.25rem;
+    line-height: 1;
+    transform: rotate(-3deg);
+  }
+
+  .about-story {
+    padding-block: clamp(86px, 11vw, 142px);
+    border-top: 1px dashed var(--line-strong);
+  }
+
+  .about-story__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 0.68fr);
+    gap: clamp(50px, 8vw, 110px);
+  }
+
+  .about-story h2 { margin-bottom: 0; }
+  .about-story__content p { color: var(--muted); font-size: 1.06rem; }
+
+  .about-focus {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block: 1px solid var(--line-strong);
+  }
+
+  .about-focus article { padding: 36px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about-focus article:nth-child(2n) { border-right: 0; }
+  .about-focus article:nth-child(n + 3) { border-bottom: 0; }
+  .about-focus article img { margin-bottom: 28px; }
+  .about-focus h3 { margin-bottom: 13px; font-size: clamp(1.75rem, 2.6vw, 2.55rem); }
+  .about-focus p { max-width: 540px; margin-bottom: 0; color: var(--muted); }
+
+  .about-toolkit { padding-block: clamp(92px, 12vw, 154px); }
+  .about-toolkit__heading { margin-bottom: 42px; }
+  .about-toolkit__heading h2 { margin-bottom: 0; }
+
+  .about-toolkit ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line-strong);
+    list-style: none;
+  }
+
+  .about-toolkit li {
+    display: flex;
+    min-height: 88px;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-weight: 600;
+  }
+
+  .about-toolkit li:nth-child(4n) { border-right: 0; }
+  .about-toolkit img { width: 32px; height: 32px; object-fit: contain; }
+
+  .about-personal {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.62fr);
+    gap: clamp(48px, 8vw, 110px);
+    padding-block: clamp(86px, 11vw, 140px);
+    border-top: 1px dashed var(--line-strong);
+  }
+
+  .about-personal h2 { margin-bottom: 0; }
+  .about-personal div:last-child { display: grid; justify-items: start; gap: 22px; align-content: end; }
+  .about-personal div:last-child p { margin-bottom: 0; color: var(--muted); font-size: 1.06rem; }
+
+  @media (max-width: 1080px) {
+    .about-hero,
+    .about-story__content,
+    .about-personal { grid-template-columns: 1fr; gap: 40px; }
+    .about-hero { min-height: auto; }
+    .about-hero__visual { width: min(100%, 520px); min-height: 500px; justify-self: center; }
+    .about-toolkit ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .about-toolkit li:nth-child(4n) { border-right: 1px solid var(--line); }
+    .about-toolkit li:nth-child(3n) { border-right: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .about-hero { padding-inline: 0; }
+    .about-hero h1 { font-size: clamp(3.35rem, 15vw, 4.6rem); }
+    .about-hero__visual { min-height: 430px; }
+    .about-hero__dots { inset-inline: 0; }
+    .about-hero__portrait { right: 50%; width: min(88vw, 350px); transform: translateX(50%) rotate(1.2deg); }
+    .about-focus { grid-template-columns: 1fr; }
+    .about-focus article,
+    .about-focus article:nth-child(2n),
+    .about-focus article:nth-child(n + 3) { padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+    .about-focus article:last-child { border-bottom: 0; }
+    .about-toolkit ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .about-toolkit li:nth-child(3n) { border-right: 1px solid var(--line); }
+    .about-toolkit li:nth-child(2n) { border-right: 0; }
+  }
+</style>

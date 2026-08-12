@@ -54,6 +54,26 @@
     Cache-Control = "no-store"
     X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet"
 
+[[redirects]]
+  from = "/projects"
+  to = "/work"
+  status = 301
+
+[[redirects]]
+  from = "/projects/*"
+  to = "/work/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/Kene_CV.pdf"
+  to = "/Kenechukwu_Nnakwue_CV_2026.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/my_cv.pdf"
+  to = "/Kenechukwu_Nnakwue_CV_2026.pdf"
+  status = 301
+
 # Domain redirect - redirect codehermit.com to codehermit.netlify.app
 [[redirects]]
   from = "https://codehermit.com/*"

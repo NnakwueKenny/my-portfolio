@@ -1,0 +1,117 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import SiteFooter from '../components/organisms/SiteFooter.astro';
+import SiteHeader from '../components/organisms/SiteHeader.astro';
+import { activeDesign } from '../config/design';
+import { profile } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = `${profile.brandName} — ${profile.title}`,
+  description = profile.summary,
+  image = '/images/kenechukwu-nnakwue-2026.jpg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const socialImage = new URL(image, Astro.site ?? Astro.url.origin);
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.fullName,
+  alternateName: [profile.familiarName, profile.brandName],
+  jobTitle: profile.title,
+  url: Astro.site?.toString() ?? Astro.url.origin,
+  sameAs: [profile.github, profile.linkedin, profile.twitter],
+};
+---
+
+<!doctype html>
+<html lang="en" data-design={activeDesign.id}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content={`${profile.fullName} (${profile.brandName})`} />
+    <meta name="theme-color" content={activeDesign.themeColor} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/site-icon.ico" sizes="any" />
+    <link rel="preload" href="/fonts/fraunces-variable.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/instrument-sans-400.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/caveat-variable.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+
+    <script>
+      const initialisePage = () => {
+        if (!window.location.hash) {
+          requestAnimationFrame(() => window.scrollTo(0, 0));
+        }
+
+        const header = document.querySelector<HTMLElement>('[data-site-header]');
+        const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+        const nav = document.querySelector<HTMLElement>('[data-site-nav]');
+
+        const closeMenu = () => {
+          menuButton?.setAttribute('aria-expanded', 'false');
+          menuButton?.setAttribute('aria-label', 'Open navigation');
+          nav?.classList.remove('is-open');
+          document.body.classList.remove('menu-open');
+        };
+
+        menuButton?.addEventListener('click', () => {
+          const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+          menuButton.setAttribute('aria-expanded', String(!isOpen));
+          menuButton.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
+          nav?.classList.toggle('is-open', !isOpen);
+          document.body.classList.toggle('menu-open', !isOpen);
+        });
+
+        nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+        const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 12);
+        updateHeader();
+        window.addEventListener('scroll', updateHeader, { passive: true });
+
+        const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          revealItems.forEach((item) => item.classList.add('is-visible'));
+        } else {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+          );
+          revealItems.forEach((item) => observer.observe(item));
+        }
+      };
+
+      document.addEventListener('astro:page-load', initialisePage);
+    </script>
+  </body>
+</html>

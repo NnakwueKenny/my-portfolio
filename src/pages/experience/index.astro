@@ -1,0 +1,126 @@
+---
+import ExperienceRow from '../../components/molecules/ExperienceRow.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { experiences } from '../../data/site';
+
+const careerHighlights = [
+  { value: '7+ years', label: 'building production software' },
+  { value: '50k+', label: 'daily API requests supported' },
+  { value: '10k+', label: 'active users served' },
+];
+---
+
+<BaseLayout
+  title="Experience — CodeHermit"
+  description="Engineering leadership and software experience across product development, architecture, delivery, and technical advisory work."
+>
+  <section class="page-hero shell">
+    <div class="page-hero__grid">
+      <div>
+        <p class="eyebrow">Experience</p>
+        <h1>From building features to leading delivery.</h1>
+      </div>
+      <p class="page-hero__copy">I’m a senior software engineer with more than seven years in production teams. I currently lead engineering at Techsense Developers while staying close to architecture, code, and delivery.</p>
+    </div>
+  </section>
+
+  <section class="career-highlights shell" aria-label="Career highlights">
+    {careerHighlights.map((highlight, index) => (
+      <div data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+        <strong>{highlight.value}</strong>
+        <span>{highlight.label}</span>
+      </div>
+    ))}
+  </section>
+
+  <section class="experience-list shell" aria-label="Professional experience">
+    <div class="experience-list__heading">
+      <span>Professional experience</span>
+      <span>Most recent first</span>
+    </div>
+    {experiences.map((experience, index) => <ExperienceRow experience={experience} index={index} />)}
+  </section>
+
+  <section class="experience-values shell" data-reveal>
+    <p class="eyebrow">Working approach</p>
+    <div class="experience-values__grid">
+      <h2>Stay close to the work.</h2>
+      <div>
+        <p>I document decisions, review architecture and code, and keep technical direction connected to product constraints.</p>
+        <p>I stay involved in implementation when the team needs context, an unblocker, or another pair of experienced hands.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .experience-list {
+    padding-bottom: clamp(80px, 11vw, 140px);
+  }
+
+  .career-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: clamp(72px, 9vw, 112px);
+    border-block: 1px solid var(--line-strong);
+  }
+
+  .career-highlights > div {
+    display: grid;
+    gap: 4px;
+    padding: 24px clamp(16px, 3vw, 34px);
+    border-right: 1px solid var(--line);
+  }
+
+  .career-highlights > div:first-child { padding-left: 0; }
+  .career-highlights > div:last-child { padding-right: 0; border-right: 0; }
+  .career-highlights strong { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: 1; }
+  .career-highlights span { color: var(--muted); font-size: 0.83rem; }
+
+  .experience-list__heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 16px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .experience-values {
+    padding-block: clamp(70px, 10vw, 120px);
+    border-block: 1px solid var(--line-strong);
+  }
+
+  .experience-values__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.7fr);
+    gap: 8vw;
+    align-items: start;
+  }
+
+  .experience-values h2,
+  .experience-values p:last-child {
+    margin-bottom: 0;
+  }
+
+  .experience-values p {
+    color: var(--muted);
+    font-size: 1.08rem;
+  }
+
+  @media (max-width: 820px) {
+    .career-highlights { grid-template-columns: 1fr; }
+    .career-highlights > div,
+    .career-highlights > div:first-child,
+    .career-highlights > div:last-child { padding: 20px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+    .career-highlights > div:last-child { border-bottom: 0; }
+
+    .experience-values__grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+</style>

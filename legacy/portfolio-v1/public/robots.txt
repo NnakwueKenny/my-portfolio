@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /vault
+Disallow: /vault/
+Disallow: /api/admin/

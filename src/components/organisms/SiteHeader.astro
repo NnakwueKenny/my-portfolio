@@ -1,0 +1,50 @@
+---
+import { profile } from '../../data/site';
+
+const pathname = Astro.url.pathname;
+const navigation = [
+  { href: '/work', label: 'Work' },
+  { href: '/experience', label: 'Experience' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const isCurrent = (href: string) =>
+  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<header class="site-header" data-site-header>
+  <div class="shell site-header__inner">
+    <a class="wordmark" href="/" aria-label={`${profile.brandName}, home`}>
+      <span class="wordmark__name">{profile.familiarName}</span>
+      <span class="wordmark__dot" aria-hidden="true">•</span>
+      <span class="wordmark__handle">{profile.brandName}</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      data-menu-toggle
+    >
+      <img class="menu-toggle__open" src="/icons/menu.svg" alt="" width="24" height="24" />
+      <img class="menu-toggle__close" src="/icons/close.svg" alt="" width="20" height="20" />
+    </button>
+
+    <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation" data-site-nav>
+      <ul>
+        {navigation.map(({ href, label }) => (
+          <li>
+            <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>
+          </li>
+        ))}
+      </ul>
+      <a class="resume-link" href={profile.resume} target="_blank" rel="noreferrer">
+        Résumé
+        <img src="/icons/external.svg" alt="" width="13" height="13" />
+      </a>
+    </nav>
+  </div>
+</header>

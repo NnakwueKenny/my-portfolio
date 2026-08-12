@@ -1,0 +1,27 @@
+---
+import type { Experience } from '../../data/site';
+
+interface Props {
+  experience: Experience;
+  index?: number;
+}
+
+const { experience, index = 0 } = Astro.props;
+---
+
+<article class="experience-row" data-reveal style={`--reveal-delay: ${Math.min(index * 70, 280)}ms`}>
+  <div class="experience-row__period">
+    <span>{experience.period}</span>
+    <span>{experience.mode}</span>
+  </div>
+  <div class="experience-row__main">
+    <div class="experience-row__heading">
+      {experience.logo && <img src={experience.logo} alt="" width="44" height="44" loading="lazy" />}
+      <div>
+        <h3>{experience.title}</h3>
+        <p>{experience.company}{experience.current && <span class="current-label">Current</span>}</p>
+      </div>
+    </div>
+    <p class="experience-row__summary">{experience.summary}</p>
+  </div>
+</article>

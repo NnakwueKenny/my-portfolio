@@ -1,0 +1,24 @@
+---
+import { profile } from '../../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__cta" data-reveal>
+      <p class="section-label">Get in touch</p>
+      <h2>Need an experienced engineer or technical lead?</h2>
+      <a class="action-link action-link--primary" href="/contact">Contact Kene</a>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {year} {profile.fullName} · {profile.brandName}</p>
+      <nav aria-label="Social links">
+        <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+        <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href={profile.twitter} target="_blank" rel="noreferrer">X</a>
+      </nav>
+    </div>
+  </div>
+</footer>
