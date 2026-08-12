@@ -11,14 +11,13 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 const projectIndex = projects.findIndex((item) => item.slug === project.slug);
 const nextProject = projects[(projectIndex + 1) % projects.length];
-const projectNumber = String(projectIndex + 1).padStart(2, '0');
 ---
 
 <BaseLayout title={`${project.title} — Kene · CodeHermit`} description={project.description} image={project.image}>
   <article class="case-study">
     <header class="case-study__hero shell">
       <div class="case-study__heading">
-        <p class="eyebrow">Project {projectNumber} · {project.year}</p>
+        <p class="eyebrow">Case study · {project.year}</p>
         <h1 transition:name={`project-title-${project.slug}`}>{project.title}</h1>
         <p>{project.description}</p>
       </div>
@@ -42,50 +41,56 @@ const projectNumber = String(projectIndex + 1).padStart(2, '0');
       </div>
     </header>
 
-    <figure class="case-study__visual" transition:name={`project-image-${project.slug}`}>
-      <img
-        src={project.image}
-        alt={`${project.title} product interface`}
-        width="1680"
-        height="844"
-        style={`object-position: ${project.imagePosition ?? 'top center'}`}
-      />
-    </figure>
+    <div class="case-study__media">
+      <figure class="case-study__visual" transition:name={`project-image-${project.slug}`}>
+        <img
+          src={project.image}
+          alt={`${project.title} product interface`}
+          width="1680"
+          height="844"
+          style={`object-position: ${project.imagePosition ?? 'top center'}`}
+        />
+      </figure>
 
-    <div class="case-study__caption shell">
-      <p>{project.title} / Product interface</p>
-      <a href={project.url} target="_blank" rel="noreferrer">
-        Open live product
-        <img src="/icons/external.svg" alt="" width="13" height="13" />
-      </a>
+      <div class="case-study__caption">
+        <p>{project.title} / Product interface</p>
+        <a href={project.url} target="_blank" rel="noreferrer">
+          Open live product
+          <img src="/icons/external.svg" alt="" width="13" height="13" />
+        </a>
+      </div>
     </div>
 
     <div class="case-study__sections shell">
       <section class="case-study__section" data-reveal>
-        <p class="case-study__index">01</p>
-        <p class="eyebrow">The project</p>
-        <div>
-          <h2>What it is.</h2>
-          <p>{project.description}</p>
-          <p class="case-study__role">My role: <strong>{project.role}</strong></p>
+        <header>
+          <p class="eyebrow">The product</p>
+          <h2>Project overview</h2>
+        </header>
+        <div class="case-study__copy">
+          <p class="case-study__lead">{project.overview}</p>
         </div>
       </section>
 
       <section class="case-study__section" data-reveal>
-        <p class="case-study__index">02</p>
-        <p class="eyebrow">My contribution</p>
-        <div>
-          <h2>What I worked on.</h2>
-          <p>{project.contribution}</p>
+        <header>
+          <p class="eyebrow">My role</p>
+          <h2>Contribution</h2>
+        </header>
+        <div class="case-study__copy">
+          <p class="case-study__lead">{project.contributionDetails}</p>
+          <ul class="case-study__highlights" aria-label="Key areas of work">
+            {project.highlights.map((highlight) => <li>{highlight}</li>)}
+          </ul>
         </div>
       </section>
 
       <section class="case-study__section case-study__section--technology" data-reveal>
-        <p class="case-study__index">03</p>
-        <p class="eyebrow">Tools & technology</p>
-        <div>
-          <h2>The stack.</h2>
-          <p>Technologies used across the product, platform, and delivery work.</p>
+        <header>
+          <p class="eyebrow">Technology</p>
+          <h2>Built with</h2>
+        </header>
+        <div class="case-study__copy">
           <TechnologyList items={project.tags} size="large" />
         </div>
       </section>
@@ -197,6 +202,11 @@ const projectNumber = String(projectIndex + 1).padStart(2, '0');
     line-height: 1.45;
   }
 
+  .case-study__media {
+    width: min(1040px, var(--shell));
+    margin-inline: auto;
+  }
+
   .case-study__visual {
     width: 100%;
     margin: 0;
@@ -229,29 +239,20 @@ const projectNumber = String(projectIndex + 1).padStart(2, '0');
     text-decoration: none;
   }
 
-  .case-study__sections { padding-top: clamp(78px, 10vw, 138px); }
+  .case-study__sections { padding-top: clamp(72px, 9vw, 122px); }
 
   .case-study__section {
     display: grid;
-    grid-template-columns: 80px minmax(150px, 0.28fr) minmax(0, 1fr);
-    gap: clamp(24px, 5vw, 78px);
-    padding-block: clamp(54px, 7vw, 94px);
+    grid-template-columns: minmax(230px, 0.42fr) minmax(0, 1fr);
+    gap: clamp(44px, 9vw, 138px);
+    padding-block: clamp(52px, 7vw, 86px);
     border-top: 1px solid var(--line-strong);
   }
 
   .case-study__section:last-child { border-bottom: 1px solid var(--line-strong); }
 
-  .case-study__index {
-    margin: 0;
-    color: var(--accent);
-    font-family: var(--font-hand);
-    font-size: 1.55rem;
-    line-height: 1;
-    transform: rotate(-3deg);
-  }
-
-  .case-study__section > .eyebrow {
-    margin-top: 7px;
+  .case-study__section header .eyebrow {
+    margin-bottom: 15px;
     color: var(--muted);
     font-family: var(--font-body);
     font-size: 0.72rem;
@@ -260,30 +261,53 @@ const projectNumber = String(projectIndex + 1).padStart(2, '0');
     transform: none;
   }
 
-  .case-study__section > div { max-width: 830px; }
-
   .case-study__section h2 {
-    margin-bottom: 30px;
-    font-size: clamp(2.8rem, 5vw, 5.1rem);
+    max-width: 310px;
+    margin: 0;
+    font-size: clamp(2.35rem, 3.9vw, 4rem);
   }
 
-  .case-study__section div > p {
-    max-width: 730px;
+  .case-study__copy { max-width: 790px; }
+
+  .case-study__lead {
+    max-width: 760px;
+    margin: 0;
     color: var(--muted);
     font-size: clamp(1.05rem, 1.45vw, 1.2rem);
+    line-height: 1.75;
   }
 
-  .case-study__role {
-    margin-top: 28px;
-    padding-top: 22px;
+  .case-study__highlights {
+    display: grid;
+    margin: 36px 0 0;
+    padding: 0;
     border-top: 1px solid var(--line);
+    list-style: none;
   }
 
-  .case-study__role strong { color: var(--ink); font-weight: 600; }
+  .case-study__highlights li {
+    position: relative;
+    padding: 17px 0 17px 24px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
 
-  .case-study__section--technology > div { max-width: 920px; }
+  .case-study__highlights li::before {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    content: '';
+  }
 
-  .case-study__section--technology .technology-list { margin-top: 36px; }
+  .case-study__section--technology .case-study__copy { max-width: 880px; }
+
+  .case-study__section--technology .technology-list { margin-top: 4px; }
 
   .next-project {
     margin-top: clamp(72px, 9vw, 118px);
@@ -349,10 +373,7 @@ const projectNumber = String(projectIndex + 1).padStart(2, '0');
 
     .case-study__facts { max-width: 640px; }
 
-    .case-study__section {
-      grid-template-columns: 64px minmax(128px, 0.24fr) minmax(0, 1fr);
-      gap: 24px;
-    }
+    .case-study__section { gap: 52px; }
   }
 
   @media (max-width: 720px) {
@@ -385,16 +406,12 @@ const projectNumber = String(projectIndex + 1).padStart(2, '0');
     .case-study__sections { padding-top: 60px; }
 
     .case-study__section {
-      grid-template-columns: 42px minmax(0, 1fr);
-      gap: 14px 18px;
+      grid-template-columns: 1fr;
+      gap: 28px;
       padding-block: 48px;
     }
 
-    .case-study__section > .eyebrow { margin-top: 3px; }
-
-    .case-study__section > div { grid-column: 1 / -1; padding-top: 10px; }
-
-    .case-study__section h2 { margin-bottom: 24px; }
+    .case-study__section h2 { max-width: none; }
 
     .next-project { margin-top: 68px; padding-block: 48px 0; }
 
