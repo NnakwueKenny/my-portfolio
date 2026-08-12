@@ -1,0 +1,87 @@
+---
+interface Props {
+  items: string[];
+  labelledBy?: string;
+  size?: 'compact' | 'large';
+}
+
+const { items, labelledBy, size = 'compact' } = Astro.props;
+
+const icons: Record<string, string> = {
+  'Next.js': '/images/dev-logos/nextjs.png',
+  React: '/images/dev-logos/react.svg',
+  'Node.js': '/images/dev-logos/nodejs.svg',
+  NestJS: '/images/dev-logos/nestjs.svg',
+  TypeScript: '/images/dev-logos/typescript.svg',
+  Python: '/images/dev-logos/python.svg',
+  PostgreSQL: '/images/dev-logos/postgresql.svg',
+  MongoDB: '/images/dev-logos/mongodb.svg',
+  Azure: '/images/dev-logos/azure.svg',
+  AWS: '/images/dev-logos/aws.svg',
+  Docker: '/images/dev-logos/docker.svg',
+  'Tailwind CSS': '/images/dev-logos/tailwind.svg',
+  Netlify: '/images/dev-logos/netlify.svg',
+};
+---
+
+<ul class:list={['technology-list', `technology-list--${size}`]} aria-labelledby={labelledBy}>
+  {items.map((item) => (
+    <li class:list={{ 'has-icon': Boolean(icons[item]) }}>
+      {icons[item] && <img src={icons[item]} alt="" width={size === 'large' ? '30' : '19'} height={size === 'large' ? '30' : '19'} loading="lazy" />}
+      <span>{item}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .technology-list li {
+    display: inline-flex;
+    align-items: center;
+    color: var(--muted);
+  }
+
+  .technology-list img {
+    flex: 0 0 auto;
+    object-fit: contain;
+  }
+
+  .technology-list--compact {
+    gap: 10px 18px;
+  }
+
+  .technology-list--compact li {
+    gap: 7px;
+    font-size: 0.78rem;
+  }
+
+  .technology-list--large {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid var(--line);
+  }
+
+  .technology-list--large li {
+    min-height: 70px;
+    gap: 12px;
+    padding: 16px 18px 16px 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+
+  @media (max-width: 720px) {
+    .technology-list--large { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 420px) {
+    .technology-list--large { grid-template-columns: 1fr; }
+  }
+</style>
