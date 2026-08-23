@@ -11,114 +11,134 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 const projectIndex = projects.findIndex((item) => item.slug === project.slug);
 const nextProject = projects[(projectIndex + 1) % projects.length];
+const liveHost = new URL(project.url).host.replace(/^www\./, '');
+const platePropsFor = (item: typeof project) =>
+  [
+    item.imageRatio && `--plate-ratio: ${item.imageRatio}`,
+    item.imagePosition && `--plate-position: ${item.imagePosition}`,
+  ]
+    .filter(Boolean)
+    .join('; ') || undefined;
+
+const facts = [
+  { term: 'Role', detail: project.role },
+  ...(project.surfaces ? [{ term: 'Surfaces', detail: project.surfaces }] : []),
+  { term: 'Year', detail: project.year },
+];
 ---
 
 <BaseLayout title={`${project.title} — Kene · CodeHermit`} description={project.description} image={project.image}>
   <article class="case-study">
-    <header class="case-study__hero shell">
+    <header class="case-study__masthead">
       <a class="case-study__back" href="/work">
-        <img src="/icons/arrow-right.svg" alt="" width="16" height="16" />
+        <img src="/icons/arrow-right.svg" alt="" width="15" height="15" />
         All work
       </a>
 
-      <div class="case-study__intro">
-        <div class="case-study__heading">
-          <p class="eyebrow">Product · {project.year}</p>
-          <h1 transition:name={`project-title-${project.slug}`}>{project.title}</h1>
-        </div>
+      <p class="case-study__kicker">Case study <span aria-hidden="true">/</span> {project.year}</p>
+      <h1 transition:name={`project-title-${project.slug}`}>{project.title}</h1>
 
-        <div class="case-study__introduction">
-          <p class="case-study__description">{project.description}</p>
-          <dl class="case-study__brief">
-            <div>
-              <dt>My role</dt>
-              <dd>{project.role}</dd>
-            </div>
-            {project.surfaces && (
-              <div>
-                <dt>Product surfaces</dt>
-                <dd>{project.surfaces}</dd>
-              </div>
-            )}
-          </dl>
-          <div class="case-study__action">
-            <ActionLink href={project.url} variant="primary" external>Visit live product</ActionLink>
-          </div>
-        </div>
+      <div class="case-study__lede">
+        <p class="case-study__deck">{project.description}</p>
+        <ActionLink href={project.url} variant="primary" external>Visit live product</ActionLink>
       </div>
+
+      <dl class="case-study__facts">
+        {facts.map((fact) => (
+          <div>
+            <dt>{fact.term}</dt>
+            <dd>{fact.detail}</dd>
+          </div>
+        ))}
+        <div>
+          <dt>Live</dt>
+          <dd>
+            <a class="case-study__fact-link" href={project.url} target="_blank" rel="noreferrer noopener">
+              {liveHost}
+              <img src="/icons/external.svg" alt="" width="12" height="12" />
+            </a>
+          </dd>
+        </div>
+      </dl>
     </header>
 
     <div class="case-study__media">
-      <figure class="case-study__visual" transition:name={`project-image-${project.slug}`}>
-        <img
-          src={project.image}
-          alt={`${project.title} product interface`}
-          width="1680"
-          height="844"
-          style={`object-position: ${project.imagePosition ?? 'top center'}`}
-        />
+      <figure
+        class="case-study__visual media-plate"
+        transition:name={`project-image-${project.slug}`}
+        style={platePropsFor(project)}
+      >
+        <div class="case-study__chrome" aria-hidden="true">
+          <span class="case-study__chrome-dots"><i></i><i></i><i></i></span>
+        </div>
+        <img src={project.image} alt={`${project.title} product interface`} width="1680" height="1050" />
       </figure>
-
-      <div class="case-study__caption">
-        <p>{project.title} / Product interface</p>
-        <a href={project.url} target="_blank" rel="noreferrer">
-          Open live product
-          <img src="/icons/external.svg" alt="" width="13" height="13" />
-        </a>
-      </div>
+      <p class="case-study__caption">{project.title} — product interface</p>
     </div>
 
-    <section class="case-study__stack shell" aria-labelledby="project-stack-heading" data-reveal>
-      <div>
-        <p class="eyebrow">Product stack</p>
-        <h2 id="project-stack-heading">Tools and technologies.</h2>
-      </div>
-      <TechnologyList items={project.tags} labelledBy="project-stack-heading" />
-    </section>
-
-    <div class="case-study__story shell">
+    <div class="case-study__story">
       <section class="case-study__chapter" data-reveal>
-        <header>
-          <p class="eyebrow">Why it exists</p>
-          <h2>{project.storyHeading ?? 'What the product needed to do.'}</h2>
-        </header>
+        <div class="case-study__rail">
+          <p class="case-study__label">Why it exists</p>
+        </div>
         <div class="case-study__copy">
+          <h2>{project.storyHeading ?? 'What the product needed to do'}</h2>
           <p class="case-study__lead">{project.overview}</p>
         </div>
       </section>
 
       <section class="case-study__chapter" data-reveal>
-        <header>
-          <p class="eyebrow">What I built</p>
-          <h2>{project.contributionHeading ?? 'What I was responsible for.'}</h2>
-        </header>
+        <div class="case-study__rail">
+          <p class="case-study__label">What I built</p>
+        </div>
         <div class="case-study__copy">
+          <h2>{project.contributionHeading ?? 'What I was responsible for'}</h2>
           <p class="case-study__lead">{project.contributionDetails}</p>
-          <ul class="case-study__highlights" aria-label="Key areas of work">
-            {project.highlights.map((highlight) => (
+
+          <ol class="case-study__highlights" aria-label="Key areas of work">
+            {project.highlights.map((highlight, index) => (
               <li>
-                <img src="/icons/arrow-up-right.svg" alt="" width="16" height="16" />
-                <span>{highlight}</span>
+                <span class="case-study__highlight-index">{String(index + 1).padStart(2, '0')}</span>
+                <span class="case-study__highlight-text">{highlight}</span>
               </li>
             ))}
-          </ul>
+          </ol>
+        </div>
+      </section>
+
+      <section class="case-study__chapter" aria-labelledby="project-stack-heading" data-reveal>
+        <div class="case-study__rail">
+          <p class="case-study__label">Stack</p>
+        </div>
+        <div class="case-study__copy">
+          <h2 id="project-stack-heading">Tools and technologies</h2>
+          <p class="case-study__stack-note">
+            {project.tags.length} technologies used across the product.
+          </p>
+          <TechnologyList items={project.tags} labelledBy="project-stack-heading" size="chip" />
         </div>
       </section>
     </div>
 
     <aside class="next-project" data-reveal>
-      <a class="next-project__inner shell" href={`/work/${nextProject.slug}`}>
+      <a class="next-project__inner" href={`/work/${nextProject.slug}`}>
         <div class="next-project__copy">
-          <p class="eyebrow">Next project</p>
+          <p class="case-study__label">Next case study</p>
           <h2>{nextProject.title}</h2>
           <p>{nextProject.description}</p>
-          <span>
+          <span class="next-project__cue">
             View case study
-            <img src="/icons/arrow-up-right.svg" alt="" width="18" height="18" />
+            <img src="/icons/arrow-up-right.svg" alt="" width="17" height="17" />
           </span>
         </div>
-        <div class="next-project__visual">
-          <img src={nextProject.image} alt={`${nextProject.title} product interface`} width="1680" height="844" loading="lazy" />
+        <div class="next-project__visual media-plate" style={platePropsFor(nextProject)}>
+          <img
+            src={nextProject.image}
+            alt={`${nextProject.title} product interface`}
+            width="1680"
+            height="1050"
+            loading="lazy"
+          />
         </div>
       </a>
     </aside>
@@ -126,306 +146,365 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
 </BaseLayout>
 
 <style>
-  .case-study__hero {
-    padding-top: clamp(40px, 5vw, 68px);
-    padding-bottom: clamp(44px, 6vw, 78px);
+  /* One inner measure for the whole case study so the masthead, capture, story,
+     and handoff all sit on the same two edges. */
+  .case-study {
+    --case-shell: min(1180px, var(--shell));
+  }
+
+  .case-study__masthead,
+  .case-study__media,
+  .case-study__story,
+  .next-project__inner {
+    width: var(--case-shell);
+    margin-inline: auto;
+  }
+
+  /* ---------- Masthead ---------- */
+
+  .case-study__masthead {
+    padding-top: clamp(30px, 4vw, 48px);
+    padding-bottom: clamp(36px, 5vw, 60px);
   }
 
   .case-study__back {
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    margin-bottom: clamp(34px, 4vw, 54px);
+    margin-bottom: clamp(30px, 4vw, 48px);
     color: var(--muted);
     font-size: 0.78rem;
     font-weight: 650;
     letter-spacing: 0.03em;
     text-decoration: none;
+    transition: color 200ms ease;
   }
 
-  .case-study__back img { transform: rotate(180deg); }
-
-  .case-study__intro {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.72fr);
-    gap: clamp(64px, 10vw, 152px);
-    align-items: start;
+  .case-study__back img {
+    transform: rotate(180deg);
+    transition: transform 260ms var(--ease-out);
   }
 
-  .case-study__heading .eyebrow {
-    margin-bottom: 17px;
-    color: var(--accent);
-    font-family: var(--font-hand);
-    font-size: clamp(1.06rem, 1.25vw, 1.3rem);
-    letter-spacing: 0;
-    text-transform: none;
-    transform: rotate(-1deg);
-  }
-
-  .case-study__heading h1 {
-    max-width: 760px;
-    margin: 0;
-    font-size: clamp(2.8rem, 3.8vw, 4rem);
-    line-height: 0.98;
-  }
-
-  .case-study__description {
-    max-width: 600px;
-    margin: 0;
-    color: var(--muted);
-    font-size: clamp(1.08rem, 1.35vw, 1.3rem);
-    line-height: 1.55;
-  }
-
-  .case-study__brief {
-    display: grid;
-    gap: 17px;
-    margin: 28px 0 0;
-    padding: 22px 0 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .case-study__brief div {
-    display: grid;
-    grid-template-columns: 112px minmax(0, 1fr);
-    gap: 18px;
-  }
-
-  .case-study__brief dt {
+  .case-study__kicker {
+    margin-bottom: 14px;
     color: var(--muted);
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
   }
 
-  .case-study__brief dd {
+  .case-study__kicker span {
+    padding-inline: 4px;
+    color: var(--line-strong);
+  }
+
+  .case-study__masthead h1 {
+    max-width: 14ch;
     margin: 0;
-    font-size: 0.86rem;
+    font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+  }
+
+  /* The deck and CTA sit under the title rather than in a second column, so
+     there is no empty half-page beside the heading. */
+  .case-study__lede {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px clamp(32px, 5vw, 60px);
+    margin-top: clamp(22px, 3vw, 32px);
+  }
+
+  .case-study__deck {
+    flex: 1 1 30ch;
+    max-width: 46ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(1.06rem, 1.35vw, 1.26rem);
     line-height: 1.55;
   }
 
-  .case-study__action {
-    margin-top: 28px;
+  .case-study__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    margin: clamp(38px, 5vw, 58px) 0 0;
+    border-top: 1px solid var(--line-strong);
   }
 
-  .case-study__media {
-    width: min(1180px, calc(100% - 40px));
-    margin-inline: auto;
+  .case-study__facts > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px clamp(18px, 2.2vw, 30px) 20px 0;
+    border-bottom: 1px solid var(--line);
   }
+
+  .case-study__facts > div + div {
+    padding-left: clamp(18px, 2.2vw, 30px);
+    border-left: 1px solid var(--line);
+  }
+
+  .case-study__facts dt {
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .case-study__facts dd {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .case-study__fact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* ---------- Media ---------- */
 
   .case-study__visual {
-    width: 100%;
     margin: 0;
+    --plate-ratio: 16 / 10;
   }
 
-  .case-study__visual img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+  /* A minimal browser bar frames each capture as a real, live product view and
+     stops partial page screenshots from reading as a bad crop. */
+  .case-study__chrome {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    block-size: 38px;
+  }
+
+  .case-study__chrome-dots {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+
+  .case-study__chrome-dots i {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--line-strong);
   }
 
   .case-study__caption {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding-block: 18px;
-    border-bottom: 1px solid var(--line);
+    padding-block: 14px;
     color: var(--muted);
     font-size: 0.74rem;
   }
 
-  .case-study__caption p { margin: 0; }
+  /* ---------- Story ---------- */
 
-  .case-study__caption a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
+  .case-study__story {
+    margin-top: clamp(28px, 4vw, 44px);
+    border-top: 1px solid var(--line-strong);
   }
-
-  .case-study__stack {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
-    gap: clamp(44px, 8vw, 112px);
-    padding-top: clamp(48px, 6vw, 72px);
-    padding-bottom: clamp(58px, 8vw, 96px);
-  }
-
-  .case-study__stack .eyebrow,
-  .case-study__chapter .eyebrow {
-    margin-bottom: 12px;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transform: none;
-  }
-
-  .case-study__stack h2 {
-    margin: 0;
-    font-size: clamp(2rem, 2.8vw, 3rem);
-  }
-
-  .case-study__story { border-top: 1px solid var(--line-strong); }
 
   .case-study__chapter {
     display: grid;
-    grid-template-columns: minmax(280px, 0.76fr) minmax(0, 1fr);
-    gap: clamp(56px, 9vw, 132px);
-    padding-block: clamp(64px, 8vw, 104px);
-    border-bottom: 1px solid var(--line-strong);
+    grid-template-columns: minmax(150px, 0.24fr) minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 84px);
+    padding-block: clamp(52px, 6.5vw, 84px);
+    border-bottom: 1px solid var(--line);
   }
 
-  .case-study__chapter h2 {
-    max-width: 520px;
-    margin: 0;
-    font-size: clamp(2.25rem, 3.55vw, 3.7rem);
-    line-height: 1.04;
+  .case-study__chapter:last-child {
+    padding-bottom: clamp(34px, 4vw, 52px);
+    border-bottom: 0;
   }
 
-  .case-study__copy { max-width: 790px; }
+  /* The label rail sticks so the narrow column stays company for the copy
+     instead of leaving a tall empty gutter. */
+  .case-study__rail {
+    position: sticky;
+    top: calc(var(--header-height) + 28px);
+    align-self: start;
+  }
 
-  .case-study__lead {
-    max-width: 760px;
+  .case-study__label {
     margin: 0;
     color: var(--muted);
-    font-size: clamp(1.05rem, 1.45vw, 1.2rem);
-    line-height: 1.75;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .case-study__label::after {
+    display: block;
+    width: 26px;
+    height: 2px;
+    margin-top: 12px;
+    background: var(--accent);
+    content: '';
+  }
+
+  .case-study__copy { max-width: 68ch; }
+
+  .case-study__copy h2 {
+    max-width: 22ch;
+    margin: 0 0 20px;
+    font-size: clamp(1.6rem, 2.4vw, 2.3rem);
+    line-height: 1.1;
+  }
+
+  .case-study__lead {
+    margin: 0;
+    max-width: 64ch;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.25vw, 1.1rem);
+    line-height: 1.72;
   }
 
   .case-study__highlights {
     display: grid;
-    margin: 36px 0 0;
+    gap: 1px;
+    margin: clamp(30px, 4vw, 42px) 0 0;
     padding: 0;
-    border-top: 1px solid var(--line);
+    background: var(--line);
+    border-radius: var(--radius);
     list-style: none;
+    overflow: hidden;
   }
 
   .case-study__highlights li {
     display: grid;
-    grid-template-columns: 18px minmax(0, 1fr);
-    gap: 12px;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--line);
-    color: var(--ink);
-    font-size: 0.94rem;
-    line-height: 1.6;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px 20px;
+    background: var(--paper-strong);
+    font-size: 0.93rem;
+    line-height: 1.62;
   }
 
-  .case-study__highlights img { margin-top: 5px; }
+  .case-study__highlight-index {
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.72;
+  }
+
+  .case-study__stack-note {
+    margin: -6px 0 22px;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+
+  /* ---------- Next project ---------- */
 
   .next-project {
-    margin-top: clamp(72px, 9vw, 118px);
-    padding-block: clamp(48px, 6vw, 70px);
-    border-top: 1px dashed var(--line-strong);
+    margin-top: 0;
+    padding-block: clamp(44px, 5.5vw, 68px);
+    border-top: 1px solid var(--line-strong);
   }
 
   .next-project__inner {
     display: grid;
-    grid-template-columns: minmax(300px, 0.52fr) minmax(0, 0.78fr);
-    gap: clamp(54px, 8vw, 116px);
+    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1fr);
+    gap: clamp(36px, 5vw, 72px);
     align-items: center;
     color: inherit;
     text-decoration: none;
   }
 
+  .next-project__copy .case-study__label { margin-bottom: 18px; }
+
   .next-project__copy h2 {
-    margin-bottom: 18px;
-    font-size: clamp(2.7rem, 4.5vw, 4.8rem);
+    margin-bottom: 12px;
+    font-size: clamp(2rem, 3.2vw, 3rem);
     transition: color 220ms ease;
   }
 
-  .next-project__copy > p:not(.eyebrow) {
-    max-width: 480px;
+  .next-project__copy > p:not(.case-study__label) {
+    max-width: 42ch;
+    margin-bottom: 0;
     color: var(--muted);
+    font-size: 0.98rem;
   }
 
-  .next-project__copy span {
+  .next-project__cue {
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    margin-top: 14px;
+    margin-top: 18px;
     color: var(--accent);
     font-family: var(--font-hand);
     font-size: 1.25rem;
   }
 
-  .next-project__copy span img { transition: transform 220ms var(--ease-out); }
+  .next-project__cue img { transition: transform 260ms var(--ease-out); }
 
   .next-project__visual {
-    overflow: hidden;
-    max-height: 380px;
+    --plate-ratio: 16 / 10;
+    transition: box-shadow 420ms var(--ease-out), transform 420ms var(--ease-out), border-color 300ms ease;
   }
 
-  .next-project__visual img {
-    width: 100%;
-    height: 100%;
-    max-height: 380px;
-    object-fit: contain;
-    object-position: left center;
-    transition: transform 700ms var(--ease-out);
-  }
+  .next-project__visual img { transition: transform 900ms var(--ease-glide); }
 
-  .next-project__inner:hover h2 { color: var(--accent); }
-  .next-project__inner:hover .next-project__copy span img { transform: translate(3px, -3px); }
-  .next-project__inner:hover .next-project__visual img { transform: translateY(-5px); }
+  @media (hover: hover) {
+    .case-study__back:hover { color: var(--ink); }
+    .case-study__back:hover img { transform: rotate(180deg) translateX(3px); }
+    .case-study__fact-link:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+    .next-project__inner:hover h2 { color: var(--accent); }
+    .next-project__inner:hover .next-project__cue img { transform: translate(3px, -3px); }
+
+    .next-project__inner:hover .next-project__visual {
+      border-color: var(--line-strong);
+      box-shadow: var(--shadow-plate-hover);
+      transform: translateY(-4px);
+    }
+
+    .next-project__inner:hover .next-project__visual img { transform: scale(1.02); }
+  }
 
   @media (max-width: 980px) {
-    .case-study__intro { grid-template-columns: 1fr; gap: 42px; }
-    .case-study__introduction { max-width: 680px; }
-    .case-study__chapter { gap: 52px; }
+    .case-study__chapter {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .case-study__rail { position: static; }
+    .case-study__copy { max-width: 72ch; }
+    .case-study__facts > div + div { padding-left: 0; border-left: 0; }
+    .case-study__facts > div:not(:last-child) { padding-right: 24px; }
   }
 
   @media (max-width: 720px) {
-    .case-study__hero {
-      padding-top: 30px;
-      padding-bottom: 44px;
-    }
+    .case-study__masthead { padding-top: 24px; padding-bottom: 34px; }
+    .case-study__back { margin-bottom: 28px; }
+    .case-study__masthead h1 { max-width: none; font-size: clamp(2.35rem, 10.5vw, 3rem); }
+    .case-study__lede { align-items: flex-start; flex-direction: column; gap: 24px; }
 
-    .case-study__back { margin-bottom: 34px; }
-
-    .case-study__intro { gap: 32px; }
-
-    .case-study__heading h1 {
-      font-size: clamp(2.5rem, 10.8vw, 3rem);
-      line-height: 1;
-    }
-
-    .case-study__brief div { grid-template-columns: 92px minmax(0, 1fr); }
-
-    .case-study__media { width: calc(100% - 32px); }
-
-    .case-study__caption {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .case-study__stack {
-      grid-template-columns: 1fr;
-      gap: 30px;
-      padding-top: 44px;
-      padding-bottom: 62px;
-    }
-
-    .case-study__chapter {
-      grid-template-columns: 1fr;
-      gap: 28px;
-      padding-block: 56px;
-    }
-
-    .case-study__chapter h2 { max-width: none; }
-
-    .next-project { margin-top: 68px; padding-block: 48px 0; }
-
-    .next-project__inner {
-      grid-template-columns: 1fr;
-      gap: 34px;
-    }
-
+    /* Stacked, the deck's flex-basis would become a height — reset it. */
+    .case-study__deck { flex: 0 0 auto; max-width: none; }
+    .case-study__facts { grid-template-columns: 1fr; }
+    .case-study__chrome { padding-inline: 12px; block-size: 32px; }
+    .case-study__chrome-dots i { width: 7px; height: 7px; }
+    .case-study__chapter { padding-block: 44px; }
+    .case-study__copy h2 { max-width: none; }
+    .case-study__highlights li { grid-template-columns: 28px minmax(0, 1fr); gap: 10px; padding: 16px; }
+    .next-project { margin-top: 48px; padding-block: 40px 0; }
+    .next-project__inner { grid-template-columns: 1fr; gap: 28px; }
     .next-project__visual { order: -1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-study__rail { position: static; }
   }
 </style>

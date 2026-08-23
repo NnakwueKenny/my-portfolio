@@ -487,7 +487,130 @@ async function sendMail(payload) {
   });
 }
 
-function buildOwnerNotificationEmail(messageRecord) {
+/* ---------------------------------------------------------------------------
+   Email templates
+   Table-based and inline-styled for mail-client support, using the same paper,
+   ink, hairline, and blue accent as the portfolio itself.
+--------------------------------------------------------------------------- */
+
+const MAIL = {
+  page: "#f1eee7",
+  card: "#fbfaf7",
+  surface: "#ffffff",
+  ink: "#191817",
+  muted: "#67635f",
+  line: "#ddd9d1",
+  accent: "#1559c5",
+  serif: "Georgia, 'Times New Roman', Times, serif",
+  sans: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+};
+
+const LABEL_STYLE = `font-family:${MAIL.sans};font-size:11px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:${MAIL.muted};`;
+const BODY_STYLE = `font-family:${MAIL.sans};font-size:15px;line-height:1.75;color:${MAIL.ink};`;
+
+function renderEmailShell({ preheader, tag, eyebrow, heading, intro, content, footer }) {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="x-apple-disable-message-reformatting" />
+<meta name="color-scheme" content="light" />
+<meta name="supported-color-schemes" content="light" />
+<title>${escapeHtml(heading)}</title>
+</head>
+<body style="margin:0;padding:0;width:100%;background:${MAIL.page};">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;mso-hide:all;">${preheader}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${MAIL.page};">
+  <tr>
+    <td align="center" style="padding:32px 16px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:100%;background:${MAIL.card};border:1px solid ${MAIL.line};border-radius:12px;">
+
+        <tr>
+          <td style="padding:22px 32px;border-bottom:1px solid ${MAIL.line};">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="font-family:${MAIL.serif};font-size:17px;font-weight:700;letter-spacing:-0.02em;color:${MAIL.ink};">
+                  Kene <span style="color:${MAIL.line};">&middot;</span> <span style="color:${MAIL.accent};">CodeHermit</span>
+                </td>
+                <td align="right" style="${LABEL_STYLE}">${tag}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:34px 32px 8px;">
+            <div style="${LABEL_STYLE}padding-bottom:14px;">${eyebrow}</div>
+            <h1 style="margin:0;font-family:${MAIL.serif};font-size:28px;line-height:1.18;letter-spacing:-0.02em;font-weight:700;color:${MAIL.ink};">${escapeHtml(heading)}</h1>
+            ${intro ? `<p style="margin:14px 0 0;font-family:${MAIL.sans};font-size:15px;line-height:1.7;color:${MAIL.muted};">${intro}</p>` : ""}
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:26px 32px 34px;">${content}</td>
+        </tr>
+
+        <tr>
+          <td style="padding:18px 32px 22px;border-top:1px solid ${MAIL.line};font-family:${MAIL.sans};font-size:12px;line-height:1.7;color:${MAIL.muted};">${footer}</td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>`;
+}
+
+/** Label/value rows separated by hairlines, in place of stacked rounded cards. */
+function renderDetailRows(rows) {
+  const cells = rows
+    .map((row, index) => {
+      const divider = index === 0 ? "" : `border-top:1px solid ${MAIL.line};`;
+      const spacing = index === 0 ? "padding:0 0 13px;" : "padding:13px 0;";
+      return `
+              <tr>
+                <td width="118" valign="top" style="${spacing}${divider}${LABEL_STYLE}line-height:1.6;">${row.label}</td>
+                <td valign="top" style="${spacing}${divider}font-family:${MAIL.sans};font-size:15px;line-height:1.6;color:${MAIL.ink};">${row.value}</td>
+              </tr>`;
+    })
+    .join("");
+
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">${cells}</table>`;
+}
+
+/** Quoted content, marked by an accent rule rather than another nested card. */
+function renderQuote({ label, title, body }) {
+  return `
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+              <tr>
+                <td width="3" style="background:${MAIL.accent};"></td>
+                <td style="padding:16px 20px;background:${MAIL.surface};border:1px solid ${MAIL.line};border-left:0;">
+                  ${label ? `<div style="${LABEL_STYLE}padding-bottom:10px;">${label}</div>` : ""}
+                  ${title ? `<div style="font-family:${MAIL.serif};font-size:18px;line-height:1.35;font-weight:700;color:${MAIL.ink};padding-bottom:10px;">${title}</div>` : ""}
+                  <div style="${BODY_STYLE}">${body}</div>
+                </td>
+              </tr>
+            </table>`;
+}
+
+function renderButton({ href, label }) {
+  return `
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background:${MAIL.ink};border-radius:8px;">
+                  <a href="${href}" style="display:inline-block;padding:13px 22px;font-family:${MAIL.sans};font-size:14px;font-weight:700;line-height:1;color:#ffffff;text-decoration:none;">${label}</a>
+                </td>
+              </tr>
+            </table>`;
+}
+
+function renderSignOff() {
+  return `<p style="margin:24px 0 0;${BODY_STYLE}">Best,<br /><span style="font-family:${MAIL.serif};font-size:17px;font-weight:700;color:${MAIL.ink};">Kenechukwu</span></p>`;
+}
+
+export function buildOwnerNotificationEmail(messageRecord) {
   const submittedAt = new Date(messageRecord.created_at).toLocaleString("en-US", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -498,6 +621,25 @@ function buildOwnerNotificationEmail(messageRecord) {
   const escapedSubject = escapeHtml(messageRecord.subject);
   const escapedMessage = escapeHtml(messageRecord.message).replaceAll("\n", "<br />");
   const replyToLink = `mailto:${encodeURIComponent(messageRecord.email)}?subject=${encodeURIComponent(`Re: ${messageRecord.subject}`)}`;
+
+  const content = `
+            ${renderDetailRows([
+              { label: "From", value: escapedName },
+              {
+                label: "Email",
+                value: `<a href="mailto:${escapedEmail}" style="color:${MAIL.accent};font-weight:600;text-decoration:none;">${escapedEmail}</a>`,
+              },
+              { label: "Subject", value: escapedSubject },
+              { label: "Received", value: `${submittedAt} UTC` },
+            ])}
+
+            <div style="padding:26px 0 0;">
+              ${renderQuote({ label: "Message", title: "", body: escapedMessage })}
+            </div>
+
+            <div style="padding:26px 0 0;">
+              ${renderButton({ href: replyToLink, label: `Reply to ${escapedName}` })}
+            </div>`;
 
   return {
     subject: `Portfolio contact: ${messageRecord.subject}`,
@@ -512,100 +654,28 @@ function buildOwnerNotificationEmail(messageRecord) {
       "Message:",
       messageRecord.message,
     ].join("\n"),
-    html: `
-      <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-        New portfolio inquiry from ${escapedName}: ${escapedSubject}
-      </div>
-      <div style="margin:0;padding:32px 16px;background:#f3f6f8;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
-        <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #d9e2e8;border-radius:24px;overflow:hidden;box-shadow:0 18px 45px rgba(15,23,42,0.08);">
-          <div style="padding:28px 32px;background:linear-gradient(135deg,#081c15 0%,#0f3d2e 100%);">
-            <div style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(21,255,147,0.14);border:1px solid rgba(21,255,147,0.28);color:#9fffd0;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-              Code Hermit
-            </div>
-            <h1 style="margin:18px 0 8px;color:#f8fffb;font-size:28px;line-height:1.2;font-weight:800;">
-              New portfolio inquiry
-            </h1>
-            <p style="margin:0;color:#c8f8e3;font-size:15px;line-height:1.7;">
-              Someone just reached out through your portfolio contact form.
-            </p>
-          </div>
-
-          <div style="padding:28px 32px 10px;">
-            <div style="margin-bottom:18px;padding:18px 20px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;">
-              <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                Subject
-              </div>
-              <div style="color:#0f172a;font-size:22px;line-height:1.4;font-weight:700;">
-                ${escapedSubject}
-              </div>
-            </div>
-
-            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:separate;border-spacing:0 12px;">
-              <tr>
-                <td width="50%" valign="top" style="padding-right:8px;">
-                  <div style="height:100%;padding:18px 20px;background:#ffffff;border:1px solid #e2e8f0;border-radius:18px;">
-                    <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                      From
-                    </div>
-                    <div style="color:#0f172a;font-size:18px;line-height:1.5;font-weight:700;">
-                      ${escapedName}
-                    </div>
-                  </div>
-                </td>
-                <td width="50%" valign="top" style="padding-left:8px;">
-                  <div style="height:100%;padding:18px 20px;background:#ffffff;border:1px solid #e2e8f0;border-radius:18px;">
-                    <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                      Reply to
-                    </div>
-                    <a href="mailto:${escapedEmail}" style="color:#0f766e;font-size:16px;line-height:1.5;font-weight:700;text-decoration:none;">
-                      ${escapedEmail}
-                    </a>
-                  </div>
-                </td>
-              </tr>
-            </table>
-
-            <div style="margin:12px 0 0;padding:18px 20px;background:#ffffff;border:1px solid #e2e8f0;border-radius:18px;">
-              <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                Received
-              </div>
-              <div style="color:#334155;font-size:15px;line-height:1.6;">
-                ${submittedAt} UTC
-              </div>
-            </div>
-
-            <div style="margin:20px 0 0;padding:24px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;">
-              <div style="margin-bottom:12px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                Message
-              </div>
-              <div style="color:#0f172a;font-size:16px;line-height:1.8;">
-                ${escapedMessage}
-              </div>
-            </div>
-
-            <div style="padding:28px 0 10px;text-align:center;">
-              <a
-                href="${replyToLink}"
-                style="display:inline-block;padding:14px 24px;background:#0f766e;border-radius:999px;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;"
-              >
-                Reply to ${escapedName}
-              </a>
-            </div>
-          </div>
-
-          <div style="padding:18px 32px 28px;color:#64748b;font-size:13px;line-height:1.7;text-align:center;">
-            Sent from your portfolio contact form.
-          </div>
-        </div>
-      </div>
-    `,
+    html: renderEmailShell({
+      preheader: `${escapedName} — ${escapedSubject}`,
+      tag: "Contact form",
+      eyebrow: "New enquiry",
+      heading: messageRecord.subject,
+      intro: `${escapedName} reached out through your portfolio contact form.`,
+      content,
+      footer: "Sent automatically from the contact form on your portfolio.",
+    }),
   };
 }
 
-function buildContactConfirmationEmail(messageRecord) {
+export function buildContactConfirmationEmail(messageRecord) {
   const escapedName = escapeHtml(messageRecord.name);
   const escapedSubject = escapeHtml(messageRecord.subject);
   const escapedMessage = escapeHtml(messageRecord.message).replaceAll("\n", "<br />");
+
+  const content = `
+            <p style="margin:0 0 18px;${BODY_STYLE}">Hi ${escapedName},</p>
+            <p style="margin:0 0 24px;${BODY_STYLE}">Thanks for getting in touch. Your message reached my inbox and I will read it properly and reply as soon as I can.</p>
+            ${renderQuote({ label: "What you sent", title: escapedSubject, body: escapedMessage })}
+            ${renderSignOff()}`;
 
   return {
     subject: "I received your message",
@@ -623,131 +693,54 @@ function buildContactConfirmationEmail(messageRecord) {
       "Best,",
       "Kenechukwu",
     ].join("\n"),
-    html: `
-      <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-        Thanks for reaching out. Your message has been received.
-      </div>
-      <div style="margin:0;padding:32px 16px;background:#f3f6f8;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
-        <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #d9e2e8;border-radius:24px;overflow:hidden;box-shadow:0 18px 45px rgba(15,23,42,0.08);">
-          <div style="padding:28px 32px;background:linear-gradient(135deg,#081c15 0%,#0f3d2e 100%);">
-            <div style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(21,255,147,0.14);border:1px solid rgba(21,255,147,0.28);color:#9fffd0;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-              Code Hermit
-            </div>
-            <h1 style="margin:18px 0 8px;color:#f8fffb;font-size:28px;line-height:1.2;font-weight:800;">
-              Thanks for reaching out
-            </h1>
-            <p style="margin:0;color:#c8f8e3;font-size:15px;line-height:1.7;">
-              Your message came through successfully. I'll review it and reply as soon as I can.
-            </p>
-          </div>
-
-          <div style="padding:28px 32px 12px;">
-            <p style="margin:0 0 18px;color:#334155;font-size:16px;line-height:1.8;">
-              Hi ${escapedName},
-            </p>
-            <p style="margin:0 0 18px;color:#334155;font-size:16px;line-height:1.8;">
-              Thanks for contacting me through my portfolio. This is a quick confirmation that I received your message and it is now in my inbox.
-            </p>
-
-            <div style="padding:20px 22px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;">
-              <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                Your subject
-              </div>
-              <div style="margin-bottom:18px;color:#0f172a;font-size:20px;line-height:1.5;font-weight:700;">
-                ${escapedSubject}
-              </div>
-              <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                Your message
-              </div>
-              <div style="color:#334155;font-size:15px;line-height:1.8;">
-                ${escapedMessage}
-              </div>
-            </div>
-
-            <p style="margin:22px 0 0;color:#334155;font-size:16px;line-height:1.8;">
-              Best,<br />
-              <span style="color:#0f172a;font-weight:700;">Kenechukwu</span>
-            </p>
-          </div>
-
-          <div style="padding:18px 32px 28px;color:#64748b;font-size:13px;line-height:1.7;text-align:center;">
-            This is an automatic confirmation from the Code Hermit portfolio contact form.
-          </div>
-        </div>
-      </div>
-    `,
+    html: renderEmailShell({
+      preheader: "Your message reached my inbox. I will reply shortly.",
+      tag: "Confirmation",
+      eyebrow: "Message received",
+      heading: "Thanks for reaching out",
+      intro: "This is a quick confirmation that your message came through.",
+      content,
+      footer: "You are receiving this because you used the contact form at codehermit.netlify.app.",
+    }),
   };
 }
 
-function buildReplyEmail({ messageRecord, subject, body }) {
-  const escapedName = escapeHtml(messageRecord.name);
-  const escapedSubject = escapeHtml(subject);
+export function buildReplyEmail({ messageRecord, subject, body }) {
   const escapedBody = escapeHtml(body).replaceAll("\n", "<br />");
   const escapedOriginalSubject = escapeHtml(messageRecord.subject);
   const escapedOriginalMessage = escapeHtml(messageRecord.message).replaceAll("\n", "<br />");
 
+  /* The reply body is written by hand in the dashboard and carries its own
+     greeting, so the template must not add a second one. */
+  const content = `
+            <div style="${BODY_STYLE}">${escapedBody}</div>
+            ${renderSignOff()}
+
+            <div style="padding:30px 0 0;">
+              <div style="${LABEL_STYLE}padding-bottom:12px;border-top:1px solid ${MAIL.line};padding-top:22px;">In reply to</div>
+              <div style="font-family:${MAIL.serif};font-size:16px;font-weight:700;line-height:1.4;color:${MAIL.ink};padding-bottom:8px;">${escapedOriginalSubject}</div>
+              <div style="font-family:${MAIL.sans};font-size:14px;line-height:1.7;color:${MAIL.muted};">${escapedOriginalMessage}</div>
+            </div>`;
+
   return {
     subject,
     text: [
-      `Hi ${messageRecord.name},`,
-      "",
       body,
-      "",
-      `Original subject: ${messageRecord.subject}`,
       "",
       "Best,",
       "Kenechukwu",
+      "",
+      `In reply to: ${messageRecord.subject}`,
     ].join("\n"),
-    html: `
-      <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-        A reply from Code Hermit regarding your message: ${escapedOriginalSubject}
-      </div>
-      <div style="margin:0;padding:32px 16px;background:#f3f6f8;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
-        <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #d9e2e8;border-radius:24px;overflow:hidden;box-shadow:0 18px 45px rgba(15,23,42,0.08);">
-          <div style="padding:28px 32px;background:linear-gradient(135deg,#081c15 0%,#0f3d2e 100%);">
-            <div style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(21,255,147,0.14);border:1px solid rgba(21,255,147,0.28);color:#9fffd0;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-              Code Hermit
-            </div>
-            <h1 style="margin:18px 0 8px;color:#f8fffb;font-size:28px;line-height:1.2;font-weight:800;">
-              ${escapedSubject}
-            </h1>
-            <p style="margin:0;color:#c8f8e3;font-size:15px;line-height:1.7;">
-              A response to the message you sent through my portfolio.
-            </p>
-          </div>
-
-          <div style="padding:28px 32px 18px;">
-            <p style="margin:0 0 18px;color:#334155;font-size:16px;line-height:1.8;">
-              Hi ${escapedName},
-            </p>
-            <div style="padding:22px;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;color:#334155;font-size:16px;line-height:1.9;">
-              ${escapedBody}
-            </div>
-
-            <div style="margin-top:24px;padding:20px 22px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;">
-              <div style="margin-bottom:8px;color:#64748b;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">
-                Original message
-              </div>
-              <div style="margin-bottom:12px;color:#0f172a;font-size:18px;font-weight:700;line-height:1.5;">
-                ${escapedOriginalSubject}
-              </div>
-              <div style="color:#475569;font-size:15px;line-height:1.8;">
-                ${escapedOriginalMessage}
-              </div>
-            </div>
-
-            <p style="margin:22px 0 0;color:#334155;font-size:16px;line-height:1.8;">
-              Best,<br />
-              <span style="color:#0f172a;font-weight:700;">Kenechukwu</span>
-            </p>
-          </div>
-
-          <div style="padding:18px 32px 28px;color:#64748b;font-size:13px;line-height:1.7;text-align:center;">
-            Sent from the Code Hermit private inbox.
-          </div>
-        </div>
-      </div>
-    `,
+    html: renderEmailShell({
+      preheader: `A reply about: ${escapedOriginalSubject}`,
+      tag: "Reply",
+      eyebrow: "From Kene",
+      heading: subject,
+      intro: "",
+      content,
+      footer: "Replying directly to this email reaches me.",
+    }),
   };
 }
 

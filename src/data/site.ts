@@ -49,6 +49,8 @@ export type Project = {
   surfaces?: string;
   featured?: boolean;
   imagePosition?: string;
+  /** Intrinsic aspect ratio of `image`, so its plate fits it exactly with no bars or cropping. */
+  imageRatio?: string;
 };
 
 export const projects: Project[] = [
@@ -57,10 +59,11 @@ export const projects: Project[] = [
     title: 'FlamePay',
     year: '2026',
     description:
-      'A Credway product for planning, prepaying, and redeeming cooking-gas value in Nigeria.',
+      'Mobile-first LPG prepayment and redemption for Nigerian households and verified partner gas stations.',
     overview:
-      'FlamePay is a mobile-first LPG prepayment and redemption platform built under Credway for Nigerian households and verified partner stations. Station Lock lets a customer buy a fixed gas quantity at one selected station for a clear 10-day window, while Flexible Naira keeps value Naira-backed until the customer chooses an available station at redemption. Customer, station, and administrative products share one traceable operational system.',
+      'FlamePay is a mobile-first LPG prepayment and redemption platform built for Nigerian households and verified partner stations. Station Lock lets a customer buy a fixed gas quantity at one selected station for a clear 10-day window, while Flexible Naira keeps value Naira-backed until the customer chooses an available station at redemption. Customer, station, and administrative products share one traceable operational system.',
     image: '/images/flamepay-website.jpg',
+    imageRatio: '1440 / 900',
     url: 'https://flamepay.netlify.app',
     role: 'Technical founder, product architecture and full-stack engineering',
     surfaces: 'Customer app, station app, administration, API and public web',
@@ -115,6 +118,7 @@ export const projects: Project[] = [
     overview:
       'Credway needed a website that could explain a trust-dependent service without burying visitors in logistics language. The finished experience gives moving, storage, and related services a clear hierarchy, reinforces the company’s local positioning and service commitments, and keeps a direct enquiry path close to every decision point.',
     image: '/images/credway-website.jpg',
+    imageRatio: '1280 / 720',
     url: 'https://credway.com.ng',
     role: 'Product design and frontend engineering',
     contribution:
@@ -136,6 +140,7 @@ export const projects: Project[] = [
     overview:
       'Skybod CarePass brings job discovery and workforce compliance into one product for the UK care industry. Care professionals can maintain the information required to demonstrate readiness for work, while providers can find suitable people and review the records that support a hiring decision.',
     image: '/images/skybod_carepass-website.png',
+    imageRatio: '3360 / 1688',
     url: 'https://skybodcarepass.com',
     role: 'Product architecture and full-stack engineering',
     contribution:
@@ -158,6 +163,7 @@ export const projects: Project[] = [
     overview:
       'NaijaGrocer turns recurring household food shopping into a more manageable digital service. Customers can choose curated food packs, subscribe to repeat orders, spread payments through wallet instalments, and coordinate delivery without losing sight of order or payment status.',
     image: '/images/naijagrocer-website.png',
+    imageRatio: '3360 / 1688',
     url: 'https://naijagrocer.com',
     role: 'Product engineering and technical delivery',
     contribution:
@@ -180,6 +186,7 @@ export const projects: Project[] = [
     overview:
       'Entrecore helps leadership teams turn fragmented business information into structured, decision-ready intelligence. Rather than leaving important context scattered across tools and documents, the platform creates a clearer system for organising knowledge and bringing relevant information into view.',
     image: '/images/entrecore-website.png',
+    imageRatio: '1205 / 901',
     url: 'https://entrecore.com',
     role: 'Engineering lead and systems architect',
     contribution:
@@ -202,6 +209,7 @@ export const projects: Project[] = [
     overview:
       'NotJustEvent gives organisers one place to create events, sell and validate tickets, manage promotions, and follow payment activity. It also provides the backend foundation needed for attendees to discover events and move through a dependable purchase journey.',
     image: '/images/nje-website.png',
+    imageRatio: '1748 / 1240',
     url: 'https://notjustevent.com',
     role: 'Lead software engineer',
     contribution:
@@ -223,6 +231,7 @@ export const projects: Project[] = [
     overview:
       'Yacht Crew Center combines crew discovery, recruitment information, certification records, and maritime compliance in a mobile-ready product. It gives crew members and the teams hiring them a shared place to manage the information that determines whether someone is ready for a role.',
     image: '/images/ycc-website.png',
+    imageRatio: '1334 / 901',
     url: 'https://yachtcrewcenter.com',
     role: 'Engineering lead',
     contribution:
@@ -244,6 +253,7 @@ export const projects: Project[] = [
     overview:
       'Yoris Africa’s digital platform supports the operational activity behind a logistics business. It combines customer-facing and administrative capabilities with the APIs and asynchronous services required to keep high-volume requests and internal workflows moving reliably.',
     image: '/images/yoris-website.png',
+    imageRatio: '1440 / 900',
     url: 'https://yoris.africa',
     role: 'Software engineer',
     contribution:
