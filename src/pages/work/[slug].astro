@@ -16,28 +16,35 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
 <BaseLayout title={`${project.title} — Kene · CodeHermit`} description={project.description} image={project.image}>
   <article class="case-study">
     <header class="case-study__hero shell">
-      <div class="case-study__heading">
-        <p class="eyebrow">Case study · {project.year}</p>
-        <h1 transition:name={`project-title-${project.slug}`}>{project.title}</h1>
-        <p>{project.description}</p>
-      </div>
+      <a class="case-study__back" href="/work">
+        <img src="/icons/arrow-right.svg" alt="" width="16" height="16" />
+        All work
+      </a>
 
-      <div class="case-study__facts">
-        <dl>
-          <div>
-            <dt>Year</dt>
-            <dd>{project.year}</dd>
+      <div class="case-study__intro">
+        <div class="case-study__heading">
+          <p class="eyebrow">Product · {project.year}</p>
+          <h1 transition:name={`project-title-${project.slug}`}>{project.title}</h1>
+        </div>
+
+        <div class="case-study__introduction">
+          <p class="case-study__description">{project.description}</p>
+          <dl class="case-study__brief">
+            <div>
+              <dt>My role</dt>
+              <dd>{project.role}</dd>
+            </div>
+            {project.surfaces && (
+              <div>
+                <dt>Product surfaces</dt>
+                <dd>{project.surfaces}</dd>
+              </div>
+            )}
+          </dl>
+          <div class="case-study__action">
+            <ActionLink href={project.url} variant="primary" external>Visit live product</ActionLink>
           </div>
-          <div>
-            <dt>Role</dt>
-            <dd>{project.role}</dd>
-          </div>
-          <div>
-            <dt>Focus</dt>
-            <dd>{project.tags.slice(0, 3).join(', ')}</dd>
-          </div>
-        </dl>
-        <ActionLink href={project.url} variant="primary" external>Visit live product</ActionLink>
+        </div>
       </div>
     </header>
 
@@ -61,37 +68,40 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
       </div>
     </div>
 
-    <div class="case-study__sections shell">
-      <section class="case-study__section" data-reveal>
+    <section class="case-study__stack shell" aria-labelledby="project-stack-heading" data-reveal>
+      <div>
+        <p class="eyebrow">Product stack</p>
+        <h2 id="project-stack-heading">Tools and technologies.</h2>
+      </div>
+      <TechnologyList items={project.tags} labelledBy="project-stack-heading" />
+    </section>
+
+    <div class="case-study__story shell">
+      <section class="case-study__chapter" data-reveal>
         <header>
-          <p class="eyebrow">The product</p>
-          <h2>Project overview</h2>
+          <p class="eyebrow">Why it exists</p>
+          <h2>{project.storyHeading ?? 'What the product needed to do.'}</h2>
         </header>
         <div class="case-study__copy">
           <p class="case-study__lead">{project.overview}</p>
         </div>
       </section>
 
-      <section class="case-study__section" data-reveal>
+      <section class="case-study__chapter" data-reveal>
         <header>
-          <p class="eyebrow">My role</p>
-          <h2>Contribution</h2>
+          <p class="eyebrow">What I built</p>
+          <h2>{project.contributionHeading ?? 'What I was responsible for.'}</h2>
         </header>
         <div class="case-study__copy">
           <p class="case-study__lead">{project.contributionDetails}</p>
           <ul class="case-study__highlights" aria-label="Key areas of work">
-            {project.highlights.map((highlight) => <li>{highlight}</li>)}
+            {project.highlights.map((highlight) => (
+              <li>
+                <img src="/icons/arrow-up-right.svg" alt="" width="16" height="16" />
+                <span>{highlight}</span>
+              </li>
+            ))}
           </ul>
-        </div>
-      </section>
-
-      <section class="case-study__section case-study__section--technology" data-reveal>
-        <header>
-          <p class="eyebrow">Technology</p>
-          <h2>Built with</h2>
-        </header>
-        <div class="case-study__copy">
-          <TechnologyList items={project.tags} size="large" />
         </div>
       </section>
     </div>
@@ -116,79 +126,72 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
 </BaseLayout>
 
 <style>
-  /* Editorial case-study template shared by every project route. */
   .case-study__hero {
-    position: relative;
+    padding-top: clamp(40px, 5vw, 68px);
+    padding-bottom: clamp(44px, 6vw, 78px);
+  }
+
+  .case-study__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: clamp(34px, 4vw, 54px);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+  }
+
+  .case-study__back img { transform: rotate(180deg); }
+
+  .case-study__intro {
     display: grid;
-    overflow: hidden;
-    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.46fr);
-    gap: clamp(62px, 9vw, 132px);
-    align-items: end;
-    padding: clamp(76px, 9vw, 122px) clamp(30px, 5vw, 68px) clamp(58px, 7vw, 92px);
-    isolation: isolate;
+    grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.72fr);
+    gap: clamp(64px, 10vw, 152px);
+    align-items: start;
   }
-
-  .case-study__hero::after {
-    position: absolute;
-    z-index: -1;
-    top: 34px;
-    right: -80px;
-    width: 460px;
-    height: 390px;
-    background: url('/images/design/notebook-dots.png') center / 430px 430px;
-    content: '';
-    opacity: 0.46;
-  }
-
-  .case-study__heading { max-width: 920px; }
 
   .case-study__heading .eyebrow {
-    margin-bottom: 28px;
+    margin-bottom: 17px;
     color: var(--accent);
     font-family: var(--font-hand);
-    font-size: clamp(1.18rem, 1.55vw, 1.5rem);
+    font-size: clamp(1.06rem, 1.25vw, 1.3rem);
     letter-spacing: 0;
     text-transform: none;
     transform: rotate(-1deg);
   }
 
   .case-study__heading h1 {
-    max-width: 980px;
-    margin-bottom: 28px;
-    font-size: clamp(4.4rem, 8.8vw, 8rem);
-  }
-
-  .case-study__heading > p:last-child {
     max-width: 760px;
-    margin-bottom: 0;
-    color: var(--muted);
-    font-size: clamp(1.18rem, 1.75vw, 1.48rem);
-    line-height: 1.45;
-  }
-
-  .case-study__facts {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    gap: 32px;
-    justify-items: start;
-  }
-
-  .case-study__facts dl {
-    width: 100%;
     margin: 0;
-    border-top: 1px solid var(--line-strong);
+    font-size: clamp(2.8rem, 3.8vw, 4rem);
+    line-height: 0.98;
   }
 
-  .case-study__facts dl div {
+  .case-study__description {
+    max-width: 600px;
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(1.08rem, 1.35vw, 1.3rem);
+    line-height: 1.55;
+  }
+
+  .case-study__brief {
     display: grid;
-    grid-template-columns: 64px minmax(0, 1fr);
-    gap: 18px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
+    gap: 17px;
+    margin: 28px 0 0;
+    padding: 22px 0 0;
+    border-top: 1px solid var(--line);
   }
 
-  .case-study__facts dt {
+  .case-study__brief div {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .case-study__brief dt {
     color: var(--muted);
     font-size: 0.72rem;
     font-weight: 700;
@@ -196,21 +199,24 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
     text-transform: uppercase;
   }
 
-  .case-study__facts dd {
+  .case-study__brief dd {
     margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.45;
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .case-study__action {
+    margin-top: 28px;
   }
 
   .case-study__media {
-    width: min(1040px, var(--shell));
+    width: min(1180px, calc(100% - 40px));
     margin-inline: auto;
   }
 
   .case-study__visual {
     width: 100%;
     margin: 0;
-    background: var(--paper-strong);
   }
 
   .case-study__visual img {
@@ -239,32 +245,45 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
     text-decoration: none;
   }
 
-  .case-study__sections { padding-top: clamp(72px, 9vw, 122px); }
-
-  .case-study__section {
+  .case-study__stack {
     display: grid;
-    grid-template-columns: minmax(230px, 0.42fr) minmax(0, 1fr);
-    gap: clamp(44px, 9vw, 138px);
-    padding-block: clamp(52px, 7vw, 86px);
-    border-top: 1px solid var(--line-strong);
+    grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
+    gap: clamp(44px, 8vw, 112px);
+    padding-top: clamp(48px, 6vw, 72px);
+    padding-bottom: clamp(58px, 8vw, 96px);
   }
 
-  .case-study__section:last-child { border-bottom: 1px solid var(--line-strong); }
-
-  .case-study__section header .eyebrow {
-    margin-bottom: 15px;
+  .case-study__stack .eyebrow,
+  .case-study__chapter .eyebrow {
+    margin-bottom: 12px;
     color: var(--muted);
     font-family: var(--font-body);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     transform: none;
   }
 
-  .case-study__section h2 {
-    max-width: 310px;
+  .case-study__stack h2 {
     margin: 0;
-    font-size: clamp(2.35rem, 3.9vw, 4rem);
+    font-size: clamp(2rem, 2.8vw, 3rem);
+  }
+
+  .case-study__story { border-top: 1px solid var(--line-strong); }
+
+  .case-study__chapter {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.76fr) minmax(0, 1fr);
+    gap: clamp(56px, 9vw, 132px);
+    padding-block: clamp(64px, 8vw, 104px);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .case-study__chapter h2 {
+    max-width: 520px;
+    margin: 0;
+    font-size: clamp(2.25rem, 3.55vw, 3.7rem);
+    line-height: 1.04;
   }
 
   .case-study__copy { max-width: 790px; }
@@ -286,28 +305,17 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
   }
 
   .case-study__highlights li {
-    position: relative;
-    padding: 17px 0 17px 24px;
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 12px;
+    padding: 18px 0;
     border-bottom: 1px solid var(--line);
     color: var(--ink);
     font-size: 0.94rem;
     line-height: 1.6;
   }
 
-  .case-study__highlights li::before {
-    position: absolute;
-    top: 25px;
-    left: 0;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    content: '';
-  }
-
-  .case-study__section--technology .case-study__copy { max-width: 880px; }
-
-  .case-study__section--technology .technology-list { margin-top: 4px; }
+  .case-study__highlights img { margin-top: 5px; }
 
   .next-project {
     margin-top: clamp(72px, 9vw, 118px);
@@ -326,7 +334,7 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
 
   .next-project__copy h2 {
     margin-bottom: 18px;
-    font-size: clamp(3.3rem, 6vw, 6.4rem);
+    font-size: clamp(2.7rem, 4.5vw, 4.8rem);
     transition: color 220ms ease;
   }
 
@@ -366,36 +374,29 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
   .next-project__inner:hover .next-project__visual img { transform: translateY(-5px); }
 
   @media (max-width: 980px) {
-    .case-study__hero {
-      grid-template-columns: 1fr;
-      gap: 46px;
-    }
-
-    .case-study__facts { max-width: 640px; }
-
-    .case-study__section { gap: 52px; }
+    .case-study__intro { grid-template-columns: 1fr; gap: 42px; }
+    .case-study__introduction { max-width: 680px; }
+    .case-study__chapter { gap: 52px; }
   }
 
   @media (max-width: 720px) {
     .case-study__hero {
-      gap: 38px;
-      padding: 48px 0 46px;
+      padding-top: 30px;
+      padding-bottom: 44px;
     }
 
-    .case-study__hero::after {
-      top: 0;
-      right: -170px;
-      width: 360px;
-      height: 300px;
-      opacity: 0.36;
-    }
+    .case-study__back { margin-bottom: 34px; }
 
-    .case-study__heading .eyebrow { margin-bottom: 20px; }
+    .case-study__intro { gap: 32px; }
 
     .case-study__heading h1 {
-      margin-bottom: 22px;
-      font-size: clamp(3.7rem, 18vw, 5.3rem);
+      font-size: clamp(2.5rem, 10.8vw, 3rem);
+      line-height: 1;
     }
+
+    .case-study__brief div { grid-template-columns: 92px minmax(0, 1fr); }
+
+    .case-study__media { width: calc(100% - 32px); }
 
     .case-study__caption {
       align-items: flex-start;
@@ -403,15 +404,20 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
       gap: 8px;
     }
 
-    .case-study__sections { padding-top: 60px; }
-
-    .case-study__section {
+    .case-study__stack {
       grid-template-columns: 1fr;
-      gap: 28px;
-      padding-block: 48px;
+      gap: 30px;
+      padding-top: 44px;
+      padding-bottom: 62px;
     }
 
-    .case-study__section h2 { max-width: none; }
+    .case-study__chapter {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-block: 56px;
+    }
+
+    .case-study__chapter h2 { max-width: none; }
 
     .next-project { margin-top: 68px; padding-block: 48px 0; }
 

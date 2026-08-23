@@ -27,6 +27,11 @@
 - Project-page source/implementation comparison: `/Users/mac/Documents/Projects/my-portfolio/tmp/case-study-qa/12-source-implementation-comparison.jpg`
 - Project-page desktop evidence: `/Users/mac/Documents/Projects/my-portfolio/tmp/case-study-qa/04-after-top-final.png`, `/Users/mac/Documents/Projects/my-portfolio/tmp/case-study-qa/05-after-sections-final.png`, and `/Users/mac/Documents/Projects/my-portfolio/tmp/case-study-qa/06-after-technology-final.png`
 - Project-page mobile evidence: `/Users/mac/Documents/Projects/my-portfolio/tmp/case-study-qa/07-mobile-top-final.png` and `/Users/mac/Documents/Projects/my-portfolio/tmp/case-study-qa/08-mobile-sections-final.png`
+- FlamePay catalogue evidence: `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/work-flamepay-first-desktop.png`
+- FlamePay case-study evidence: `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/flamepay-detail-desktop.png` and `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/flamepay-detail-mobile.png`
+- Current FlamePay source capture: `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/flamepay-current-live-desktop.png`
+- Final FlamePay redesign evidence: `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/flamepay-detail-redesigned-desktop.jpg`, `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/flamepay-detail-full-stack-desktop.jpg`, `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/flamepay-detail-redesigned-mobile-top.jpg`, and `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/work-flamepay-complete-stack-desktop.jpg`
+- FlamePay source/portfolio comparison: `/Users/mac/Documents/Projects/my-portfolio/tmp/flamepay-qa/flamepay-source-portfolio-comparison.jpg`
 
 The source and implementation were normalized to the same 1487 × 1058 viewport before judging typography, hero composition, portrait scale, connectors, CTA treatment, divider position, and the start of selected work. A second combined input isolates the hero because identity, portrait treatment, and hand-drawn connectors were the highest-risk details.
 
@@ -37,8 +42,9 @@ The source and implementation were normalized to the same 1487 × 1058 viewport 
 - The background is a quieter neutral paper tone and page labels use restrained body typography, reducing the template-like blue-handwriting repetition without abandoning the selected design system.
 - Real project images are standalone, proportionally contained, and unframed.
 - Credway is included in the full Work catalogue and has its own generated case-study route, while the homepage remains limited to the three selected features.
+- FlamePay leads the full Work catalogue directly above Credway and has a complete case study covering its customer, station, administration, API, payment, ledger, background-processing, and public-web surfaces; the homepage feature set remains unchanged.
 - Motion now has three distinct levels: a staggered homepage entrance, project/section scroll reveals, and Astro page transitions. The project reveal visibly resolves from a 38-pixel translated, clipped, 0.975-scale state to its settled state in 760 milliseconds.
-- All project detail routes now use a shared editorial case-study template with a contained product capture, project facts, direct unnumbered content sections, an icon-led technology list, and visual next-project handoff.
+- All project detail routes now use a quieter editorial story with a restrained title, direct role context, a real contained product capture, plain-language unnumbered sections, and a visual next-project handoff.
 - Technology icons now appear in the Work catalogue and project detail pages wherever a verified local asset exists; unsupported service names remain readable text instead of fabricated icons.
 - No horizontal overflow at 1487, 1280, 1024, or 410 CSS pixels. The one 4-pixel About overflow found during the mobile pass was corrected by constraining the decorative dot field.
 - No actionable P0, P1, or P2 visual issues remain.
@@ -69,9 +75,10 @@ The source and implementation were normalized to the same 1487 × 1058 viewport 
 - Browser identity: the current portrait cutout loads from `/kene-codehermit-favicon.png`; the homepage title is `Kene · CodeHermit — Senior Software Engineer`, and internal page titles retain the same `Kene · CodeHermit` suffix.
 - Contact form contract: POST to `/api/contact`, four required fields, email input type, honeypot, submit button state, and ARIA live status region are present.
 - Live Netlify endpoint verification: a clearly labelled verification message returned HTTP 200 with `{"ok":true}`, confirming the deployed database submission path accepts and stores messages. The new frontend uses the same endpoint contract.
-- Production build: 14 routes generated successfully, including `/work/credway`.
+- Production build: 15 routes generated successfully, including `/work/flamepay` and `/work/credway`.
 - Browser console: no warnings or errors on the final homepage pass.
 - Project-template verification: Credway and Skybod CarePass both render the shared unnumbered three-section template, real contained images with `object-fit: contain`, and their correct technology icons; no horizontal overflow at 1416-pixel desktop or 371-pixel mobile content widths.
 - Final detail-page pass: Skybod CarePass rendered with a 1,040 × 522 desktop capture and a 339-pixel mobile capture; no decorative project/section numbers were present, desktop and mobile document widths matched their client widths, Docker rendered in the technology list, and the browser console returned no warnings or errors.
+- FlamePay final pass: FlamePay appears first in the Work catalogue with Credway directly after it; the outdated evidence capture was replaced with the current live FlamePay interface, all 29 verified technologies render in both the catalogue and detail page, the desktop title was reduced to 52 pixels and mobile to 40 pixels, document and client widths match at 1,371 and 371 CSS pixels, and the browser console reports no warnings or errors.
 
 final result: passed
