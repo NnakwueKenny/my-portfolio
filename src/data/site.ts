@@ -44,11 +44,69 @@ export type Project = {
   contributionDetails: string;
   highlights: string[];
   tags: string[];
+  storyHeading?: string;
+  contributionHeading?: string;
+  surfaces?: string;
   featured?: boolean;
   imagePosition?: string;
 };
 
 export const projects: Project[] = [
+  {
+    slug: 'flamepay',
+    title: 'FlamePay',
+    year: '2026',
+    description:
+      'A Credway product for planning, prepaying, and redeeming cooking-gas value in Nigeria.',
+    overview:
+      'FlamePay is a mobile-first LPG prepayment and redemption platform built under Credway for Nigerian households and verified partner stations. Station Lock lets a customer buy a fixed gas quantity at one selected station for a clear 10-day window, while Flexible Naira keeps value Naira-backed until the customer chooses an available station at redemption. Customer, station, and administrative products share one traceable operational system.',
+    image: '/images/flamepay-website.jpg',
+    url: 'https://flamepay.netlify.app',
+    role: 'Technical founder, product architecture and full-stack engineering',
+    surfaces: 'Customer app, station app, administration, API and public web',
+    storyHeading: 'Two ways to prepare for a refill, backed by one traceable system.',
+    contributionHeading: 'From customer payment to station redemption.',
+    contribution:
+      'Architected and built the product across customer and station applications, administration, payments, ledger-backed value, redemption, background processing, and public delivery.',
+    contributionDetails:
+      'I shaped FlamePay from product rules and interaction design through system architecture and implementation. The work spans universal React Native and Expo applications for customers and station teams, Next.js public and administrative surfaces, FastAPI services, a PostgreSQL source-of-truth ledger, Celery and Redis background processing, Paystack payment flows, and a containerised deployment foundation. I also established the engineering system, design tokens, auditability rules, and verification practices used across the product.',
+    highlights: [
+      'Built the customer and station journeys for authentication, Station Lock, Flexible Naira, vouchers, partial redemption, and transaction records.',
+      'Designed traceable payment, ledger, settlement, notification, and administrative workflows with idempotent value-changing operations.',
+      'Delivered the public website on Netlify and a Docker-based deployment foundation for the API, worker, scheduler, PostgreSQL, and Redis services.',
+    ],
+    tags: [
+      'Next.js',
+      'React',
+      'React Native',
+      'Expo',
+      'Expo Router',
+      'TypeScript',
+      'JavaScript',
+      'NativeWind',
+      'Tailwind CSS',
+      'Python',
+      'FastAPI',
+      'Pydantic',
+      'PostgreSQL',
+      'SQLAlchemy',
+      'Alembic',
+      'Redis',
+      'Celery',
+      'Docker',
+      'Docker Compose',
+      'Paystack',
+      'Termii',
+      'Resend',
+      'OpenAPI',
+      'Zod',
+      'Jest',
+      'Pytest',
+      'Playwright',
+      'pnpm',
+      'Netlify',
+    ],
+  },
   {
     slug: 'credway',
     title: 'Credway',
