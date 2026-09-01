@@ -5,7 +5,7 @@ export const profile = {
   title: 'Senior Software Engineer',
   location: 'Nigeria',
   summary:
-    'Senior software engineer with 7+ years across product architecture, full-stack development, cloud delivery, and technical leadership.',
+    'Senior software engineer with 8+ years building backend, frontend, and infrastructure systems, with hands-on technical leadership from architecture through production support.',
   email: 'nnakwuekenny@gmail.com',
   github: 'https://github.com/KeneHermitCoder',
   linkedin: 'https://www.linkedin.com/in/kenechukwu-nnakwue-a854081b5',
@@ -14,21 +14,31 @@ export const profile = {
 };
 
 export const capabilities = [
-  'Angular',
-  'React',
-  'Vue',
   'TypeScript',
-  'Node.js',
-  'NestJS',
+  'JavaScript',
   'Python',
-  'FastAPI',
+  'SQL',
+  'PHP',
+  'React',
+  'Next.js',
   'React Native',
+  'Angular',
+  'Vue',
+  'Node.js',
+  'Express.js',
+  'NestJS',
+  'FastAPI',
+  'Django',
+  'Laravel',
   'PostgreSQL',
   'MongoDB',
-  'AWS',
-  'Azure',
+  'RabbitMQ',
+  'Redis',
   'Docker',
   'GitHub Actions',
+  'Linux',
+  'AWS',
+  'Azure',
 ];
 
 export type Project = {
@@ -284,7 +294,7 @@ export const experiences: Experience[] = [
     company: 'Techsense Developers',
     title: 'Head of Engineering',
     period: 'Nov 2025 — Present',
-    mode: 'Remote',
+    mode: 'Part-time',
     logo: '/images/techsensedev-logo.jpeg',
     current: true,
     summary:
@@ -294,7 +304,7 @@ export const experiences: Experience[] = [
     company: 'NotJustEvent',
     title: 'Lead Software Engineer',
     period: 'Jul 2023 — Present',
-    mode: 'Remote',
+    mode: 'Startup',
     logo: '/images/notjustevent-logo.jpeg',
     current: true,
     summary:
@@ -312,21 +322,12 @@ export const experiences: Experience[] = [
   },
   {
     company: 'Punch Group',
-    title: 'Software Engineering Lead',
-    period: 'Mar 2025 — Jul 2025',
-    mode: 'Miami, US',
-    logo: '/images/punch-group-logo.jpeg',
-    summary:
-      'Led cross-functional technical execution, reviewed architecture and implementation, mentored engineers, and improved collaboration and delivery quality across product, design, and engineering.',
-  },
-  {
-    company: 'Punch Group',
-    title: 'Software Engineer',
+    title: 'Software Engineering Lead / Software Engineer',
     period: 'Jan 2025 — Jul 2025',
     mode: 'Miami, US',
     logo: '/images/punch-group-logo.jpeg',
     summary:
-      'Developed product features, contributed to maintainable software delivery, conducted code reviews, and provided technical guidance to junior engineers.',
+      'Led cross-functional technical execution from solution design through delivery, improved production features, reviewed architecture and code, and worked with product and design to strengthen maintainability and release quality.',
   },
   {
     company: 'Yoris Africa',
@@ -338,12 +339,20 @@ export const experiences: Experience[] = [
       'Built TypeScript APIs serving more than 50,000 daily requests, designed RabbitMQ-based services, improved the React administration experience, and reduced deployment time through Docker-based delivery.',
   },
   {
-    company: 'Stemlab NG',
+    company: 'STLEMLab NG',
     title: 'Full-stack Web Developer',
     period: 'Oct 2021 — Dec 2022',
     mode: 'On-site',
     logo: '/images/stemlab-logo.png',
     summary:
       'Led client web products from requirements through launch using React and Node.js, mentored junior developers, and introduced ESLint and pull-request review workflows.',
+  },
+  {
+    company: 'Freelance',
+    title: 'Web Developer',
+    period: 'Jul 2017 — Oct 2021',
+    mode: 'Upwork & direct clients',
+    summary:
+      'Built customer-facing websites and web applications, worked directly with clients from requirements through revisions, and delivered complete solutions using HTML, CSS, Bootstrap, and JavaScript.',
   },
 ];
